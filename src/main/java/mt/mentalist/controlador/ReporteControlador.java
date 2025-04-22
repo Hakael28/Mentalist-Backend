@@ -2,11 +2,8 @@ package mt.mentalist.controlador;
 
 import jakarta.validation.Valid;
 import mt.mentalist.DTO.ReporteDTO;
-import mt.mentalist.DTO.RutaAtencionDTO;
-import mt.mentalist.DTO.UsuarioDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Reporte;
-import mt.mentalist.modelo.RutaAtencion;
 import mt.mentalist.modelo.Usuario;
 import mt.mentalist.servicio.ReporteServicio;
 import mt.mentalist.servicio.UsuarioServicio;
@@ -36,7 +33,7 @@ public class ReporteControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    // Controlador pafra utilizar el metodo de listar Rutas de atención
+    // Controlador para utilizar el metodo de listar Rutas de atención
     //http://localhost:8084/mentalist-web/usuarios
     @GetMapping("/reportes")
     public List<Reporte> obtenerReportes() {

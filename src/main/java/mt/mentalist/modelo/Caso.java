@@ -82,12 +82,6 @@ public class Caso implements Serializable {
 
     @OneToMany(mappedBy = "caso", cascade = CascadeType.ALL)
     @ToString.Exclude
-     @Builder.Default
-    private List<HistorialConsulta> historialConsultas= new ArrayList<>();
-
-
-    @OneToMany(mappedBy = "caso", cascade = CascadeType.ALL)
-    @ToString.Exclude
     @Builder.Default
     private List<HistoriaClinica> historiasClinicas = new ArrayList<>();
 

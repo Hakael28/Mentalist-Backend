@@ -29,5 +29,4 @@ public class UsuarioDTO {
 
     @NotNull(message = "El telefono del usuario es obligatorio")
     private String telefono;
-
 }
