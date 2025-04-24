@@ -78,7 +78,7 @@ public class PacienteControlador {
 
     // Controlador para utilizar el metodo de actualizar la informacion de los pacientes
     @PutMapping("/pacientes/{idPaciente}")
-    public ResponseEntity<Reporte> actualizarPaciente(
+    public ResponseEntity<PacienteDTO> actualizarPaciente(
             @PathVariable int idPaciente,
             @Valid @RequestBody Paciente pacienteRecibido) {
         if (pacienteRecibido == null) {
@@ -114,7 +114,6 @@ public class PacienteControlador {
         dto.setDireccion(paciente.getDireccion());
 
         pacienteServicio.guardarPaciente(dto);
-
         return ResponseEntity.ok(dto);
     }
 }

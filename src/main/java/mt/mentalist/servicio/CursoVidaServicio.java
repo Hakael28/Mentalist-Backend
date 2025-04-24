@@ -17,6 +17,7 @@ public class CursoVidaServicio implements ICursoVidaServicio {
     private CursoVidaRepositorio cursoVidaRepositorio;
     private Integer idCursoVida;
 
+
     @Override
     public List<CursoVida> listarCursoVida() {
         List<CursoVida> Cursovida = cursoVidaRepositorio.findAll();

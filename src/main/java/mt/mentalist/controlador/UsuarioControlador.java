@@ -23,6 +23,7 @@ import java.util.Map;
 @CrossOrigin(value = "http://localhost:4200")
 public class UsuarioControlador {
 
+
     private static final Logger logger =
             LoggerFactory.getLogger(UsuarioControlador.class);
 
@@ -34,7 +35,7 @@ public class UsuarioControlador {
     @GetMapping("/usuarios")
     public List<Usuario> obtenerUsuarios() {
         List<Usuario> usuarios = this.usuarioServicio.listarUsuarios();
-        logger.info("Productos obtenidos:");
+        logger.info("Usuarios obtenidos:");
         usuarios.forEach((usuario -> logger.info(usuario.toString())));
         return usuarios;
     }
@@ -109,6 +110,7 @@ public class UsuarioControlador {
 
         return ResponseEntity.ok(usuario);
     }
+
     // Controlador para utilizar el metodo de actualizar la informacion de los usuarios
     @PutMapping("/administrador/{idUsuario}/credenciales")
     public ResponseEntity<Usuario> actualizarUsuarioAdmin(
@@ -130,6 +132,7 @@ public class UsuarioControlador {
         usuario.setTelefono(usuarioRecibido.getTelefono());
 
         // Guardar utilizando DTO si solo tienes ese método
+
         UsuarioDTO dto = new UsuarioDTO();
         dto.setNombre(usuario.getNombre());
         dto.setUsuario(usuario.getUsuario());
