@@ -25,7 +25,7 @@ import java.util.Map;
 @CrossOrigin(value = "http://localhost:4200")
 public class ReporteControlador {
 
-    private static final Logger logger= LoggerFactory.getLogger(ReporteControlador.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReporteControlador.class);
 
     @Autowired
     private ReporteServicio reporteServicio;
@@ -49,7 +49,7 @@ public class ReporteControlador {
         logger.info("Reporte a agregar" + dto);
 
         Usuario usuario = usuarioServicio.buscarUsuarioId(dto.getIdUsuario());
-        if (usuario==null){
+        if (usuario == null) {
             throw new RecursoNoEncontradoExcepcion("No se encontro el usuario con el Id: " + dto.getIdUsuario());
         }
 
@@ -66,7 +66,7 @@ public class ReporteControlador {
     @GetMapping("/reportes/{idReporte}")
     public ResponseEntity<Reporte> obtenerReporteId(
             @PathVariable int idReporte) {
-        Reporte reporte= this.reporteServicio.buscarReporteId(idReporte);
+        Reporte reporte = this.reporteServicio.buscarReporteId(idReporte);
         if (reporte != null) {
             return ResponseEntity.ok(reporte);
         } else {
@@ -89,14 +89,7 @@ public class ReporteControlador {
     public ResponseEntity<Reporte> actualizarReporte(
             @PathVariable int idReporte,
             @Valid @RequestBody ReporteDTO dto) {
-        Reporte existente = reporteServicio.buscarReporteId(idReporte);
-        if (existente == null) {
-            throw new RecursoNoEncontradoExcepcion("No se encontro el reporte con el id: " + idReporte);
-        }
-
-       // Reporte actualizado = reporteServicio.actualizarReporte(existente, dto);
-
-        return null;
-        //ResponseEntity.ok(actualizado);
+        Reporte actualizado = reporteServicio.actualizarReporte(idReporte, dto);
+        return ResponseEntity.ok(actualizado);
     }
 }

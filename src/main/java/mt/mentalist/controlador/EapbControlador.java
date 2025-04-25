@@ -53,7 +53,7 @@ public class EapbControlador {
     }
 
     // Controlador para utilizar el metodo de buscar Eapb por id
-    @GetMapping("/eapbs/{idEapb")
+    @GetMapping("/eapbs/{idEapb}")
     public ResponseEntity<Eapb> obtenerEapbid(
             @PathVariable int idEapb) {
         Eapb eapb = this.eapbServicio.buscarEapbId(idEapb);

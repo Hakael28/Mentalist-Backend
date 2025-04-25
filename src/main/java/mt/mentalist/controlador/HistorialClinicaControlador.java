@@ -50,7 +50,7 @@ public class HistorialClinicaControlador {
         return ResponseEntity.created(ubicacion).body(historiaClinicaGuardado);
     }
     // Controlador para utilizar el metodo de buscar Historia  Clinica por id
-    @GetMapping("/historias/{idHistorialClinica")
+    @GetMapping("/historias/{idHistorialClinica}")
     public ResponseEntity<HistoriaClinica> obtenerhHistoriaClinicaid(
             @PathVariable int idHistorialClinica) {
         HistoriaClinica historiaClinica = this.historiaClinicaServicio.buscarClinicaId(idHistorialClinica);
