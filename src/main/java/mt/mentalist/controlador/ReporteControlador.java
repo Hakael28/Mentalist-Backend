@@ -33,7 +33,7 @@ public class ReporteControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    // Controlador para utilizar el metodo de listar Rutas de atención
+    // Controlador para utilizar el metodo de listar los Reportes
     //http://localhost:8084/mentalist-web/usuarios
     @GetMapping("/reportes")
     public List<Reporte> obtenerReportes() {
@@ -43,7 +43,7 @@ public class ReporteControlador {
         return reportes;
     }
 
-    // Controlador para utilizar el metodo de guardar reportes
+    // Controlador para utilizar el metodo de guardar Reportes
     @PostMapping("/reportes")
     public ResponseEntity<Reporte> agregarReporte(@Valid @RequestBody ReporteDTO dto) {
         logger.info("Reporte a agregar" + dto);
@@ -62,7 +62,7 @@ public class ReporteControlador {
         return ResponseEntity.created(ubicacion).body(reporteGuardado);
     }
 
-    // Controlador para utilizar el metodo de buscar Rutas de atención por id
+    // Controlador para utilizar el metodo de buscar un Reporte por id
     @GetMapping("/reportes/{idReporte}")
     public ResponseEntity<Reporte> obtenerReporteId(
             @PathVariable int idReporte) {
@@ -74,7 +74,7 @@ public class ReporteControlador {
         }
     }
 
-    // Controlador para utilizar el metodo de elimninar Rutas de atención
+    // Controlador para utilizar el metodo de elimninar un Reporte
     @DeleteMapping("/reportes/{idReporte}")
     public ResponseEntity<Map<String, Boolean>>
     eliminarReporte(@PathVariable int idReporte) {
@@ -84,33 +84,18 @@ public class ReporteControlador {
         return ResponseEntity.ok(respuesta);
     }
 
-    // Controlador para utilizar el metodo de actualizar la informacion de los usuarios
+    // Controlador para utilizar el metodo de actualizar la informacion de un Reporte
     @PutMapping("/reportes/{idReporte}")
     public ResponseEntity<Reporte> actualizarReporte(
             @PathVariable int idReporte,
-            @Valid @RequestBody Reporte reporteRecibido) {
-        if (reporteRecibido == null) {
-            throw new IllegalArgumentException("El cuerpo de la solicitud no puede estar vacio.");
-        }
-        Reporte reporte = this.reporteServicio.buscarReporteId(idReporte);
-        if (reporte == null) {
+            @Valid @RequestBody ReporteDTO dto) {
+        Reporte existente = reporteServicio.buscarReporteId(idReporte);
+        if (existente == null) {
             throw new RecursoNoEncontradoExcepcion("No se encontro el reporte con el id: " + idReporte);
         }
 
-        reporte.setUsuario(reporteRecibido.getUsuario());
-        reporte.setTipoReporte(reporteRecibido.getTipoReporte());
-        reporte.setDescripcion(reporteRecibido.getDescripcion());
-        reporte.setFecha(reporteRecibido.getFecha());
+        Reporte actualizado = reporteServicio.actualizarReporte(existente, dto);
 
-        // Guardar utilizando DTO si solo tienes ese método
-        ReporteDTO dto = new ReporteDTO();
-        dto.setIdUsuario(reporte.getUsuario().getIdUsuario());
-        dto.setTipoReporte(reporte.getTipoReporte());
-        dto.setDescripcion(reporte.getDescripcion());
-        dto.setFecha(reporte.getFecha());
-
-        reporteServicio.guardarReporte(dto);
-
-        return ResponseEntity.ok(reporteRecibido);
+        return ResponseEntity.ok(actualizado);
     }
 }

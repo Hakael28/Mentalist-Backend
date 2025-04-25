@@ -10,21 +10,6 @@ public class CasoDTO {
     @NotNull(message = "El ID del paciente es obligatorio")
     private Integer idPaciente;
 
-    @NotNull(message = "El ID del área de ocurrencia es obligatorio")
-    private Integer idAreaOcurrencia;
-
-    @NotNull(message = "El ID de la ruta de atención es obligatorio")
-    private Integer idRutaAtencion;
-
-    @NotNull(message = "El ID de la EAPB es obligatorio")
-    private Integer idEapb;
-
-    @NotNull(message = "El ID del curso de vida es obligatorio")
-    private Integer idCursoVida;
-
-    @NotNull(message = "El ID del diagnóstico específico es obligatorio")
-    private Integer idDiagnosticoEspecifico;
-
     @NotNull(message = "El ID del usuario es obligatorio")
     private Integer idUsuario;
 

@@ -5,8 +5,7 @@ import java.util.Optional;
 
 import mt.mentalist.DTO.CasoDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
-import mt.mentalist.modelo.Caso;
-import mt.mentalist.modelo.Usuario;
+import mt.mentalist.modelo.*;
 import mt.mentalist.repositorio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,24 +49,40 @@ public class CasoServicio implements ICasoServicio {
 
     @Override
     public Caso guardarCaso(CasoDTO dto) {
-        Caso caso = new Caso();
 //        Entidades que viene del DTO (selecionados por el usuario y el sistema)
-        caso.setPaciente(pacienteServicio.buscarPacientesId(dto.getIdPaciente()));
-        caso.setUsuario(usuarioServicio.buscarUsuarioId(dto.getIdUsuario()));
+        Usuario usuario = usuarioServicio.buscarUsuarioId(dto.getIdUsuario());
+        if (usuario== null){
+            throw new RecursoNoEncontradoExcepcion("No encontro el usuario con el id: " + dto.getIdUsuario());
+        }
+
+        Paciente paciente = pacienteServicio.buscarPacientesId(dto.getIdPaciente());
+        if (paciente== null){
+            throw new RecursoNoEncontradoExcepcion("No encontro el paciente con el id: " + dto.getIdPaciente());
+        }
 
 //        Entidades que se toman el ultimo registro insertado
-        caso.setAreaOcurrencia(areaOcurrenciaServicio.findTopByOrderByIdAreaOcurrenciaDesc()
-                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No hay registros en área de ocurrencia")));
-        caso.setRutaAtencion(rutaAtencionServicio.findTopByOrderByIdRutaAtencionDesc()
-                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No hay registros en ruta de atencion")));
+        AreaOcurrencia areaOcurrencia = areaOcurrenciaServicio.findTopByOrderByIdAreaOcurrenciaDesc()
+                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No hay registros en área de ocurrencia"));
+        RutaAtencion rutaAtencion = rutaAtencionServicio.findTopByOrderByIdRutaAtencionDesc()
+                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No hay registros en ruta de atencion"));
 
-        caso.setEapb(eapbServicio.findTopByOrderByIdEapbDesc()
-                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No hay registros en eapb")));
-        caso.setCursoVida(cursoVidaServicio.findTopByOrderByIdCursoVidaDesc()
-                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No hay registros en curso de vida")));
+        Eapb eapb = eapbServicio.findTopByOrderByIdEapbDesc()
+                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No hay registros en eapb"));
+        CursoVida cursoVida = cursoVidaServicio.findTopByOrderByIdCursoVidaDesc()
+                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No hay registros en curso de vida"));
 
-        caso.setDiagnostico(diagnosticoEspecificoServicio.findTopByOrderByIdDiagnosticoEspecificoDesc()
-                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No hay registros en diagnostico especifico")));
+        DiagnosticoEspecifico diagnosticoEspecifico = diagnosticoEspecificoServicio.findTopByOrderByIdDiagnosticoEspecificoDesc()
+                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No hay registros en diagnostico especifico"));
+
+
+        Caso caso = new Caso();
+        caso.setUsuario(usuario);
+        caso.setPaciente(paciente);
+        caso.setAreaOcurrencia(areaOcurrencia);
+        caso.setRutaAtencion(rutaAtencion);
+        caso.setEapb(eapb);
+        caso.setCursoVida(cursoVida);
+        caso.setDiagnostico(diagnosticoEspecifico);
 
 //        Datos propios del caso
         caso.setFechaNotificacion(dto.getFechaNotificacion());
@@ -77,8 +92,7 @@ public class CasoServicio implements ICasoServicio {
         caso.setRemisionRutaSalud(dto.getRemisionRutaSalud());
 
 //        Guardar el caso en la base de datos
-       Caso casoGuardado = casoRepositorio.save(caso);
-       return casoGuardado;
+       return casoRepositorio.save(caso);
     }
 
 

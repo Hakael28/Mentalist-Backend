@@ -23,6 +23,7 @@ public interface IReporteServicio {
 
     //Metodo para guardar reporte
     public Reporte guardarReporte(ReporteDTO dto);
+    public Reporte actualizarReporte(Reporte existente, ReporteDTO dto);
 
     //Metodo para eliminar reporte
     public void eliminarReporte(Integer idReporte);
