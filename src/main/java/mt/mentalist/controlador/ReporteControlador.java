@@ -94,8 +94,9 @@ public class ReporteControlador {
             throw new RecursoNoEncontradoExcepcion("No se encontro el reporte con el id: " + idReporte);
         }
 
-        Reporte actualizado = reporteServicio.actualizarReporte(existente, dto);
+       // Reporte actualizado = reporteServicio.actualizarReporte(existente, dto);
 
-        return ResponseEntity.ok(actualizado);
+        return null;
+        //ResponseEntity.ok(actualizado);
     }
 }
