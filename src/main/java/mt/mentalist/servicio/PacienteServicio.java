@@ -50,8 +50,7 @@ public class PacienteServicio implements IPacienteServicio {
         paciente.setDireccion(dto.getDireccion());
         paciente.setFechaNacimiento(dto.getFechaNacimiento());
 
-        Paciente pacienteGuardado = pacienteRepositorio.save(paciente);
-        return pacienteGuardado;
+        return pacienteRepositorio.save(paciente);
     }
 
     @Override

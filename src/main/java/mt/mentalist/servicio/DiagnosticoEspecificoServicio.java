@@ -44,8 +44,7 @@ public class DiagnosticoEspecificoServicio implements IDiagnosticoEspecificoServ
         diagnosticoEspecifico.setCodigoCie(dto.getCodigoCie());
         diagnosticoEspecifico.setObservacionesMedicas(dto.getObservacionesMedicas());
         diagnosticoEspecifico.setFechadiagnostico(dto.getFechadiagnostico());
-        DiagnosticoEspecifico diagnosticoEspecificoGuardado= diagnosticoEspecificoRepositorio.save(diagnosticoEspecifico);
-        return diagnosticoEspecificoGuardado;
+        return diagnosticoEspecificoRepositorio.save(diagnosticoEspecifico);
     }
 
     @Override

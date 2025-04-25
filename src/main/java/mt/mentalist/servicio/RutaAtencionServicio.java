@@ -42,8 +42,7 @@ public class RutaAtencionServicio implements IRutaAtencionServicio {
     public RutaAtencion guardarRuta(RutaAtencionDTO dto) {
         RutaAtencion ruta = new RutaAtencion();
         ruta.setDescripcion(dto.getDescripcion());
-        RutaAtencion rutaGuardada = rutaRepositorio.save(ruta);
-        return  rutaGuardada;
+        return rutaRepositorio.save(ruta);
     }
 
     @Override

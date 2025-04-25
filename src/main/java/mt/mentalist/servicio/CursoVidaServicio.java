@@ -38,8 +38,7 @@ public class CursoVidaServicio implements ICursoVidaServicio {
     public CursoVida guardarCursoVida(CursoVidaDTO dto) {
         CursoVida cursovida = new CursoVida();
         cursovida.setEtapa(dto.getEtapa());
-        CursoVida cursoVidaGuardada = cursoVidaRepositorio.save(cursovida);
-        return cursoVidaGuardada;
+        return cursoVidaRepositorio.save(cursovida);
     }
 
     @Override

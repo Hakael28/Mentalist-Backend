@@ -49,8 +49,7 @@ public class ReporteServicio implements IReporteServicio {
         reporte.setTipoReporte(dto.getTipoReporte());
         reporte.setDescripcion(dto.getDescripcion());
         reporte.setFecha(dto.getFecha());
-        Reporte reporteGuardado = reporteRepositorio.save(reporte);
-        return reporteGuardado;
+        return reporteRepositorio.save(reporte);
     }
 
     @Override

@@ -40,8 +40,8 @@ public class AreaOcurrenciaServicio implements IAreaOcurrenciaServicio {
     public AreaOcurrencia guardarAreaOcurrencia(AreaOcurrenciaDTO dto) {
         AreaOcurrencia areaOcurrencia = new AreaOcurrencia();
         areaOcurrencia.setNombre(dto.getNombre());
-        AreaOcurrencia areaOcurrenciaGuardada = areaOcurrenciaRepositorio.save(areaOcurrencia);
-        return areaOcurrenciaGuardada;
+        return areaOcurrenciaRepositorio.save(areaOcurrencia);
+
     }
 
     @Override

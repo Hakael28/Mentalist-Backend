@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.HistoriaClinicaDTO;
+import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
+import mt.mentalist.modelo.Caso;
 import mt.mentalist.modelo.HistoriaClinica;
-import mt.mentalist.modelo.Reporte;
+import mt.mentalist.modelo.Paciente;
 import mt.mentalist.repositorio.HistoriaClinicaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,13 +48,24 @@ public class HistoriaClinicaServicio implements IHistoriaClinicaServicio {
 
     @Override
     public HistoriaClinica guardarClinica(HistoriaClinicaDTO dto) {
+
+        Paciente paciente = pacienteServicio.buscarPacientesId(dto.getIdPaciente());
+        if (paciente == null) {
+            throw new RecursoNoEncontradoExcepcion("No encontro el paciente con el ID: " + dto.getIdPaciente());
+        }
+
+        Caso caso = casoServicio.buscarCasoId(dto.getIdCaso());
+        if (caso == null) {
+            throw new RecursoNoEncontradoExcepcion("No encontro el caso con el ID: " + dto.getIdCaso());
+        }
+
         HistoriaClinica historiaClinica = new HistoriaClinica();
 
-        historiaClinica.setPaciente(pacienteServicio.buscarPacientesId(dto.getIdPaciente()));
-        historiaClinica.setCaso(casoServicio.buscarCasoId(dto.getIdCaso()));
+        historiaClinica.setPaciente(paciente);
+        historiaClinica.setCaso(caso);
         historiaClinica.setDescripcionHistoria(dto.getDescripcionHistoria());
-        HistoriaClinica historiaGuardada = clinicaRepositorio.save(historiaClinica);
-        return historiaGuardada;
+
+        return clinicaRepositorio.save(historiaClinica);
     }
 
 
@@ -65,6 +78,5 @@ public class HistoriaClinicaServicio implements IHistoriaClinicaServicio {
             throw new RuntimeException("Historia clinica no encontrada con ID: " + idHistoriaClinica);
         }
     }
-
 
 }

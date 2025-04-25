@@ -40,8 +40,7 @@ public class EapbServicio implements IEapbServicio {
     public Eapb guardarEapb(EapbDTO dto) {
         Eapb eapb = new Eapb();
         eapb.setNombre(dto.getNombre());
-        Eapb eapbGuardada = eapbRepositorio.save(eapb);
-        return eapbGuardada;
+        return eapbRepositorio.save(eapb);
     }
 
     @Override

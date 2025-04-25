@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class RutaAtencionDTO {
-    //hOLA
+
     @NotBlank(message = "La descripcion es obligatorio")
     private String descripcion;
 }
