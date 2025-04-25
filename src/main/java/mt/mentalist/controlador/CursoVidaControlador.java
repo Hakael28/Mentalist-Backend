@@ -61,7 +61,7 @@ public class CursoVidaControlador {
         if (cursoVida != null) {
             return ResponseEntity.ok(cursoVida);
         } else {
-            throw new RecursoNoEncontradoExcepcion("No se encontro el paciente con el id: " + idCursoVida);
+            throw new RecursoNoEncontradoExcepcion("No se encontro el curso de vida con el id: " + idCursoVida);
         }
     }
 
@@ -69,7 +69,7 @@ public class CursoVidaControlador {
     @DeleteMapping("/cursoVida/{idCursoVida}")
     public ResponseEntity<Map<String, Boolean>>
     eliminarCursoVida(@PathVariable int idCursoVida) {
-        cursoVidaServicio.eliminarCursiVida(idCursoVida);
+        cursoVidaServicio.eliminarCursoVida(idCursoVida);
         Map<String, Boolean> respuesta = new HashMap<>();
         respuesta.put("Eliminado", Boolean.TRUE);
         return ResponseEntity.ok(respuesta);

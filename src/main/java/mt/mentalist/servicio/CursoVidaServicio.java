@@ -15,18 +15,11 @@ public class CursoVidaServicio implements ICursoVidaServicio {
 
     @Autowired
     private CursoVidaRepositorio cursoVidaRepositorio;
-    private Integer idCursoVida;
-
 
     @Override
     public List<CursoVida> listarCursoVida() {
         List<CursoVida> Cursovida = cursoVidaRepositorio.findAll();
         return Cursovida;
-    }
-
-    @Override
-    public Optional<CursoVida> findTopByOrderByIdDesc() {
-        return Optional.empty();
     }
 
     @Override
@@ -37,7 +30,6 @@ public class CursoVidaServicio implements ICursoVidaServicio {
 
     @Override
     public CursoVida buscarCursoVidaId(Integer idCursoVida) {
-        this.idCursoVida = idCursoVida;
         CursoVida cursovida = cursoVidaRepositorio.findById(idCursoVida).orElse(null);
         return cursovida;
     }
@@ -51,7 +43,7 @@ public class CursoVidaServicio implements ICursoVidaServicio {
     }
 
     @Override
-    public void eliminarCursiVida(Integer idCursoVida) {
+    public void eliminarCursoVida(Integer idCursoVida) {
         Optional<CursoVida> cursoVida = cursoVidaRepositorio.findById(idCursoVida);
         if(cursoVida.isPresent()){
             cursoVidaRepositorio.deleteById(idCursoVida);

@@ -13,8 +13,6 @@ public interface ICursoVidaServicio {
     public List<CursoVida> listarCursoVida();
 
     // Metodo para seleccionar el ultimo registro curso vida
-    public Optional<CursoVida> findTopByOrderByIdDesc();
-
     Optional<CursoVida> findTopByOrderByIdCursoVidaDesc();
 
     //Metodo para buscar usuario
@@ -24,7 +22,7 @@ public interface ICursoVidaServicio {
     public CursoVida guardarCursoVida(CursoVidaDTO dto);
 
     //Metodo para eliminar cursvida
-    public void eliminarCursiVida(Integer idCursoVida);
+    public void eliminarCursoVida(Integer idCursoVida);
 
 }
       

@@ -33,8 +33,8 @@ public class DiagnosticoEspecificoServicio implements IDiagnosticoEspecificoServ
 
     @Override
     public DiagnosticoEspecifico buscarDiagnosticoEspecificoId(Integer idDianosticoEspecifico) {
-        DiagnosticoEspecifico diagnosticoespecifico = diagnosticoEspecificoRepositorio.findById(idDianosticoEspecifico).orElse(null);
-        return diagnosticoespecifico;
+        DiagnosticoEspecifico diagnosticoEspecifico = diagnosticoEspecificoRepositorio.findById(idDianosticoEspecifico).orElse(null);
+        return diagnosticoEspecifico;
     }
 
     @Override
