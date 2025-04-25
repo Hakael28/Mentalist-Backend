@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 //import mt.mentalist.Funciones.Validacion;
 import mt.mentalist.DTO.UsuarioDTO;
+import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Usuario;
 import mt.mentalist.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,43 @@ public class UsuarioServicio implements IUsuarioServicio {
     public Usuario guardarUsuario(UsuarioDTO dto) {
 
         Usuario usuario = new Usuario();
+
+        usuario.setNombre(dto.getNombre());
+        usuario.setUsuario(dto.getUsuario());
+        usuario.setRol(dto.getRol());
+        usuario.setContraseña(dto.getContraseña());
+        usuario.setCorreo(dto.getCorreo());
+        usuario.setTelefono(dto.getTelefono());
+
+        return usuarioRepositorio.save(usuario);
+    }
+
+    @Override
+    public Usuario actualizarUsuarioRestricciones(Integer idUsuario, UsuarioDTO dto) {
+        Usuario usuario = buscarUsuarioId(idUsuario);
+        if (usuario==null){
+            throw new RecursoNoEncontradoExcepcion("No encontro el usuario con el ID: "+ idUsuario );
+        }
+        if(!dto.getRol().equals(usuario.getRol())){
+            throw new IllegalArgumentException("No está permitido modificar el rol del usuario.");
+        }
+        if(!dto.getUsuario().equals(usuario.getUsuario())){
+            throw new IllegalArgumentException("No está permitido modificar el nombre de usuario.");
+        }
+        usuario.setNombre(dto.getNombre());
+        usuario.setContraseña(dto.getContraseña());
+        usuario.setCorreo(dto.getCorreo());
+        usuario.setTelefono(dto.getTelefono());
+
+        return usuarioRepositorio.save(usuario);
+    }
+
+    @Override
+    public Usuario actulizarUsuarioAdmin(Integer idUsuario, UsuarioDTO dto) {
+        Usuario usuario = buscarUsuarioId(idUsuario);
+        if (usuario == null) {
+            throw new RecursoNoEncontradoExcepcion("No se encontró el usuario con el ID: " + idUsuario);
+        }
 
         usuario.setNombre(dto.getNombre());
         usuario.setUsuario(dto.getUsuario());

@@ -18,6 +18,8 @@ public interface IPacienteServicio {
     
     //Metodo para guardar paciente
     public Paciente guardarPaciente(PacienteDTO dto);
+
+    public Paciente actualizarPaciente(Integer idPaciente, PacienteDTO dto);
     
     //Metodo para eliminar paciente
     public void eliminarPaciente(Integer idPaciente);    

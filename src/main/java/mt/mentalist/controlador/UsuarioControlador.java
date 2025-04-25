@@ -78,71 +78,19 @@ public class UsuarioControlador {
     // Controlador para utilizar el metodo de actualizar la informacion de los usuarios con restriccion referente a rol
     @PutMapping("/usuarios/{idUsuario}")
     public ResponseEntity<Usuario> actualizarUsuario(
-            @PathVariable int idUsuario,
-            @Valid @RequestBody Usuario usuarioRecibido) {
-        Usuario usuario = this.usuarioServicio.buscarUsuarioId(idUsuario);
-
-        if (usuario == null) {
-            throw new RecursoNoEncontradoExcepcion("No se encontró el ID: " + idUsuario);
-        }
-
-        if (!usuarioRecibido.getRol().equals(usuario.getRol())) {
-            throw new IllegalArgumentException("No está permitido modificar el rol del usuario.");
-        }
-
-        if (!usuarioRecibido.getUsuario().equals(usuario.getUsuario())) {
-            throw new IllegalArgumentException("No está permitido modificar el nombre de usuario.");
-        }
-        usuario.setNombre(usuarioRecibido.getNombre());
-        usuario.setContraseña(usuarioRecibido.getContraseña());
-        usuario.setCorreo(usuarioRecibido.getCorreo());
-        usuario.setTelefono(usuarioRecibido.getTelefono());
-
-        UsuarioDTO dto = new UsuarioDTO();
-        dto.setNombre(usuario.getNombre());
-        dto.setUsuario(usuario.getUsuario());
-        dto.setRol(usuario.getRol());
-        dto.setContraseña(usuario.getContraseña());
-        dto.setCorreo(usuario.getCorreo());
-        dto.setTelefono(usuario.getTelefono());
-
-        usuarioServicio.guardarUsuario(dto);
-
-        return ResponseEntity.ok(usuario);
+           @PathVariable int idUsuario,
+           @Valid @RequestBody UsuarioDTO dto){
+        Usuario actulizado = usuarioServicio.actualizarUsuarioRestricciones(idUsuario, dto);
+        return ResponseEntity.ok(actulizado);
     }
 
     // Controlador para utilizar el metodo de actualizar la informacion de los usuarios
     @PutMapping("/administrador/{idUsuario}/credenciales")
     public ResponseEntity<Usuario> actualizarUsuarioAdmin(
             @PathVariable int idUsuario,
-            @Valid @RequestBody Usuario usuarioRecibido) {
-        if (usuarioRecibido == null) {
-            throw new IllegalArgumentException("El cuerpo de la solicitud no puede estar vacio.");
-        }
-        Usuario usuario = this.usuarioServicio.buscarUsuarioId(idUsuario);
-        if (usuario == null) {
-            throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + idUsuario);
-        }
-        // Actualiza todos los campos (ya que es administrador)
-        usuario.setNombre(usuarioRecibido.getNombre());
-        usuario.setUsuario(usuarioRecibido.getUsuario());
-        usuario.setRol(usuarioRecibido.getRol());
-        usuario.setContraseña(usuarioRecibido.getContraseña());
-        usuario.setCorreo(usuarioRecibido.getCorreo());
-        usuario.setTelefono(usuarioRecibido.getTelefono());
+            @Valid @RequestBody UsuarioDTO  dto) {
+        Usuario actualizado = usuarioServicio.actulizarUsuarioAdmin(idUsuario, dto);
+        return ResponseEntity.ok(actualizado);
 
-        // Guardar utilizando DTO si solo tienes ese método
-
-        UsuarioDTO dto = new UsuarioDTO();
-        dto.setNombre(usuario.getNombre());
-        dto.setUsuario(usuario.getUsuario());
-        dto.setRol(usuario.getRol());
-        dto.setContraseña(usuario.getContraseña());
-        dto.setCorreo(usuario.getCorreo());
-        dto.setTelefono(usuario.getTelefono());
-
-        usuarioServicio.guardarUsuario(dto);
-
-        return ResponseEntity.ok(usuario);
     }
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.PacienteDTO;
+import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Paciente;
 import mt.mentalist.modelo.Reporte;
 import mt.mentalist.repositorio.PacienteRepositorio;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Service;
 public class PacienteServicio implements IPacienteServicio {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
-
 
 
     // Listar todos los pacientes
@@ -50,8 +50,27 @@ public class PacienteServicio implements IPacienteServicio {
         paciente.setDireccion(dto.getDireccion());
         paciente.setFechaNacimiento(dto.getFechaNacimiento());
 
-        Paciente pacienteGuardado= pacienteRepositorio.save(paciente);
+        Paciente pacienteGuardado = pacienteRepositorio.save(paciente);
         return pacienteGuardado;
+    }
+
+    @Override
+    public Paciente actualizarPaciente(Integer idPaciente, PacienteDTO dto) {
+        Paciente existente = buscarPacientesId(idPaciente);
+        if (existente == null) {
+            throw new RecursoNoEncontradoExcepcion("No se encontro el paciente con el ID: " + idPaciente);
+        }
+        existente.setTipoDocumento(dto.getTipoDocumento());
+        existente.setNombreCompleto(dto.getNombreCompleto());
+        existente.setFechaNacimiento(dto.getFechaNacimiento());
+        existente.setEdad(dto.getEdad());
+        existente.setGenero(dto.getGenero());
+        existente.setNacionalidad(dto.getNacionalidad());
+        existente.setTelefono(dto.getTelefono());
+        existente.setCorreo(dto.getCorreo());
+        existente.setDireccion(dto.getDireccion());
+
+        return pacienteRepositorio.save(existente);
     }
 
 
@@ -59,10 +78,10 @@ public class PacienteServicio implements IPacienteServicio {
     @Override
     public void eliminarPaciente(Integer idPaciente) {
         Optional<Paciente> paciente = pacienteRepositorio.findById(idPaciente);
-        if(paciente.isPresent()){
+        if (paciente.isPresent()) {
             pacienteRepositorio.deleteById(idPaciente);
-        }else {
-            throw new RuntimeException("Paciente no encontrado con ID: " +idPaciente);
+        } else {
+            throw new RuntimeException("Paciente no encontrado con ID: " + idPaciente);
         }
     }
 

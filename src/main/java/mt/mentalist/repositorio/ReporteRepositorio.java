@@ -11,6 +11,4 @@ import java.util.Optional;
 
 @Repository
 public interface ReporteRepositorio extends JpaRepository<Reporte, Integer> {
-     Optional<Reporte> findTopByOrderByIdReporteDesc();
-
 }

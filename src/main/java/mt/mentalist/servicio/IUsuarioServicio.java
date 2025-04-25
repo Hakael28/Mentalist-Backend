@@ -17,21 +17,28 @@ public interface IUsuarioServicio {
     Optional<Usuario> findTopByOrderByIdUsuarioDesc();
 
 //    // Método para buscar un usuario por Usuario
-//    public Optional<Usuario> buscarUsuario(String usuario);
+//   Optional<Usuario> buscarUsuario(String usuario);
 
     // Método para buscar un usuario por ID
-    public Usuario buscarUsuarioId(Integer idUsuario);
+    Usuario buscarUsuarioId(Integer idUsuario);
 
-    // Método para guardar o actualizar un usuario
-    public Usuario guardarUsuario(UsuarioDTO dto);
+    // Método para guardar un usuario
+    Usuario guardarUsuario(UsuarioDTO dto);
+
+    // Actualiza datos de un usuario, sin permitir cambiar el rol ni el nombre de usuario
+    public Usuario actualizarUsuarioRestricciones(Integer idUsuario, UsuarioDTO dto);
+
+    // Actualiza todos los datos del usuario (sin restricciones, para administrador)
+    public Usuario actulizarUsuarioAdmin(Integer idUsuario, UsuarioDTO dto);
 
     // Método para eliminar usuario por ID
-    public void eliminarUsuario(Integer idUsuario);
+    void eliminarUsuario(Integer idUsuario);
 
 //    // Método para validar si existe un usuario por su nombre de usuario
-//    public boolean existeUsuario(String usuario);
+//  boolean existeUsuario(String usuario);
+
 
 //    // Metodo para validar ingreso del usuario
-//    public Validacion validarUsuario(String usuario, String contraseña, Rol rol);
+//   Validacion validarUsuario(String usuario, String contraseña, Rol rol);
 
 }

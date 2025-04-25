@@ -78,43 +78,11 @@ public class PacienteControlador {
 
     // Controlador para utilizar el metodo de actualizar la informacion de los pacientes
     @PutMapping("/pacientes/{idPaciente}")
-    public ResponseEntity<PacienteDTO> actualizarPaciente(
+    public ResponseEntity<Paciente> actualizarPaciente(
             @PathVariable int idPaciente,
-            @Valid @RequestBody Paciente pacienteRecibido) {
-        if (pacienteRecibido == null) {
-            throw new IllegalArgumentException("El cuerpo de la solicitud no puede estar vacio.");
-        }
-        Paciente paciente = this.pacienteServicio.buscarPacientesId(idPaciente);
-        if (paciente == null) {
-            throw new RecursoNoEncontradoExcepcion("No se encontro el reporte con el id: " + idPaciente);
-        }
-
-        paciente.setIdPaciente(pacienteRecibido.getIdPaciente());
-        paciente.setTipoDocumento(pacienteRecibido.getTipoDocumento());
-        paciente.setNombreCompleto(pacienteRecibido.getNombreCompleto());
-        paciente.setFechaNacimiento(pacienteRecibido.getFechaNacimiento());
-        paciente.setEdad(pacienteRecibido.getEdad());
-        paciente.setGenero(pacienteRecibido.getGenero());
-        paciente.setNacionalidad(pacienteRecibido.getNacionalidad());
-        paciente.setTelefono(pacienteRecibido.getTelefono());
-        paciente.setCorreo(pacienteRecibido.getCorreo());
-        paciente.setDireccion(pacienteRecibido.getDireccion());
-
-        // Guardar utilizando DTO si solo tienes ese método
-        PacienteDTO dto = new PacienteDTO();
-        dto.setIdPaciente(paciente.getIdPaciente());
-        dto.setTipoDocumento(paciente.getTipoDocumento());
-        dto.setNombreCompleto(paciente.getNombreCompleto());
-        dto.setFechaNacimiento(paciente.getFechaNacimiento());
-        dto.setEdad(paciente.getEdad());
-        dto.setGenero(paciente.getGenero());
-        dto.setNacionalidad(paciente.getNacionalidad());
-        dto.setTelefono(paciente.getTelefono());
-        dto.setCorreo(paciente.getCorreo());
-        dto.setDireccion(paciente.getDireccion());
-
-        pacienteServicio.guardarPaciente(dto);
-        return ResponseEntity.ok(dto);
+            @Valid @RequestBody PacienteDTO dto) {
+        Paciente actualizado = pacienteServicio.actualizarPaciente(idPaciente, dto);
+        return ResponseEntity.ok(actualizado);
     }
 }
 

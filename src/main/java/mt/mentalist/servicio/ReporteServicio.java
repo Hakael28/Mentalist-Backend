@@ -31,11 +31,6 @@ public class ReporteServicio implements IReporteServicio {
     // Metodo para seleccionar el ultimo  registro de reporte
 
     @Override
-    public Optional<Reporte> findTopByOrderByIdReporteDesc() {
-        return reporteRepositorio.findTopByOrderByIdReporteDesc();
-    }
-
-    @Override
     public Reporte buscarReporteId(Integer id_reporte) {
         Reporte reporte = reporteRepositorio.findById(id_reporte).orElse(null);
         return reporte;
@@ -59,16 +54,20 @@ public class ReporteServicio implements IReporteServicio {
     }
 
     @Override
-    public Reporte actualizarReporte(Reporte exitente, ReporteDTO dto) {
+    public Reporte actualizarReporte(Integer idReporte, ReporteDTO dto) {
+        Reporte existente = buscarReporteId(idReporte);
+        if (existente == null) {
+            throw new RecursoNoEncontradoExcepcion("No ser encontro el reporte con el id: " + idReporte);
+        }
         Usuario usuario = usuarioServicio.buscarUsuarioId(dto.getIdUsuario());
         if (usuario == null) {
             throw new RecursoNoEncontradoExcepcion("No ser encontro el usuario con el id: " + dto.getIdUsuario());
         }
-        exitente.setUsuario(usuario);
-        exitente.setTipoReporte(dto.getTipoReporte());
-        exitente.setDescripcion(dto.getDescripcion());
-        exitente.setFecha(dto.getFecha());
-        return reporteRepositorio.save(exitente);
+        existente.setUsuario(usuario);
+        existente.setTipoReporte(dto.getTipoReporte());
+        existente.setDescripcion(dto.getDescripcion());
+        existente.setFecha(dto.getFecha());
+        return reporteRepositorio.save(existente);
     }
 
     @Override
