@@ -2,11 +2,7 @@ package mt.mentalist.controlador;
 
 import jakarta.validation.Valid;
 import mt.mentalist.DTO.ReporteDTO;
-import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
-import mt.mentalist.modelo.Reporte;
-import mt.mentalist.modelo.Usuario;
 import mt.mentalist.servicio.ReporteServicio;
-import mt.mentalist.servicio.UsuarioServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +26,12 @@ public class ReporteControlador {
     @Autowired
     private ReporteServicio reporteServicio;
 
-    @Autowired
-    private UsuarioServicio usuarioServicio;
 
     // Controlador para utilizar el metodo de listar los Reportes
-    //http://localhost:8084/mentalist-web/usuarios
+    //http://localhost:8084/mentalist-web/reportes
     @GetMapping("/reportes")
-    public List<Reporte> obtenerReportes() {
-        List<Reporte> reportes = this.reporteServicio.listarReportes();
+    public List<ReporteDTO> obtenerReportes() {
+        List<ReporteDTO> reportes = this.reporteServicio.listarReportes();
         logger.info("Reportes obtenidos:");
         reportes.forEach((reporte -> logger.info(reporte.toString())));
         return reportes;
@@ -45,33 +39,23 @@ public class ReporteControlador {
 
     // Controlador para utilizar el metodo de guardar Reportes
     @PostMapping("/reportes")
-    public ResponseEntity<Reporte> agregarReporte(@Valid @RequestBody ReporteDTO dto) {
+    public ResponseEntity<ReporteDTO> agregarReporte(@Valid @RequestBody ReporteDTO dto) {
         logger.info("Reporte a agregar" + dto);
-
-        Usuario usuario = usuarioServicio.buscarUsuarioId(dto.getIdUsuario());
-        if (usuario == null) {
-            throw new RecursoNoEncontradoExcepcion("No se encontro el usuario con el Id: " + dto.getIdUsuario());
-        }
-
-        Reporte reporteGuardado = this.reporteServicio.guardarReporte(dto);
+        ReporteDTO respuesta = reporteServicio.guardarReporte(dto);
         URI ubicacion = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{idReporte}")
-                .buildAndExpand(reporteGuardado.getIdReporte())
+                .buildAndExpand(respuesta.getIdReporte())
                 .toUri();
-        return ResponseEntity.created(ubicacion).body(reporteGuardado);
+        return ResponseEntity.created(ubicacion).body(respuesta);
     }
 
     // Controlador para utilizar el metodo de buscar un Reporte por id
     @GetMapping("/reportes/{idReporte}")
-    public ResponseEntity<Reporte> obtenerReporteId(
+    public ResponseEntity<ReporteDTO> obtenerReporteId(
             @PathVariable int idReporte) {
-        Reporte reporte = this.reporteServicio.buscarReporteId(idReporte);
-        if (reporte != null) {
-            return ResponseEntity.ok(reporte);
-        } else {
-            throw new RecursoNoEncontradoExcepcion("No se encontro el reporte con el id: " + idReporte);
-        }
+        ReporteDTO reporteDTO = this.reporteServicio.buscarReporteId(idReporte);
+        return ResponseEntity.ok(reporteDTO);
     }
 
     // Controlador para utilizar el metodo de elimninar un Reporte
@@ -86,10 +70,10 @@ public class ReporteControlador {
 
     // Controlador para utilizar el metodo de actualizar la informacion de un Reporte
     @PutMapping("/reportes/{idReporte}")
-    public ResponseEntity<Reporte> actualizarReporte(
+    public ResponseEntity<ReporteDTO> actualizarReporte(
             @PathVariable int idReporte,
             @Valid @RequestBody ReporteDTO dto) {
-        Reporte actualizado = reporteServicio.actualizarReporte(idReporte, dto);
+        ReporteDTO actualizado = reporteServicio.actualizarReporte(idReporte, dto);
         return ResponseEntity.ok(actualizado);
     }
 }

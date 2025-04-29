@@ -12,6 +12,8 @@ import java.time.LocalDate;
 @Data
 public class ReporteDTO {
 
+    private Integer idReporte;
+
     @NotNull(message = "El ID del usuario es obligatorio")
     private Integer idUsuario;
 

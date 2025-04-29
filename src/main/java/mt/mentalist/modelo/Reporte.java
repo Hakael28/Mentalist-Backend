@@ -22,7 +22,6 @@ public class Reporte implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_reporte", nullable = false)
-    @NotNull
     private Integer idReporte;
 
     @ManyToOne

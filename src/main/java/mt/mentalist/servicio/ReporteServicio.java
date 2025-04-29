@@ -24,20 +24,23 @@ public class ReporteServicio implements IReporteServicio {
     private UsuarioServicio usuarioServicio;
 
     @Override
-    public List<Reporte> listarReportes() {
+    public List<ReporteDTO> listarReportes() {
         List<Reporte> reportes = reporteRepositorio.findAll();
-        return reportes;
+        return reportes.stream()
+                .map(this::convertirEntidadDTO)
+                .toList();
     }
     // Metodo para seleccionar el ultimo  registro de reporte
 
     @Override
-    public Reporte buscarReporteId(Integer id_reporte) {
-        Reporte reporte = reporteRepositorio.findById(id_reporte).orElse(null);
-        return reporte;
+    public ReporteDTO buscarReporteId(Integer id_reporte) {
+        Reporte reporte = reporteRepositorio.findById(id_reporte)
+                .orElseThrow(()-> new RecursoNoEncontradoExcepcion("No se encontro el reporte con el ID : "+ id_reporte));
+        return convertirEntidadDTO(reporte);
     }
 
     @Override
-    public Reporte guardarReporte(ReporteDTO dto) {
+    public ReporteDTO guardarReporte(ReporteDTO dto) {
 
         Usuario usuario = usuarioServicio.buscarUsuarioId(dto.getIdUsuario());
         if (usuario == null) {
@@ -46,15 +49,17 @@ public class ReporteServicio implements IReporteServicio {
 
         Reporte reporte = new Reporte();
 
+        reporte.setUsuario(usuario);
         reporte.setTipoReporte(dto.getTipoReporte());
         reporte.setDescripcion(dto.getDescripcion());
         reporte.setFecha(dto.getFecha());
-        return reporteRepositorio.save(reporte);
+        Reporte reporteGuardado = reporteRepositorio.save(reporte);
+        return convertirEntidadDTO(reporteGuardado);
     }
 
     @Override
-    public Reporte actualizarReporte(Integer idReporte, ReporteDTO dto) {
-        Reporte existente = buscarReporteId(idReporte);
+    public ReporteDTO actualizarReporte(Integer idReporte, ReporteDTO dto) {
+        Reporte existente = obtenerReporteEntidad(idReporte);
         if (existente == null) {
             throw new RecursoNoEncontradoExcepcion("No ser encontro el reporte con el id: " + idReporte);
         }
@@ -66,7 +71,8 @@ public class ReporteServicio implements IReporteServicio {
         existente.setTipoReporte(dto.getTipoReporte());
         existente.setDescripcion(dto.getDescripcion());
         existente.setFecha(dto.getFecha());
-        return reporteRepositorio.save(existente);
+        Reporte actualizado = reporteRepositorio.save(existente);
+        return convertirEntidadDTO(actualizado);
     }
 
     @Override
@@ -80,4 +86,18 @@ public class ReporteServicio implements IReporteServicio {
 
     }
 
+    private ReporteDTO convertirEntidadDTO(Reporte reporte){
+        ReporteDTO dto = new ReporteDTO();
+        dto.setIdReporte(reporte.getIdReporte());
+        dto.setIdUsuario(reporte.getUsuario().getIdUsuario());
+        dto.setTipoReporte(reporte.getTipoReporte());
+        dto.setDescripcion(reporte.getDescripcion());
+        dto.setFecha(reporte.getFecha());
+        return dto;
+    }
+
+    private Reporte obtenerReporteEntidad(Integer idReporte) {
+        return reporteRepositorio.findById(idReporte)
+                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No se encontró el reporte con el ID: " + idReporte));
+    }
 }

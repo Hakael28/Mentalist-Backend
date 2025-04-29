@@ -12,15 +12,15 @@ import java.util.Optional;
 
 public interface IReporteServicio {
     // Metodo para listar los reportes
-    public List<Reporte> listarReportes();
+    public List<ReporteDTO> listarReportes();
 
     //Metodo para buscar reporte
-    public Reporte buscarReporteId(Integer idReporte);
+    public ReporteDTO buscarReporteId(Integer idReporte);
 
     //Metodo para guardar reporte
-    public Reporte guardarReporte(ReporteDTO dto);
+    public ReporteDTO guardarReporte(ReporteDTO dto);
     //Metodo para actualizar reporte
-    public Reporte actualizarReporte(Integer idReporte, ReporteDTO dto);
+    public ReporteDTO actualizarReporte(Integer idReporte, ReporteDTO dto);
 
     //Metodo para eliminar reporte
     public void eliminarReporte(Integer idReporte);
