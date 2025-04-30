@@ -1,5 +1,6 @@
 
 package mt.mentalist.modelo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -27,5 +28,6 @@ public class Eapb {
    @OneToMany(mappedBy = "eapb", cascade = CascadeType.ALL)
    @ToString.Exclude
    @Builder.Default
+   @JsonIgnore
    private List<Caso>casos = new ArrayList<>();
    }

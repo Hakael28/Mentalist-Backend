@@ -10,19 +10,19 @@ import mt.mentalist.modelo.CursoVida;
 public interface ICursoVidaServicio {
 
     // Metodo para listar cursovida
-    public List<CursoVida> listarCursoVida();
+    List<CursoVidaDTO> listarCursoVida();
 
     // Metodo para seleccionar el ultimo registro curso vida
     Optional<CursoVida> findTopByOrderByIdCursoVidaDesc();
 
     //Metodo para buscar usuario
-    public CursoVida buscarCursoVidaId(Integer id_CursoVida);
+    CursoVidaDTO buscarCursoVidaId(Integer id_CursoVida);
 
     //Metodo para guarda cursovida
-    public CursoVida guardarCursoVida(CursoVidaDTO dto);
+    CursoVidaDTO guardarCursoVida(CursoVidaDTO dto);
 
     //Metodo para eliminar cursvida
-    public void eliminarCursoVida(Integer idCursoVida);
+    void eliminarCursoVida(Integer idCursoVida);
 
 }
       

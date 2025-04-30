@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.CursoVidaDTO;
+import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.CursoVida;
 import mt.mentalist.modelo.Usuario;
 import mt.mentalist.repositorio.CursoVidaRepositorio;
@@ -17,9 +18,11 @@ public class CursoVidaServicio implements ICursoVidaServicio {
     private CursoVidaRepositorio cursoVidaRepositorio;
 
     @Override
-    public List<CursoVida> listarCursoVida() {
-        List<CursoVida> Cursovida = cursoVidaRepositorio.findAll();
-        return Cursovida;
+    public List<CursoVidaDTO> listarCursoVida() {
+        List<CursoVida> cursoVidas = cursoVidaRepositorio.findAll();
+        return cursoVidas.stream()
+                .map(this::convertirEntidadDTO)
+                .toList();
     }
 
     @Override
@@ -29,16 +32,18 @@ public class CursoVidaServicio implements ICursoVidaServicio {
 
 
     @Override
-    public CursoVida buscarCursoVidaId(Integer idCursoVida) {
-        CursoVida cursovida = cursoVidaRepositorio.findById(idCursoVida).orElse(null);
-        return cursovida;
+    public CursoVidaDTO buscarCursoVidaId(Integer idCursoVida) {
+        CursoVida cursoVida = cursoVidaRepositorio.findById(idCursoVida)
+                .orElseThrow(()-> new RecursoNoEncontradoExcepcion("No se encontro el curso de vida con el ID : "+ idCursoVida));
+        return convertirEntidadDTO(cursoVida);
     }
 
     @Override
-    public CursoVida guardarCursoVida(CursoVidaDTO dto) {
-        CursoVida cursovida = new CursoVida();
-        cursovida.setEtapa(dto.getEtapa());
-        return cursoVidaRepositorio.save(cursovida);
+    public CursoVidaDTO guardarCursoVida(CursoVidaDTO dto) {
+        CursoVida cursoVida = new CursoVida();
+        cursoVida.setEtapa(dto.getEtapa());
+        CursoVida cursoVidaGuardado = cursoVidaRepositorio.save(cursoVida);
+        return convertirEntidadDTO(cursoVidaGuardado);
     }
 
     @Override
@@ -49,5 +54,11 @@ public class CursoVidaServicio implements ICursoVidaServicio {
         }else {
             throw new RuntimeException("Usuario no encontrado con ID: " +idCursoVida);
         }
+    }
+    private CursoVidaDTO convertirEntidadDTO(CursoVida cursoVida){
+        CursoVidaDTO dto = new CursoVidaDTO();
+        dto.setIdCursoVida(cursoVida.getIdCursoVida());
+        dto.setEtapa(cursoVida.getEtapa());
+        return  dto;
     }
 }

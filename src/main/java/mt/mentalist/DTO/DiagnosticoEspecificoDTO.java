@@ -14,6 +14,8 @@ import java.time.LocalDate;
 @Data
 public class DiagnosticoEspecificoDTO {
 
+    private  Integer idDiagnosticoEspecifico;
+
     @NotNull(message = "El tipo de diagnóstico es obligatorio")
     private TipoDiagnostico tipodiagnostico;
 

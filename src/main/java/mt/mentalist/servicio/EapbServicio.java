@@ -5,6 +5,7 @@ import java.util.Optional;
 
 
 import mt.mentalist.DTO.EapbDTO;
+import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Eapb;
 import mt.mentalist.modelo.Reporte;
 import mt.mentalist.repositorio.EapbRepositorio;
@@ -17,9 +18,11 @@ public class EapbServicio implements IEapbServicio {
     private EapbRepositorio eapbRepositorio;
 
     @Override
-    public List<Eapb> listarEapb() {
-        List<Eapb> eapb = eapbRepositorio.findAll();
-        return eapb;
+    public List<EapbDTO> listarEapb() {
+        List<Eapb> eapbs = eapbRepositorio.findAll();
+        return eapbs.stream()
+                .map(this::convertirEntidadDTO)
+                .toList();
 
     }
 
@@ -30,17 +33,19 @@ public class EapbServicio implements IEapbServicio {
     }
 
     @Override
-    public Eapb buscarEapbId(Integer idEapb) {
-        Eapb eapb = eapbRepositorio.findById(idEapb).orElse(null);
-        return eapb;
+    public EapbDTO buscarEapbId(Integer idEapb) {
+        Eapb eapb = eapbRepositorio.findById(idEapb)
+                .orElseThrow(()-> new RecursoNoEncontradoExcepcion("No se encontro el Eapb con el ID : "+ idEapb));
+        return convertirEntidadDTO(eapb);
 
     }
 
     @Override
-    public Eapb guardarEapb(EapbDTO dto) {
+    public EapbDTO guardarEapb(EapbDTO dto) {
         Eapb eapb = new Eapb();
         eapb.setNombre(dto.getNombre());
-        return eapbRepositorio.save(eapb);
+        Eapb eapbGuardada = eapbRepositorio.save(eapb);
+        return  convertirEntidadDTO(eapbGuardada);
     }
 
     @Override
@@ -52,6 +57,13 @@ public class EapbServicio implements IEapbServicio {
             throw new RuntimeException("EAPB no encontrada con ID: " +idEapb);
         }
 
+    }
+
+    private EapbDTO convertirEntidadDTO (Eapb eapb){
+        EapbDTO dto = new EapbDTO();
+        dto.setIdEapb(eapb.getIdEapb());
+        dto.setNombre(eapb.getNombre());
+        return dto;
     }
 
 

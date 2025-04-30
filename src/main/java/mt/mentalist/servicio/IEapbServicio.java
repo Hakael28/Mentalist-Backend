@@ -10,16 +10,16 @@ import mt.mentalist.modelo.Eapb;
 
 public interface IEapbServicio {
     // Metodo para listar las eapb
-    public List<Eapb> listarEapb();
+    public List<EapbDTO> listarEapb();
 
     // Metodo para seleccionar el ultimo  registro de Eapb
     public Optional<Eapb> findTopByOrderByIdEapbDesc();
 
     //Metodo para buscar la eapb
-    public Eapb buscarEapbId(Integer idEapb);
+    public EapbDTO buscarEapbId(Integer idEapb);
 
     //Metodo para guardar la eapb
-    public Eapb guardarEapb(EapbDTO dto);
+    public EapbDTO guardarEapb(EapbDTO dto);
 
     //Metodo para eliminar la eapb
     public void eliminarEapb(Integer idEapb);

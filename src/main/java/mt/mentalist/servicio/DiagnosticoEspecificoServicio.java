@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.DiagnosticoEspecificoDTO;
+import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.DiagnosticoEspecifico;
 import mt.mentalist.modelo.Usuario;
 import mt.mentalist.repositorio.DiagnosticoEspecificoRepositorio;
@@ -18,8 +19,10 @@ public class DiagnosticoEspecificoServicio implements IDiagnosticoEspecificoServ
     private DiagnosticoEspecificoRepositorio diagnosticoEspecificoRepositorio;
 
     @Override
-    public List<DiagnosticoEspecifico> listarDiagnosticoEspecifico() {
-        return diagnosticoEspecificoRepositorio.findAll();
+    public List<DiagnosticoEspecificoDTO> listarDiagnosticoEspecifico() {
+        List<DiagnosticoEspecifico> diagnosticoEspecificos = diagnosticoEspecificoRepositorio.findAll();
+        return diagnosticoEspecificos.stream().map(this::convertirEntidadDTO)
+                .toList();
     }
 
     @Override
@@ -27,24 +30,23 @@ public class DiagnosticoEspecificoServicio implements IDiagnosticoEspecificoServ
         return diagnosticoEspecificoRepositorio.findTopByOrderByIdDiagnosticoEspecificoDesc();
     }
 
-    public DiagnosticoEspecifico buscarDiagnosticoEspecificoId() {
-        return buscarDiagnosticoEspecificoId(null);
+    @Override
+    public DiagnosticoEspecificoDTO buscarDiagnosticoEspecificoId(Integer idDianosticoEspecifico) {
+        DiagnosticoEspecifico diagnosticoEspecifico = diagnosticoEspecificoRepositorio.findById(idDianosticoEspecifico)
+                .orElseThrow(()-> new RecursoNoEncontradoExcepcion("No se encontro el diagnostico especifico con el ID : "+ idDianosticoEspecifico));
+
+        return convertirEntidadDTO(diagnosticoEspecifico);
     }
 
     @Override
-    public DiagnosticoEspecifico buscarDiagnosticoEspecificoId(Integer idDianosticoEspecifico) {
-        DiagnosticoEspecifico diagnosticoEspecifico = diagnosticoEspecificoRepositorio.findById(idDianosticoEspecifico).orElse(null);
-        return diagnosticoEspecifico;
-    }
-
-    @Override
-    public DiagnosticoEspecifico guardarDiagnosticoEspecifico(DiagnosticoEspecificoDTO dto) {
+    public DiagnosticoEspecificoDTO guardarDiagnosticoEspecifico(DiagnosticoEspecificoDTO dto) {
         DiagnosticoEspecifico diagnosticoEspecifico = new DiagnosticoEspecifico();
         diagnosticoEspecifico.setTipodiagnostico(dto.getTipodiagnostico());
         diagnosticoEspecifico.setCodigoCie(dto.getCodigoCie());
         diagnosticoEspecifico.setObservacionesMedicas(dto.getObservacionesMedicas());
         diagnosticoEspecifico.setFechadiagnostico(dto.getFechadiagnostico());
-        return diagnosticoEspecificoRepositorio.save(diagnosticoEspecifico);
+        DiagnosticoEspecifico diagnosticoEspecificoGuardado =diagnosticoEspecificoRepositorio.save(diagnosticoEspecifico);
+        return convertirEntidadDTO(diagnosticoEspecificoGuardado);
     }
 
     @Override
@@ -57,4 +59,13 @@ public class DiagnosticoEspecificoServicio implements IDiagnosticoEspecificoServ
         }
     }
 
+    private DiagnosticoEspecificoDTO convertirEntidadDTO(DiagnosticoEspecifico diagnosticoEspecifico){
+        DiagnosticoEspecificoDTO dto = new DiagnosticoEspecificoDTO();
+        dto.setIdDiagnosticoEspecifico(diagnosticoEspecifico.getIdDiagnosticoEspecifico());
+        dto.setTipodiagnostico(diagnosticoEspecifico.getTipodiagnostico());
+        dto.setCodigoCie(diagnosticoEspecifico.getCodigoCie());
+        dto.setObservacionesMedicas(diagnosticoEspecifico.getObservacionesMedicas());
+        dto.setFechadiagnostico(diagnosticoEspecifico.getFechadiagnostico());
+        return dto;
+    }
 }

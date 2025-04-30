@@ -30,8 +30,8 @@ public class DiagnosticoEspecificoControlador {
     // Controlador para utilizar el metodo de listar Diagnostico especifico
     //http://localhost:8084/mentalist-web/usuarios
     @GetMapping("/diagnosticos")
-    public List<DiagnosticoEspecifico> obtenediagnosticos() {
-        List<DiagnosticoEspecifico> diagnosticos = this.diagnosticoEspecificoServicio.listarDiagnosticoEspecifico();
+    public List<DiagnosticoEspecificoDTO> obtenediagnosticos() {
+        List<DiagnosticoEspecificoDTO> diagnosticos = this.diagnosticoEspecificoServicio.listarDiagnosticoEspecifico();
         logger.info("DiagnosticoEspecifico obtenidos:");
         diagnosticos.forEach((diagnostico -> logger.info(diagnostico.toString())));
         return diagnosticos;
@@ -40,9 +40,9 @@ public class DiagnosticoEspecificoControlador {
 
     // Controlador para utilizar el metodo de guardar diagnosticos
     @PostMapping("/diagnosticos")
-    public ResponseEntity<DiagnosticoEspecifico> agregarDianosticoEsoecifico(@Valid @RequestBody DiagnosticoEspecificoDTO dto) {
+    public ResponseEntity<DiagnosticoEspecificoDTO> agregarDianosticoEsoecifico(@Valid @RequestBody DiagnosticoEspecificoDTO dto) {
         logger.info("DiagnosticoEspecifico a agregar" + dto);
-        DiagnosticoEspecifico diagnosticoEspecificoGuardado = this.diagnosticoEspecificoServicio.guardarDiagnosticoEspecifico(dto);
+        DiagnosticoEspecificoDTO diagnosticoEspecificoGuardado = this.diagnosticoEspecificoServicio.guardarDiagnosticoEspecifico(dto);
         URI ubicacion = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{idDiagnosticoEspecifico}")
@@ -54,9 +54,9 @@ public class DiagnosticoEspecificoControlador {
 
     // Controlador para utilizar el metodo de buscar Dianostico especifico por id
     @GetMapping("/diagnosticos/{idDiagnosticoEspecifico}")
-    public ResponseEntity<DiagnosticoEspecifico> obtenerDiagnosticoEspecificoid(
+    public ResponseEntity<DiagnosticoEspecificoDTO> obtenerDiagnosticoEspecificoid(
             @PathVariable int idDiagnosticoEspecifico) {
-        DiagnosticoEspecifico diagnosticoEspecifico = this.diagnosticoEspecificoServicio.buscarDiagnosticoEspecificoId(idDiagnosticoEspecifico);
+        DiagnosticoEspecificoDTO diagnosticoEspecifico = this.diagnosticoEspecificoServicio.buscarDiagnosticoEspecificoId(idDiagnosticoEspecifico);
         if (diagnosticoEspecifico != null) {
             return ResponseEntity.ok(diagnosticoEspecifico);
         } else {

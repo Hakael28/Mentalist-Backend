@@ -14,17 +14,17 @@ import java.util.Optional;
 
 public interface IDiagnosticoEspecificoServicio {
     // Metodo para listar los Diagnostico especificos
-    public List<DiagnosticoEspecifico> listarDiagnosticoEspecifico();
+    List<DiagnosticoEspecificoDTO> listarDiagnosticoEspecifico();
 
     // Metodo para seleccionar el ultimo  registro de diagnostico especifico
-    public Optional<DiagnosticoEspecifico> findTopByOrderByIdDiagnosticoEspecificoDesc();
+    Optional<DiagnosticoEspecifico> findTopByOrderByIdDiagnosticoEspecificoDesc();
 
     //Metodo para buscar Diagnostico especificos
-    public DiagnosticoEspecifico buscarDiagnosticoEspecificoId(Integer id_diagnostico_especifico);
+    DiagnosticoEspecificoDTO buscarDiagnosticoEspecificoId(Integer id_diagnostico_especifico);
 
     //Metodo para guardar Diagnostico especificos
-    public DiagnosticoEspecifico guardarDiagnosticoEspecifico(DiagnosticoEspecificoDTO dto);
+    DiagnosticoEspecificoDTO guardarDiagnosticoEspecifico(DiagnosticoEspecificoDTO dto);
 
     //Metodo para eliminar Diagnostico especificos
-    public void eliminarDiagnosticoEspecifico(Integer idDiagnosticoEspecifico);
+    void eliminarDiagnosticoEspecifico(Integer idDiagnosticoEspecifico);
 }

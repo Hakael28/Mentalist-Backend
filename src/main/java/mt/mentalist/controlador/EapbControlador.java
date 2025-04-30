@@ -32,8 +32,8 @@ public class EapbControlador {
     // Controlador para utilizar el metodo de listar Eapb
     //http://localhost:8084/mentalist-web/Eapb
     @GetMapping("/eapbs")
-    public List<Eapb> obtenerEapb() {
-        List<Eapb> eapbs = this.eapbServicio.listarEapb();
+    public List<EapbDTO> obtenerEapb() {
+        List<EapbDTO> eapbs = this.eapbServicio.listarEapb();
         logger.info("Eapb obetenido");
         eapbs.forEach((eapb -> logger.info(eapb.toString())));
         return eapbs;
@@ -41,9 +41,9 @@ public class EapbControlador {
 
     // Controlador para utilizar el metodo de guardar Eapb
     @PostMapping("/eapbs")
-    public ResponseEntity<Eapb> agregarEapb(@Valid @RequestBody EapbDTO dto) {
+    public ResponseEntity<EapbDTO> agregarEapb(@Valid @RequestBody EapbDTO dto) {
         logger.info("Eapb a agregar" + dto);
-        Eapb eapbGuardado = this.eapbServicio.guardarEapb(dto);
+        EapbDTO eapbGuardado = this.eapbServicio.guardarEapb(dto);
         URI ubicacion = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{idEapb}")
@@ -54,11 +54,11 @@ public class EapbControlador {
 
     // Controlador para utilizar el metodo de buscar Eapb por id
     @GetMapping("/eapbs/{idEapb}")
-    public ResponseEntity<Eapb> obtenerEapbid(
+    public ResponseEntity<EapbDTO> obtenerEapbid(
             @PathVariable int idEapb) {
-        Eapb eapb = this.eapbServicio.buscarEapbId(idEapb);
+        EapbDTO eapb = this.eapbServicio.buscarEapbId(idEapb);
         if (Eapb != null) {
-            return ResponseEntity.ok(Eapb);
+            return ResponseEntity.ok(eapb);
         } else {
             throw new RecursoNoEncontradoExcepcion("no se encontro Eapb con el id:" + idEapb);
         }
@@ -72,8 +72,5 @@ public class EapbControlador {
         respuesta.put("Eliminado", Boolean.TRUE);
         return ResponseEntity.ok(respuesta);
     }
-
-
-
 }
 
