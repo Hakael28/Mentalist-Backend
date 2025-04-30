@@ -33,8 +33,8 @@ public class PacienteControlador {
     // Controlador para utilizar el metodo de listar los pacientes
     //http://localhost:8084/mentalist-web/pacientes
     @GetMapping("/pacientes")
-    public List<Paciente> obtenerPacientes() {
-        List<Paciente> pacientes = this.pacienteServicio.listarPacientes();
+    public List<PacienteDTO> obtenerPacientes() {
+        List<PacienteDTO> pacientes = this.pacienteServicio.listarPacientes();
         logger.info("Reportes obtenidos:");
         pacientes.forEach((paciente -> logger.info(paciente.toString())));
         return pacientes;
@@ -42,10 +42,10 @@ public class PacienteControlador {
 
     // Controlador para utilizar el metodo de guardar pacientes
     @PostMapping("/pacientes")
-    public ResponseEntity<Paciente> agregarPaciente(@Valid @RequestBody PacienteDTO dto) {
+    public ResponseEntity<PacienteDTO> agregarPaciente(@Valid @RequestBody PacienteDTO dto) {
         logger.info("Reporte a agregar" + dto);
 
-        Paciente pacienteGuardado = this.pacienteServicio.guardarPaciente(dto);
+        PacienteDTO pacienteGuardado = this.pacienteServicio.guardarPaciente(dto);
         URI ubicacion = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{idReporte}")
@@ -56,9 +56,9 @@ public class PacienteControlador {
 
     // Controlador para utilizar el metodo de buscar pacientes por id
     @GetMapping("/pacientes/{idPaciente}")
-    public ResponseEntity<Paciente> obtenerPacienteId(
+    public ResponseEntity<PacienteDTO> obtenerPacienteId(
             @PathVariable int idPaciente) {
-        Paciente paciente = this.pacienteServicio.buscarPacientesId(idPaciente);
+        PacienteDTO paciente = this.pacienteServicio.buscarPacientesId(idPaciente);
         if (paciente != null) {
             return ResponseEntity.ok(paciente);
         } else {
@@ -78,10 +78,10 @@ public class PacienteControlador {
 
     // Controlador para utilizar el metodo de actualizar la informacion de los pacientes
     @PutMapping("/pacientes/{idPaciente}")
-    public ResponseEntity<Paciente> actualizarPaciente(
+    public ResponseEntity<PacienteDTO> actualizarPaciente(
             @PathVariable int idPaciente,
             @Valid @RequestBody PacienteDTO dto) {
-        Paciente actualizado = pacienteServicio.actualizarPaciente(idPaciente, dto);
+        PacienteDTO actualizado = pacienteServicio.actualizarPaciente(idPaciente, dto);
         return ResponseEntity.ok(actualizado);
     }
 }

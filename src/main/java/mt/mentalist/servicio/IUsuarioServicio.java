@@ -11,31 +11,30 @@ import java.util.Optional;
 public interface IUsuarioServicio {
 
     // Método para listar todos los usuarios
-    List<Usuario> listarUsuarios();
+    List<UsuarioDTO> listarUsuarios();
     // Metodo para seleccionar el ultimo  registro de usuario
 
     Optional<Usuario> findTopByOrderByIdUsuarioDesc();
 
-//    // Método para buscar un usuario por Usuario
-//   Optional<Usuario> buscarUsuario(String usuario);
-
     // Método para buscar un usuario por ID
-    Usuario buscarUsuarioId(Integer idUsuario);
+    UsuarioDTO buscarUsuarioId(Integer idUsuario);
 
     // Método para guardar un usuario
-    Usuario guardarUsuario(UsuarioDTO dto);
+    UsuarioDTO guardarUsuario(UsuarioDTO dto);
 
     // Actualiza datos de un usuario, sin permitir cambiar el rol ni el nombre de usuario
-    public Usuario actualizarUsuarioRestricciones(Integer idUsuario, UsuarioDTO dto);
+    UsuarioDTO actualizarUsuarioRestricciones(Integer idUsuario, UsuarioDTO dto);
 
     // Actualiza todos los datos del usuario (sin restricciones, para administrador)
-    public Usuario actulizarUsuarioAdmin(Integer idUsuario, UsuarioDTO dto);
+    UsuarioDTO actulizarUsuarioAdmin(Integer idUsuario, UsuarioDTO dto);
 
     // Método para eliminar usuario por ID
     void eliminarUsuario(Integer idUsuario);
 
 //    // Método para validar si existe un usuario por su nombre de usuario
 //  boolean existeUsuario(String usuario);
+//    // Método para buscar un usuario por Usuario
+//   Optional<Usuario> buscarUsuario(String usuario);
 
 
 //    // Metodo para validar ingreso del usuario

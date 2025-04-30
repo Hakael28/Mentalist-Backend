@@ -23,19 +23,24 @@ public class PacienteServicio implements IPacienteServicio {
 
     // Listar todos los pacientes
     @Override
-    public List<Paciente> listarPacientes() {
-        return pacienteRepositorio.findAll();
+    public List<PacienteDTO> listarPacientes() {
+       List<Paciente> pacientes = pacienteRepositorio.findAll();
+       return pacientes.stream()
+               .map(this::convertirEntidadDTO)
+               .toList();
     }
 
     // Buscar un paciente por su ID
     @Override
-    public Paciente buscarPacientesId(Integer idPaciente) {
-        return pacienteRepositorio.findById(idPaciente).orElse(null);
+    public PacienteDTO buscarPacientesId(Integer idPaciente) {
+        Paciente paciente = pacienteRepositorio.findById(idPaciente)
+                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No se encontro el paciente con el ID: " +idPaciente ));
+        return convertirEntidadDTO(paciente);
     }
 
     // Guardar un paciente en la base de datos
     @Override
-    public Paciente guardarPaciente(PacienteDTO dto) {
+    public PacienteDTO guardarPaciente(PacienteDTO dto) {
         Paciente paciente = new Paciente();
 
         paciente.setIdPaciente(dto.getIdPaciente());
@@ -50,12 +55,13 @@ public class PacienteServicio implements IPacienteServicio {
         paciente.setDireccion(dto.getDireccion());
         paciente.setFechaNacimiento(dto.getFechaNacimiento());
 
-        return pacienteRepositorio.save(paciente);
+        Paciente pacienteGuardado = pacienteRepositorio.save(paciente);
+        return convertirEntidadDTO(pacienteGuardado);
     }
 
     @Override
-    public Paciente actualizarPaciente(Integer idPaciente, PacienteDTO dto) {
-        Paciente existente = buscarPacientesId(idPaciente);
+    public PacienteDTO actualizarPaciente(Integer idPaciente, PacienteDTO dto) {
+        Paciente existente = obtenerPacienteEntidad(idPaciente);
         if (existente == null) {
             throw new RecursoNoEncontradoExcepcion("No se encontro el paciente con el ID: " + idPaciente);
         }
@@ -68,8 +74,8 @@ public class PacienteServicio implements IPacienteServicio {
         existente.setTelefono(dto.getTelefono());
         existente.setCorreo(dto.getCorreo());
         existente.setDireccion(dto.getDireccion());
-
-        return pacienteRepositorio.save(existente);
+        Paciente actualizado = pacienteRepositorio.save(existente);
+        return convertirEntidadDTO(actualizado);
     }
 
 
@@ -82,6 +88,24 @@ public class PacienteServicio implements IPacienteServicio {
         } else {
             throw new RuntimeException("Paciente no encontrado con ID: " + idPaciente);
         }
+    }
+
+    private PacienteDTO convertirEntidadDTO(Paciente paciente){
+        PacienteDTO dto = new PacienteDTO();
+        dto.setIdPaciente(paciente.getIdPaciente());
+        dto.setTipoDocumento(paciente.getTipoDocumento());
+        dto.setNombreCompleto(paciente.getNombreCompleto());
+        dto.setFechaNacimiento(paciente.getFechaNacimiento());
+        dto.setEdad(paciente.getEdad());
+        dto.setGenero(paciente.getGenero());
+        dto.setNacionalidad(paciente.getNacionalidad());
+        dto.setTelefono(paciente.getTelefono());
+        dto.setCorreo(paciente.getCorreo());
+        dto.setDireccion(paciente.getDireccion());
+        return  dto;
+    }
+    private Paciente obtenerPacienteEntidad(Integer idPaciente){
+        return pacienteRepositorio.findById(idPaciente).orElseThrow(()-> new RecursoNoEncontradoExcepcion("No se encontro el paciente con el ID: "+ idPaciente));
     }
 
 

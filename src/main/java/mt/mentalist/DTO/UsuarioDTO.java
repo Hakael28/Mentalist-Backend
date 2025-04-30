@@ -8,6 +8,9 @@ import mt.mentalist.modelo.Enum.Rol;
 
 @Data
 public class UsuarioDTO {
+
+    private Integer idUsuario;
+
     @NotBlank(message = "El nombre del profesional es obligatorio")
     @Size(max = 100, message = "El nombre no debe superar los 100 caracteres")
     private String nombre;

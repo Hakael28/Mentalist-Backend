@@ -33,8 +33,8 @@ public class UsuarioControlador {
     // Controlador pafra utilizar el metodo de listar usuarios
     //http://localhost:8084/mentalist-web/usuarios
     @GetMapping("/usuarios")
-    public List<Usuario> obtenerUsuarios() {
-        List<Usuario> usuarios = this.usuarioServicio.listarUsuarios();
+    public List<UsuarioDTO> obtenerUsuarios() {
+        List<UsuarioDTO> usuarios = this.usuarioServicio.listarUsuarios();
         logger.info("Usuarios obtenidos:");
         usuarios.forEach((usuario -> logger.info(usuario.toString())));
         return usuarios;
@@ -42,9 +42,9 @@ public class UsuarioControlador {
 
     // Controlador para utilizar el metodo de guardar usuarios
     @PostMapping("/usuarios")
-    public ResponseEntity<Usuario> agregarUsuario(@Valid @RequestBody UsuarioDTO dto) {
+    public ResponseEntity<UsuarioDTO> agregarUsuario(@Valid @RequestBody UsuarioDTO dto) {
         logger.info("Usuario a agregar" + dto);
-        Usuario usuarioGuardado = this.usuarioServicio.guardarUsuario(dto);
+        UsuarioDTO usuarioGuardado = this.usuarioServicio.guardarUsuario(dto);
         URI ubicacion = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{idUsuario}")
@@ -55,9 +55,9 @@ public class UsuarioControlador {
 
     // Controlador para utilizar el metodo de buscar usuario por id
     @GetMapping("/usuarios/{idUsuario}")
-    public ResponseEntity<Usuario> obtenerUsuarioPorId(
+    public ResponseEntity<UsuarioDTO> obtenerUsuarioPorId(
             @PathVariable int idUsuario) {
-        Usuario usuario = this.usuarioServicio.buscarUsuarioId(idUsuario);
+        UsuarioDTO usuario = this.usuarioServicio.buscarUsuarioId(idUsuario);
         if (usuario != null) {
             return ResponseEntity.ok(usuario);
         } else {
@@ -77,19 +77,19 @@ public class UsuarioControlador {
 
     // Controlador para utilizar el metodo de actualizar la informacion de los usuarios con restriccion referente a rol
     @PutMapping("/usuarios/{idUsuario}")
-    public ResponseEntity<Usuario> actualizarUsuario(
+    public ResponseEntity<UsuarioDTO> actualizarUsuario(
            @PathVariable int idUsuario,
            @Valid @RequestBody UsuarioDTO dto){
-        Usuario actulizado = usuarioServicio.actualizarUsuarioRestricciones(idUsuario, dto);
+        UsuarioDTO actulizado = usuarioServicio.actualizarUsuarioRestricciones(idUsuario, dto);
         return ResponseEntity.ok(actulizado);
     }
 
     // Controlador para utilizar el metodo de actualizar la informacion de los usuarios
     @PutMapping("/administrador/{idUsuario}/credenciales")
-    public ResponseEntity<Usuario> actualizarUsuarioAdmin(
+    public ResponseEntity<UsuarioDTO> actualizarUsuarioAdmin(
             @PathVariable int idUsuario,
             @Valid @RequestBody UsuarioDTO  dto) {
-        Usuario actualizado = usuarioServicio.actulizarUsuarioAdmin(idUsuario, dto);
+        UsuarioDTO actualizado = usuarioServicio.actulizarUsuarioAdmin(idUsuario, dto);
         return ResponseEntity.ok(actualizado);
 
     }

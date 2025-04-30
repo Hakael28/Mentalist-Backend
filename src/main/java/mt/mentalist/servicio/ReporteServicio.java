@@ -30,19 +30,18 @@ public class ReporteServicio implements IReporteServicio {
                 .map(this::convertirEntidadDTO)
                 .toList();
     }
-    // Metodo para seleccionar el ultimo  registro de reporte
 
     @Override
-    public ReporteDTO buscarReporteId(Integer id_reporte) {
-        Reporte reporte = reporteRepositorio.findById(id_reporte)
-                .orElseThrow(()-> new RecursoNoEncontradoExcepcion("No se encontro el reporte con el ID : "+ id_reporte));
+    public ReporteDTO buscarReporteId(Integer idReporte) {
+        Reporte reporte = reporteRepositorio.findById(idReporte)
+                .orElseThrow(()-> new RecursoNoEncontradoExcepcion("No se encontro el reporte con el ID : "+ idReporte));
         return convertirEntidadDTO(reporte);
     }
 
     @Override
     public ReporteDTO guardarReporte(ReporteDTO dto) {
 
-        Usuario usuario = usuarioServicio.buscarUsuarioId(dto.getIdUsuario());
+        Usuario usuario = usuarioServicio.ObtenerUsuarioEntidad(dto.getIdUsuario());
         if (usuario == null) {
             throw new RecursoNoEncontradoExcepcion("No se encontró el usuario con el ID: " + dto.getIdUsuario());
         }
@@ -63,7 +62,7 @@ public class ReporteServicio implements IReporteServicio {
         if (existente == null) {
             throw new RecursoNoEncontradoExcepcion("No ser encontro el reporte con el id: " + idReporte);
         }
-        Usuario usuario = usuarioServicio.buscarUsuarioId(dto.getIdUsuario());
+        Usuario usuario = usuarioServicio.ObtenerUsuarioEntidad(dto.getIdUsuario());
         if (usuario == null) {
             throw new RecursoNoEncontradoExcepcion("No ser encontro el usuario con el id: " + dto.getIdUsuario());
         }

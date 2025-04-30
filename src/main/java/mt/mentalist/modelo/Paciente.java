@@ -1,5 +1,6 @@
 package mt.mentalist.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.validation.constraints.*;
@@ -63,11 +64,13 @@ public class Paciente {
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
+    @JsonIgnore
     private List<Caso> casos = new ArrayList<>();
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
+    @JsonIgnore
     private List<HistoriaClinica> historiaClinicas = new ArrayList<>();
 
     @PrePersist

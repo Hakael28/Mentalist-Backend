@@ -27,20 +27,25 @@ public class UsuarioServicio implements IUsuarioServicio {
     //}
 
     @Override
-    public List<Usuario> listarUsuarios() {
-        return usuarioRepositorio.findAll();
+    public List<UsuarioDTO> listarUsuarios() {
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        return usuarios.stream()
+                .map(this::convertirEntidadDTO)
+                .toList();
     }
     //    @Override
 //    public Optional<Usuario> buscarUsuario(String usuario) {
 //        return usuarioRepositorio.findByUsuario(usuario);
 //    }
     @Override
-    public Usuario buscarUsuarioId(Integer idUsuario) {
-        return usuarioRepositorio.findById(idUsuario).orElse(null);
+    public UsuarioDTO buscarUsuarioId(Integer idUsuario) {
+        Usuario usuario = usuarioRepositorio.findById(idUsuario)
+                .orElseThrow(()-> new RecursoNoEncontradoExcepcion("No se encontro el usuario con el ID: " + idUsuario));
+        return convertirEntidadDTO(usuario);
     }
 
     @Override
-    public Usuario guardarUsuario(UsuarioDTO dto) {
+    public UsuarioDTO guardarUsuario(UsuarioDTO dto) {
 
         Usuario usuario = new Usuario();
 
@@ -50,13 +55,13 @@ public class UsuarioServicio implements IUsuarioServicio {
         usuario.setContraseña(dto.getContraseña());
         usuario.setCorreo(dto.getCorreo());
         usuario.setTelefono(dto.getTelefono());
-
-        return usuarioRepositorio.save(usuario);
+        Usuario usuarioGuardado = usuarioRepositorio.save(usuario);
+        return convertirEntidadDTO(usuarioGuardado);
     }
 
     @Override
-    public Usuario actualizarUsuarioRestricciones(Integer idUsuario, UsuarioDTO dto) {
-        Usuario usuario = buscarUsuarioId(idUsuario);
+    public UsuarioDTO actualizarUsuarioRestricciones(Integer idUsuario, UsuarioDTO dto) {
+        Usuario usuario = ObtenerUsuarioEntidad(idUsuario);
         if (usuario==null){
             throw new RecursoNoEncontradoExcepcion("No encontro el usuario con el ID: "+ idUsuario );
         }
@@ -71,12 +76,13 @@ public class UsuarioServicio implements IUsuarioServicio {
         usuario.setCorreo(dto.getCorreo());
         usuario.setTelefono(dto.getTelefono());
 
-        return usuarioRepositorio.save(usuario);
+        Usuario actulizado = usuarioRepositorio.save(usuario);
+        return convertirEntidadDTO(actulizado);
     }
 
     @Override
-    public Usuario actulizarUsuarioAdmin(Integer idUsuario, UsuarioDTO dto) {
-        Usuario usuario = buscarUsuarioId(idUsuario);
+    public UsuarioDTO actulizarUsuarioAdmin(Integer idUsuario, UsuarioDTO dto) {
+        Usuario usuario = ObtenerUsuarioEntidad(idUsuario);
         if (usuario == null) {
             throw new RecursoNoEncontradoExcepcion("No se encontró el usuario con el ID: " + idUsuario);
         }
@@ -88,7 +94,8 @@ public class UsuarioServicio implements IUsuarioServicio {
         usuario.setCorreo(dto.getCorreo());
         usuario.setTelefono(dto.getTelefono());
 
-        return usuarioRepositorio.save(usuario);
+        Usuario actulizado = usuarioRepositorio.save(usuario);
+        return convertirEntidadDTO(actulizado);
     }
 
     @Override
@@ -106,7 +113,21 @@ public class UsuarioServicio implements IUsuarioServicio {
         return usuarioRepositorio.findTopByOrderByIdUsuarioDesc();
     }
 
-
+    private UsuarioDTO convertirEntidadDTO(Usuario usuario){
+        UsuarioDTO dto = new UsuarioDTO();
+        dto.setIdUsuario(usuario.getIdUsuario());
+        dto.setNombre(usuario.getNombre());
+        dto.setUsuario(usuario.getUsuario());
+        dto.setRol(usuario.getRol());
+        dto.setContraseña(usuario.getContraseña());
+        dto.setCorreo(usuario.getCorreo());
+        dto.setTelefono(usuario.getTelefono());
+        return dto;
+    }
+    public Usuario ObtenerUsuarioEntidad(Integer idUsuario){
+        return usuarioRepositorio.findById(idUsuario)
+                .orElseThrow(()-> new RecursoNoEncontradoExcepcion("No se encontro el usuario con el ID: " + idUsuario));
+    }
 //    @Override
 //    public boolean existeUsuario(String usuario) {
 //        return usuarioRepositorio.existsByUsuario(usuario);
