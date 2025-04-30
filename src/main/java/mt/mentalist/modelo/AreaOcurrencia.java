@@ -19,7 +19,6 @@ public class AreaOcurrencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_area_ocurrencia", nullable = false )
-    @NotNull
     private Integer idAreaOcurrencia;
 
     @Column(length = 100, nullable = false )

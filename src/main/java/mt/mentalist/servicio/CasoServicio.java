@@ -125,6 +125,10 @@ public class CasoServicio implements ICasoServicio {
         dto.setFechaRevisionHistoria(caso.getFechaRevisionHistoria());
         dto.setRemisionRutaSalud(caso.getRemisionRutaSalud());
         return dto;
+    }
 
+    public Caso obtenerCasoEntidad(Integer idCaso){
+        return casoRepositorio.findById(idCaso)
+                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No se encontró el caso con el ID: " + idCaso));
     }
 }

@@ -58,7 +58,7 @@ public class HistoriaClinicaServicio implements IHistoriaClinicaServicio {
             throw new RecursoNoEncontradoExcepcion("No encontro el paciente con el ID: " + dto.getIdPaciente());
         }
 
-        Caso caso = casoServicio.buscarCasoId(dto.getIdCaso());
+        Caso caso = casoServicio.obtenerCasoEntidad(dto.getIdCaso());
         if (caso == null) {
             throw new RecursoNoEncontradoExcepcion("No encontro el caso con el ID: " + dto.getIdCaso());
         }

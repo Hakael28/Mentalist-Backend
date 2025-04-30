@@ -21,7 +21,7 @@ import java.util.Map;
 
 @RestController
 //http://localhost:8084/mentalist-web
-@RequestMapping("mantalist-web")
+@RequestMapping("mentalist-web")
 @CrossOrigin(value = "http://localhost:4200")
 public class AreaOcurrenciaControlador {
     @Autowired

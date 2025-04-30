@@ -44,8 +44,8 @@ public class CasoControlador {
 
     // Controlador para utilizar el metodo de listar los casos
     @GetMapping("/casos")
-    public List<Caso> Obtenercasos() {
-        List<Caso> casos = this.casoServicio.listarCaso();
+    public List<CasoDTO> Obtenercasos() {
+        List<CasoDTO> casos = this.casoServicio.listarCaso();
         logger.info("Reportes obtenidos:");
         casos.forEach((caso -> logger.info(caso.toString())));
         return casos;
@@ -54,12 +54,12 @@ public class CasoControlador {
     //http://localhost:8084/mentalist-web/casos
     // Controlador para utilizar el metodo de guardar casos
     @PostMapping("/casos")
-    public ResponseEntity<Caso> agregarCaso(@Valid @RequestBody CasoDTO dto) {
+    public ResponseEntity<CasoDTO> agregarCaso(@Valid @RequestBody CasoDTO dto) {
         logger.info("Intentando registrar un nuevo caso con datos: {}", dto);
 
         // Solo se envía el DTO. La lógica de buscar el paciente, usuario y las entidades
         // más recientes está completamente en el servicio.
-        Caso casoGuardado = casoServicio.guardarCaso(dto);
+        CasoDTO casoGuardado = casoServicio.guardarCaso(dto);
         URI ubicacion = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{idCaso}")
@@ -71,9 +71,9 @@ public class CasoControlador {
 
     // Controlador para utilizar el metodo de buscar caso por id
     @GetMapping("/casos/{idCaso}")
-    public ResponseEntity<Caso> obtenerCasoId(
+    public ResponseEntity<CasoDTO> obtenerCasoId(
             @PathVariable int idCaso) {
-        Caso caso = this.casoServicio.buscarCasoId(idCaso);
+        CasoDTO caso = this.casoServicio.buscarCasoId(idCaso);
         if (caso != null) {
             return ResponseEntity.ok(caso);
         } else {
