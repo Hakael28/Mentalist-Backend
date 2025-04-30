@@ -24,8 +24,11 @@ public class HistoriaClinicaServicio implements IHistoriaClinicaServicio {
 
     @Override
 
-    public List<HistoriaClinica> listarClinica() {
-        return clinicaRepositorio.findAll();
+    public List<HistoriaClinicaDTO> listarClinica() {
+        List<HistoriaClinica> historiaClinicas = clinicaRepositorio.findAll();
+          return historiaClinicas.stream()
+                .map(this::convertirEntidadDTO)
+                .toList();
     }
 
     @Override
@@ -39,17 +42,18 @@ public class HistoriaClinicaServicio implements IHistoriaClinicaServicio {
     }
 
     @Override
-    public HistoriaClinica buscarClinicaId(Integer idHistoriaClinica) {
-        return clinicaRepositorio.findById(idHistoriaClinica)
+    public HistoriaClinicaDTO buscarClinicaId(Integer idHistoriaClinica) {
+        HistoriaClinica historiaClinica= clinicaRepositorio.findById(idHistoriaClinica)
                 .orElseThrow(() -> {
                     return new RuntimeException("Historia clínica no encontrada con ID: " + idHistoriaClinica);
                 });
+        return convertirEntidadDTO(historiaClinica);
     }
 
     @Override
-    public HistoriaClinica guardarClinica(HistoriaClinicaDTO dto) {
+    public HistoriaClinicaDTO guardarClinica(HistoriaClinicaDTO dto) {
 
-        Paciente paciente = pacienteServicio.buscarPacientesId(dto.getIdPaciente());
+        Paciente paciente = pacienteServicio.obtenerPacienteEntidad(dto.getIdPaciente());
         if (paciente == null) {
             throw new RecursoNoEncontradoExcepcion("No encontro el paciente con el ID: " + dto.getIdPaciente());
         }
@@ -65,7 +69,8 @@ public class HistoriaClinicaServicio implements IHistoriaClinicaServicio {
         historiaClinica.setCaso(caso);
         historiaClinica.setDescripcionHistoria(dto.getDescripcionHistoria());
 
-        return clinicaRepositorio.save(historiaClinica);
+        HistoriaClinica historiaClinicaGuardada = clinicaRepositorio.save(historiaClinica);
+        return convertirEntidadDTO(historiaClinicaGuardada);
     }
 
 
@@ -77,6 +82,15 @@ public class HistoriaClinicaServicio implements IHistoriaClinicaServicio {
         } else {
             throw new RuntimeException("Historia clinica no encontrada con ID: " + idHistoriaClinica);
         }
+    }
+
+    private HistoriaClinicaDTO convertirEntidadDTO(HistoriaClinica historiaClinica){
+        HistoriaClinicaDTO dto =new HistoriaClinicaDTO();
+        dto.setIdHistorialClinica(historiaClinica.getIdHistorialClinica());
+        dto.setIdPaciente(historiaClinica.getPaciente().getIdPaciente());
+        dto.setIdCaso(historiaClinica.getCaso().getIdCaso());
+        dto.setDescripcionHistoria(historiaClinica.getDescripcionHistoria());
+        return dto;
     }
 
 }

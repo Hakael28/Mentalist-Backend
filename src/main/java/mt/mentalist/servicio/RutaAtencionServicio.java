@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.RutaAtencionDTO;
+import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.RutaAtencion;
 import mt.mentalist.modelo.Usuario;
 import mt.mentalist.repositorio.RutaAtencionRepositorio;
@@ -22,9 +23,11 @@ public class RutaAtencionServicio implements IRutaAtencionServicio {
 
 
     @Override
-    public List<RutaAtencion> listarRutas() {
+    public List<RutaAtencionDTO> listarRutas() {
         List<RutaAtencion> rutas = rutaRepositorio.findAll();
-        return rutas;
+        return rutas.stream()
+                .map(this::convertirEntidadDTO)
+                .toList();
     }
 
     @Override
@@ -33,16 +36,18 @@ public class RutaAtencionServicio implements IRutaAtencionServicio {
     }
 
     @Override
-    public RutaAtencion buscarRutaId(Integer idRutaAtencion) {
-        RutaAtencion ruta = rutaRepositorio.findById(idRutaAtencion).orElse(null);
-        return ruta;
+    public RutaAtencionDTO buscarRutaId(Integer idRutaAtencion) {
+        RutaAtencion ruta = rutaRepositorio.findById(idRutaAtencion)
+                .orElseThrow(()->new RecursoNoEncontradoExcepcion("No se encontro la Ruta de atencion con el ID: " + idRutaAtencion));
+        return convertirEntidadDTO(ruta);
     }
 
     @Override
-    public RutaAtencion guardarRuta(RutaAtencionDTO dto) {
+    public RutaAtencionDTO guardarRuta(RutaAtencionDTO dto) {
         RutaAtencion ruta = new RutaAtencion();
         ruta.setDescripcion(dto.getDescripcion());
-        return rutaRepositorio.save(ruta);
+        RutaAtencion rutaAtencionGuardada = rutaRepositorio.save(ruta);
+        return convertirEntidadDTO(rutaAtencionGuardada);
     }
 
     @Override
@@ -53,6 +58,12 @@ public class RutaAtencionServicio implements IRutaAtencionServicio {
         }else {
             throw new RuntimeException("Ruta no encontrada con ID: " +idRutaAtencion);
         }
+    }
+    private RutaAtencionDTO convertirEntidadDTO(RutaAtencion rutaAtencion){
+        RutaAtencionDTO dto = new RutaAtencionDTO();
+        dto.setIdRutaAtencion(rutaAtencion.getIdRutaAtencion());
+        dto.setDescripcion(rutaAtencion.getDescripcion());
+        return dto;
     }
 
 }

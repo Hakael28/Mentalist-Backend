@@ -11,16 +11,16 @@ public interface IRutaAtencionServicio {
 
     // Metodo para listar las rutas de atencion
 
-    public List<RutaAtencion> listarRutas();
+    public List<RutaAtencionDTO> listarRutas();
 
     // Metodo para seleccionar el ultimo  registro de ruta de atencion..
     public Optional<RutaAtencion> findTopByOrderByIdRutaAtencionDesc();
 
     //Metodo para buscar  las rutas de atencion  
-    public RutaAtencion buscarRutaId(Integer idRutaAtencion);
+    public RutaAtencionDTO buscarRutaId(Integer idRutaAtencion);
 
     //Metodo para guardar las rutas de atencion  
-    public RutaAtencion guardarRuta(RutaAtencionDTO dto);
+    public RutaAtencionDTO guardarRuta(RutaAtencionDTO dto);
 
     //Metodo para eliminar las rutas de atencion  
     public void eliminarRuta(Integer idRutaAtencion);

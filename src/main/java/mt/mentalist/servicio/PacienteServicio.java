@@ -104,7 +104,7 @@ public class PacienteServicio implements IPacienteServicio {
         dto.setDireccion(paciente.getDireccion());
         return  dto;
     }
-    private Paciente obtenerPacienteEntidad(Integer idPaciente){
+    public Paciente obtenerPacienteEntidad(Integer idPaciente){
         return pacienteRepositorio.findById(idPaciente).orElseThrow(()-> new RecursoNoEncontradoExcepcion("No se encontro el paciente con el ID: "+ idPaciente));
     }
 

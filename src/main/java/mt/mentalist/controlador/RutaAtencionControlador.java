@@ -3,7 +3,6 @@ package mt.mentalist.controlador;
 import jakarta.validation.Valid;
 import mt.mentalist.DTO.RutaAtencionDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
-import mt.mentalist.modelo.RutaAtencion;
 import mt.mentalist.servicio.RutaAtencionServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +29,8 @@ public class RutaAtencionControlador {
     // Controlador pafra utilizar el metodo de listar Rutas de atención
     //http://localhost:8084/mentalist-web/usuarios
     @GetMapping("/rutas")
-    public List<RutaAtencion> obtenerRutas() {
-        List<RutaAtencion> rutas = this.rutaAtencionServicio.listarRutas();
+    public List<RutaAtencionDTO> obtenerRutas() {
+        List<RutaAtencionDTO> rutas = this.rutaAtencionServicio.listarRutas();
         logger.info("Rutas obtenidos:");
         rutas.forEach((ruta -> logger.info(ruta.toString())));
         return rutas;
@@ -39,22 +38,22 @@ public class RutaAtencionControlador {
 
     // Controlador para utilizar el metodo de guardar Rutas de atención
     @PostMapping("/rutas")
-    public ResponseEntity<RutaAtencion> agregarRuta(@Valid @RequestBody RutaAtencionDTO dto) {
+    public ResponseEntity<RutaAtencionDTO> agregarRuta(@Valid @RequestBody RutaAtencionDTO dto) {
         logger.info("Ruta a agregar" + dto);
-        RutaAtencion rutaGuardada = this.rutaAtencionServicio.guardarRuta(dto);
+        RutaAtencionDTO respuesta = this.rutaAtencionServicio.guardarRuta(dto);
         URI ubicacion = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{idRuta}")
-                .buildAndExpand(rutaGuardada.getIdRutaAtencion())
+                .buildAndExpand(respuesta.getIdRutaAtencion())
                 .toUri();
-        return ResponseEntity.created(ubicacion).body(rutaGuardada);
+        return ResponseEntity.created(ubicacion).body(respuesta);
     }
 
     // Controlador para utilizar el metodo de buscar Rutas de atención por id
     @GetMapping("/rutas/{idRutaAtencion}")
-    public ResponseEntity<RutaAtencion> obtenerRutaId(
+    public ResponseEntity<RutaAtencionDTO> obtenerRutaId(
             @PathVariable int idRutaAtencion) {
-        RutaAtencion ruta = this.rutaAtencionServicio.buscarRutaId(idRutaAtencion);
+        RutaAtencionDTO ruta = this.rutaAtencionServicio.buscarRutaId(idRutaAtencion);
         if (ruta != null) {
             return ResponseEntity.ok(ruta);
         } else {

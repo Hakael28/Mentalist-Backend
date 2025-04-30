@@ -30,8 +30,8 @@ public class HistorialClinicaControlador {
     // Controlador para utilizar el metodo de listar Historia clinica
     //http://localhost:8084/mentalist-web/Historia clinica
     @GetMapping ("/historias")
-    public List<HistoriaClinica> obtenerhistorias() {
-        List<HistoriaClinica> historias = this.historiaClinicaServicio.listarClinica();
+    public List<HistoriaClinicaDTO> obtenerhistorias() {
+        List<HistoriaClinicaDTO> historias = this.historiaClinicaServicio.listarClinica();
         logger.info("Histarias obtrenidas");
         historias.forEach((historia -> logger.info(historia.toString())));
         return historias;
@@ -39,21 +39,21 @@ public class HistorialClinicaControlador {
 
     // Controlador para utilizar el metodo de guardarHistoriaClinica
     @PostMapping("/historias")
-    public ResponseEntity<HistoriaClinica> agregarHistoriaClinica(@Valid @RequestBody HistoriaClinicaDTO dto) {
+    public ResponseEntity<HistoriaClinicaDTO> agregarHistoriaClinica(@Valid @RequestBody HistoriaClinicaDTO dto) {
         logger.info("HistoriaClinica a agregar" + dto);
-        HistoriaClinica historiaClinicaGuardado = this.historiaClinicaServicio.guardarClinica(dto);
+        HistoriaClinicaDTO historiaClinicaGuardada = this.historiaClinicaServicio.guardarClinica(dto);
         URI ubicacion = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{idHistorialClinica}")
-                .buildAndExpand(historiaClinicaGuardado.getIdHistorialClinica())
+                .buildAndExpand(historiaClinicaGuardada.getIdHistorialClinica())
                 .toUri();
-        return ResponseEntity.created(ubicacion).body(historiaClinicaGuardado);
+        return ResponseEntity.created(ubicacion).body(historiaClinicaGuardada);
     }
     // Controlador para utilizar el metodo de buscar Historia  Clinica por id
     @GetMapping("/historias/{idHistorialClinica}")
-    public ResponseEntity<HistoriaClinica> obtenerhHistoriaClinicaid(
+    public ResponseEntity<HistoriaClinicaDTO> obtenerhHistoriaClinicaid(
             @PathVariable int idHistorialClinica) {
-        HistoriaClinica historiaClinica = this.historiaClinicaServicio.buscarClinicaId(idHistorialClinica);
+        HistoriaClinicaDTO historiaClinica = this.historiaClinicaServicio.buscarClinicaId(idHistorialClinica);
         if (historiaClinica != null) {
             return ResponseEntity.ok(historiaClinica);
         } else {

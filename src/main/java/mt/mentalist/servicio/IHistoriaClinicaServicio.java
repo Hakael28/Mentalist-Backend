@@ -9,20 +9,20 @@ import mt.mentalist.modelo.HistoriaClinica;
 public interface IHistoriaClinicaServicio {
 
     // Metodo para listar la historia clinica
-    public List<HistoriaClinica> listarClinica();
+    List<HistoriaClinicaDTO> listarClinica();
 
-    public List<HistoriaClinica> obtenerHistoriasClinicasPorPaciente(Integer idPaciente);
+    List<HistoriaClinica> obtenerHistoriasClinicasPorPaciente(Integer idPaciente);
 
     // Metodo para seleccionar el ultimo  registro de HistoriaClinica
-    public Optional<HistoriaClinica> findTopByOrderByIdHistorialClinicaDesc();
+    Optional<HistoriaClinica> findTopByOrderByIdHistorialClinicaDesc();
 
     //Metodo para buscar la historia clinica
-    public HistoriaClinica buscarClinicaId(Integer idHistoriaClinica);
+    HistoriaClinicaDTO buscarClinicaId(Integer idHistoriaClinica);
 
     //Metodo para guardar la historia clinica
-    public HistoriaClinica guardarClinica(HistoriaClinicaDTO dto);
+    HistoriaClinicaDTO guardarClinica(HistoriaClinicaDTO dto);
 
     //Metodo para eliminar la historia clinica
-    public void eliminarClinica(Integer idHistoriaClinica);
+    void eliminarClinica(Integer idHistoriaClinica);
 
 }

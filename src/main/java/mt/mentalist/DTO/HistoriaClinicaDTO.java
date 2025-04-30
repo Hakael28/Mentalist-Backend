@@ -7,6 +7,9 @@ import lombok.Data;
 
 @Data
 public class HistoriaClinicaDTO {
+
+    private Integer idHistorialClinica;
+
     @NotNull(message = "El ID del paciente es obligatorio")
     private Integer idPaciente;
 
