@@ -34,7 +34,7 @@ public class EapbControlador {
     @GetMapping("/eapbs")
     public List<EapbDTO> obtenerEapb() {
         List<EapbDTO> eapbs = this.eapbServicio.listarEapb();
-        logger.info("Eapb obetenido");
+        logger.info("Eapb obtenidos");
         eapbs.forEach((eapb -> logger.info(eapb.toString())));
         return eapbs;
     }
