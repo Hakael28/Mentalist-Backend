@@ -1,5 +1,6 @@
 package mt.mentalist.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -83,6 +84,7 @@ public class Caso implements Serializable {
     @OneToMany(mappedBy = "caso", cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
+    @JsonIgnore
     private List<HistoriaClinica> historiasClinicas = new ArrayList<>();
 
 }

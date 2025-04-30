@@ -32,18 +32,19 @@ public class AreaOcurrenciaControlador {
     // Controlador para utilizar el metodo de listar areas de ocurrencia
     //http://localhost:8084/mentalist-web/cursoVida
     @GetMapping("/areas")
-    public List<AreaOcurrencia> obtenerAreasOcurrencia() {
-        List<AreaOcurrencia> areas = this.areaOcurrenciaServicio.listarAreaOcureencia();
+    public List<AreaOcurrenciaDTO> obtenerAreasOcurrencia() {
+        List<AreaOcurrenciaDTO> areas = this.areaOcurrenciaServicio.listarAreaOcureencia();
         logger.info("Areas de ocurrencia obtenidas");
         areas.forEach((area -> logger.info(area.toString())));
         return areas;
 
     }
+
     // Controlador para utilizar el metodo de guardar cursoVida
     @PostMapping("/areas")
-    public ResponseEntity<AreaOcurrencia> agregarAreaOcurrencia(@Valid @RequestBody AreaOcurrenciaDTO dto) {
+    public ResponseEntity<AreaOcurrenciaDTO> agregarAreaOcurrencia(@Valid @RequestBody AreaOcurrenciaDTO dto) {
         logger.info("Area de ocurrencia a agregar" + dto);
-        AreaOcurrencia areaGuardada = this.areaOcurrenciaServicio.guardarAreaOcurrencia(dto);
+        AreaOcurrenciaDTO areaGuardada = this.areaOcurrenciaServicio.guardarAreaOcurrencia(dto);
         URI ubicacion = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{idCursoVida}")
@@ -54,9 +55,9 @@ public class AreaOcurrenciaControlador {
 
     // Controlador para utilizar el metodo de buscar area de ocurrencia por id
     @GetMapping("/areas/{idAreaOcurrencia}")
-    public ResponseEntity<AreaOcurrencia> obtenerAreaOcurrenciaId(
+    public ResponseEntity<AreaOcurrenciaDTO> obtenerAreaOcurrenciaId(
             @PathVariable int idAreaOcurrencia) {
-        AreaOcurrencia areaOcurrencia = this.areaOcurrenciaServicio.buscarAreaOcurrencaId(idAreaOcurrencia);
+        AreaOcurrenciaDTO areaOcurrencia = this.areaOcurrenciaServicio.buscarAreaOcurrencaId(idAreaOcurrencia);
         if (areaOcurrencia != null) {
             return ResponseEntity.ok(areaOcurrencia);
         } else {

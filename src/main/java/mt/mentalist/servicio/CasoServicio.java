@@ -31,9 +31,11 @@ public class CasoServicio implements ICasoServicio {
 
 
     @Override
-    public List<Caso> listarCaso() {
+    public List<CasoDTO> listarCaso() {
         List<Caso> casos = casoRepositorio.findAll();
-        return casos;
+        return casos.stream()
+                .map(this::convertirEntidadDTO)
+                .toList();
     }
 
     @Override
@@ -42,21 +44,21 @@ public class CasoServicio implements ICasoServicio {
     }
 
     @Override
-    public Caso buscarCasoId(Integer idCaso) {
-        Caso caso = casoRepositorio.findById(idCaso).orElse(null);
-        return caso;
+    public CasoDTO buscarCasoId(Integer idCaso) {
+        Caso caso = casoRepositorio.findById(idCaso).orElseThrow(() -> new RecursoNoEncontradoExcepcion("No se encontro el caso con el ID: " + idCaso));
+        return convertirEntidadDTO(caso);
     }
 
     @Override
-    public Caso guardarCaso(CasoDTO dto) {
+    public CasoDTO guardarCaso(CasoDTO dto) {
 //        Entidades que viene del DTO (selecionados por el usuario y el sistema)
-        Usuario usuario = usuarioServicio.buscarUsuarioId(dto.getIdUsuario());
-        if (usuario== null){
+        Usuario usuario = usuarioServicio.ObtenerUsuarioEntidad(dto.getIdUsuario());
+        if (usuario == null) {
             throw new RecursoNoEncontradoExcepcion("No encontro el usuario con el id: " + dto.getIdUsuario());
         }
 
-        Paciente paciente = pacienteServicio.buscarPacientesId(dto.getIdPaciente());
-        if (paciente== null){
+        Paciente paciente = pacienteServicio.obtenerPacienteEntidad(dto.getIdPaciente());
+        if (paciente == null) {
             throw new RecursoNoEncontradoExcepcion("No encontro el paciente con el id: " + dto.getIdPaciente());
         }
 
@@ -92,17 +94,37 @@ public class CasoServicio implements ICasoServicio {
         caso.setRemisionRutaSalud(dto.getRemisionRutaSalud());
 
 //        Guardar el caso en la base de datos
-       return casoRepositorio.save(caso);
+        Caso casoGuardado = casoRepositorio.save(caso);
+        return convertirEntidadDTO(caso);
     }
 
 
     @Override
     public void eliminarCaso(Integer idCaso) {
         Optional<Caso> caso = casoRepositorio.findById(idCaso);
-        if(caso.isPresent()){
+        if (caso.isPresent()) {
             casoRepositorio.deleteById(idCaso);
-        }else {
-            throw new RuntimeException("Usuario no encontrado con ID: " +idCaso);
+        } else {
+            throw new RuntimeException("Usuario no encontrado con ID: " + idCaso);
         }
+    }
+
+    private CasoDTO convertirEntidadDTO(Caso caso) {
+        CasoDTO dto = new CasoDTO();
+        dto.setIdCaso(caso.getIdCaso());
+        dto.setIdPaciente(caso.getPaciente().getIdPaciente());
+        dto.setIdAreaOcurrencia(caso.getAreaOcurrencia().getIdAreaOcurrencia());
+        dto.setIdRutaAtencion(caso.getRutaAtencion().getIdRutaAtencion());
+        dto.setIdEapb(caso.getEapb().getIdEapb());
+        dto.setIdCursoVida(caso.getCursoVida().getIdCursoVida());
+        dto.setIdDiagnosticoEspecifico(caso.getDiagnostico().getIdDiagnosticoEspecifico());
+        dto.setIdUsuario(caso.getUsuario().getIdUsuario());
+        dto.setFechaNotificacion(caso.getFechaNotificacion());
+        dto.setSemanaEpidemiologica(caso.getSemanaEpidemiologica());
+        dto.setFechaIngreso(caso.getFechaIngreso());
+        dto.setFechaRevisionHistoria(caso.getFechaRevisionHistoria());
+        dto.setRemisionRutaSalud(caso.getRemisionRutaSalud());
+        return dto;
+
     }
 }

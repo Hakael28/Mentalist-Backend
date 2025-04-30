@@ -9,17 +9,17 @@ import mt.mentalist.modelo.Caso;
 
 public interface ICasoServicio {
     // Metodo para listar los casos
-    public List<Caso> listarCaso();
+    List<CasoDTO> listarCaso();
 
     // Metodo para sellecionar el ultimo caso registrado
     Optional<Caso> findTopByOrderByIdCasoDesc();
 
     //Metodo para buscar el caso
-    public Caso buscarCasoId(Integer idCaso);
+    CasoDTO buscarCasoId(Integer idCaso);
 
     //Metodo para guardar el caso
-    public Caso guardarCaso(CasoDTO dto);
+    CasoDTO guardarCaso(CasoDTO dto);
 
     //Metodo para eliminar el caso
-    public void eliminarCaso(Integer idCaso);
+    void eliminarCaso(Integer idCaso);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.AreaOcurrenciaDTO;
+import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.AreaOcurrencia;
 import mt.mentalist.modelo.Eapb;
 import mt.mentalist.modelo.Usuario;
@@ -19,9 +20,9 @@ public class AreaOcurrenciaServicio implements IAreaOcurrenciaServicio {
     private AreaOcurrenciaRepositorio areaOcurrenciaRepositorio;
 
     @Override
-    public List<AreaOcurrencia> listarAreaOcureencia() {
-        List<AreaOcurrencia> Areaocurrencia = areaOcurrenciaRepositorio.findAll();
-        return Areaocurrencia;
+    public List<AreaOcurrenciaDTO> listarAreaOcureencia() {
+        List<AreaOcurrencia> areaOcurrencias = areaOcurrenciaRepositorio.findAll();
+        return areaOcurrencias.stream().map(this::convertirEntidadDTO).toList();
     }
 
     @Override
@@ -31,26 +32,37 @@ public class AreaOcurrenciaServicio implements IAreaOcurrenciaServicio {
 
 
     @Override
-    public AreaOcurrencia buscarAreaOcurrencaId(Integer idAreaOcurrencia) {
-        AreaOcurrencia Areaocureencia = areaOcurrenciaRepositorio.findById(idAreaOcurrencia).orElse(null);
-        return Areaocureencia;
+    public AreaOcurrenciaDTO buscarAreaOcurrencaId(Integer idAreaOcurrencia) {
+        AreaOcurrencia areaOcurrencia = areaOcurrenciaRepositorio.findById(idAreaOcurrencia)
+                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No se encontro el area de ocurrencia con el ID: " + idAreaOcurrencia));
+        return convertirEntidadDTO(areaOcurrencia);
     }
 
     @Override
-    public AreaOcurrencia guardarAreaOcurrencia(AreaOcurrenciaDTO dto) {
+    public AreaOcurrenciaDTO guardarAreaOcurrencia(AreaOcurrenciaDTO dto) {
         AreaOcurrencia areaOcurrencia = new AreaOcurrencia();
         areaOcurrencia.setNombre(dto.getNombre());
-        return areaOcurrenciaRepositorio.save(areaOcurrencia);
+        AreaOcurrencia areaOcurrenciaGuardada = areaOcurrenciaRepositorio.save(areaOcurrencia);
+        return convertirEntidadDTO(areaOcurrenciaGuardada);
 
     }
 
     @Override
     public void eliminarAreaOcurrencia(Integer idAreaOcurrencia) {
         Optional<AreaOcurrencia> areaOcurrencia = areaOcurrenciaRepositorio.findById(idAreaOcurrencia);
-        if(areaOcurrencia.isPresent()){
+        if (areaOcurrencia.isPresent()) {
             areaOcurrenciaRepositorio.deleteById(idAreaOcurrencia);
-        }else {
-            throw new RuntimeException("Usuario no encontrado con ID: " +idAreaOcurrencia);
+        } else {
+            throw new RuntimeException("Usuario no encontrado con ID: " + idAreaOcurrencia);
         }
     }
+
+    private AreaOcurrenciaDTO convertirEntidadDTO(AreaOcurrencia areaOcurrencia) {
+        AreaOcurrenciaDTO dto = new AreaOcurrenciaDTO();
+        dto.setIdAreaOcurrencia(areaOcurrencia.getIdAreaOcurrencia());
+        dto.setNombre(areaOcurrencia.getNombre());
+        return dto;
+
+    }
+
 }

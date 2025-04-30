@@ -1,14 +1,28 @@
 package mt.mentalist.DTO;
+
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import mt.mentalist.modelo.*;
+
 import java.time.LocalDate;
 
 @Data
 public class CasoDTO {
 
+    private Integer idCaso;
+
     @NotNull(message = "El ID del paciente es obligatorio")
     private Integer idPaciente;
+
+    private Integer idAreaOcurrencia;
+
+    private Integer idRutaAtencion;
+
+    private Integer idEapb;
+
+    private Integer idCursoVida;
+
+    private Integer idDiagnosticoEspecifico;
 
     @NotNull(message = "El ID del usuario es obligatorio")
     private Integer idUsuario;
