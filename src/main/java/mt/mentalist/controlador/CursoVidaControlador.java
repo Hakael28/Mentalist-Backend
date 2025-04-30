@@ -32,8 +32,8 @@ public class CursoVidaControlador {
     // Controlador para utilizar el metodo de listar curso de vida
     //http://localhost:8084/mentalist-web/cursoVida
     @GetMapping("/cursoVida")
-    public List<CursoVida> obtenerCursoVida() {
-        List<CursoVida> cursos = this.cursoVidaServicio.listarCursoVida();
+    public List<CursoVidaDTO> obtenerCursoVida() {
+        List<CursoVidaDTO> cursos = this.cursoVidaServicio.listarCursoVida();
         logger.info("curso de vida obtenidos");
         cursos.forEach((curso -> logger.info(curso.toString())));
         return cursos;
@@ -42,9 +42,9 @@ public class CursoVidaControlador {
 
     // Controlador para utilizar el metodo de guardar curso de vida
     @PostMapping("/cursoVida")
-    public ResponseEntity<CursoVida> agregarCursoVida(@Valid @RequestBody CursoVidaDTO dto) {
+    public ResponseEntity<CursoVidaDTO> agregarCursoVida(@Valid @RequestBody CursoVidaDTO dto) {
         logger.info("CursVida a agregar" + dto);
-        CursoVida cursoVidaGuardado = this.cursoVidaServicio.guardarCursoVida(dto);
+        CursoVidaDTO cursoVidaGuardado = this.cursoVidaServicio.guardarCursoVida(dto);
         URI ubicacion = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{idCursoVida}")
@@ -55,9 +55,9 @@ public class CursoVidaControlador {
 
     // Controlador para utilizar el metodo de buscar curso vida por id
     @GetMapping("/cursoVida/{idCursoVida}")
-    public ResponseEntity<CursoVida> obtenerCursoVidaId(
+    public ResponseEntity<CursoVidaDTO> obtenerCursoVidaId(
             @PathVariable int idCursoVida) {
-        CursoVida cursoVida = this.cursoVidaServicio.buscarCursoVidaId(idCursoVida);
+        CursoVidaDTO cursoVida = this.cursoVidaServicio.buscarCursoVidaId(idCursoVida);
         if (cursoVida != null) {
             return ResponseEntity.ok(cursoVida);
         } else {
