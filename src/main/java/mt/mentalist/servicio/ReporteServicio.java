@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.ReporteDTO;
+import mt.mentalist.Funciones.Encriptacion.Encriptacion;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Reporte;
 import mt.mentalist.modelo.Usuario;
@@ -68,7 +69,7 @@ public class ReporteServicio implements IReporteServicio {
         }
         existente.setUsuario(usuario);
         existente.setTipoReporte(dto.getTipoReporte());
-        existente.setDescripcion(dto.getDescripcion());
+        existente.setDescripcion(Encriptacion.encriptarTexto(dto.getDescripcion()));
         existente.setFecha(dto.getFecha());
         Reporte actualizado = reporteRepositorio.save(existente);
         return convertirEntidadDTO(actualizado);
@@ -90,7 +91,7 @@ public class ReporteServicio implements IReporteServicio {
         dto.setIdReporte(reporte.getIdReporte());
         dto.setIdUsuario(reporte.getUsuario().getIdUsuario());
         dto.setTipoReporte(reporte.getTipoReporte());
-        dto.setDescripcion(reporte.getDescripcion());
+        dto.setDescripcion(Encriptacion.desencriptarTexto(reporte.getDescripcion()));
         dto.setFecha(reporte.getFecha());
         return dto;
     }

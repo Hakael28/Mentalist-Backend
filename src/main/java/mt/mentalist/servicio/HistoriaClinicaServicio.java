@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.HistoriaClinicaDTO;
+import mt.mentalist.Funciones.Encriptacion.Encriptacion;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Caso;
 import mt.mentalist.modelo.HistoriaClinica;
@@ -67,7 +68,7 @@ public class HistoriaClinicaServicio implements IHistoriaClinicaServicio {
 
         historiaClinica.setPaciente(paciente);
         historiaClinica.setCaso(caso);
-        historiaClinica.setDescripcionHistoria(dto.getDescripcionHistoria());
+        historiaClinica.setDescripcionHistoria(Encriptacion.encriptarTexto(dto.getDescripcionHistoria()));
 
         HistoriaClinica historiaClinicaGuardada = clinicaRepositorio.save(historiaClinica);
         return convertirEntidadDTO(historiaClinicaGuardada);
@@ -89,7 +90,7 @@ public class HistoriaClinicaServicio implements IHistoriaClinicaServicio {
         dto.setIdHistorialClinica(historiaClinica.getIdHistorialClinica());
         dto.setIdPaciente(historiaClinica.getPaciente().getIdPaciente());
         dto.setIdCaso(historiaClinica.getCaso().getIdCaso());
-        dto.setDescripcionHistoria(historiaClinica.getDescripcionHistoria());
+        dto.setDescripcionHistoria(Encriptacion.desencriptarTexto(historiaClinica.getDescripcionHistoria()));
         return dto;
     }
 
