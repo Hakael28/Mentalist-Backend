@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mt.mentalist.servicio;
 
 import java.util.List;
@@ -10,11 +6,10 @@ import java.util.Optional;
 import mt.mentalist.DTO.PacienteDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Paciente;
-import mt.mentalist.modelo.Reporte;
 import mt.mentalist.repositorio.PacienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import mt.mentalist.Funciones.Encriptacion.Encriptacion;
 @Service
 public class PacienteServicio implements IPacienteServicio {
     @Autowired
@@ -45,16 +40,14 @@ public class PacienteServicio implements IPacienteServicio {
 
         paciente.setIdPaciente(dto.getIdPaciente());
         paciente.setTipoDocumento(dto.getTipoDocumento());
-        paciente.setNombreCompleto(dto.getNombreCompleto());
+        paciente.setNombreCompleto(Encriptacion.encriptarTexto(dto.getNombreCompleto()));
         paciente.setFechaNacimiento(dto.getFechaNacimiento());
         paciente.setEdad(dto.getEdad());
         paciente.setGenero(dto.getGenero());
-        paciente.setNacionalidad(dto.getNacionalidad());
-        paciente.setTelefono(dto.getTelefono());
-        paciente.setCorreo(dto.getCorreo());
-        paciente.setDireccion(dto.getDireccion());
-        paciente.setFechaNacimiento(dto.getFechaNacimiento());
-
+        paciente.setNacionalidad(Encriptacion.encriptarTexto(dto.getNacionalidad()));
+        paciente.setTelefono(Encriptacion.encriptarTexto(dto.getTelefono()));
+        paciente.setCorreo(Encriptacion.encriptarTexto(dto.getCorreo()));
+        paciente.setDireccion(Encriptacion.encriptarTexto(dto.getDireccion()));
         Paciente pacienteGuardado = pacienteRepositorio.save(paciente);
         return convertirEntidadDTO(pacienteGuardado);
     }
@@ -66,14 +59,14 @@ public class PacienteServicio implements IPacienteServicio {
             throw new RecursoNoEncontradoExcepcion("No se encontro el paciente con el ID: " + idPaciente);
         }
         existente.setTipoDocumento(dto.getTipoDocumento());
-        existente.setNombreCompleto(dto.getNombreCompleto());
+        existente.setNombreCompleto(Encriptacion.encriptarTexto(dto.getNombreCompleto()));
         existente.setFechaNacimiento(dto.getFechaNacimiento());
         existente.setEdad(dto.getEdad());
         existente.setGenero(dto.getGenero());
-        existente.setNacionalidad(dto.getNacionalidad());
-        existente.setTelefono(dto.getTelefono());
-        existente.setCorreo(dto.getCorreo());
-        existente.setDireccion(dto.getDireccion());
+        existente.setNacionalidad(Encriptacion.encriptarTexto(dto.getNacionalidad()));
+        existente.setTelefono(Encriptacion.encriptarTexto(dto.getTelefono()));
+        existente.setCorreo(Encriptacion.encriptarTexto(dto.getCorreo()));
+        existente.setDireccion(Encriptacion.encriptarTexto(dto.getDireccion()));
         Paciente actualizado = pacienteRepositorio.save(existente);
         return convertirEntidadDTO(actualizado);
     }
@@ -94,14 +87,14 @@ public class PacienteServicio implements IPacienteServicio {
         PacienteDTO dto = new PacienteDTO();
         dto.setIdPaciente(paciente.getIdPaciente());
         dto.setTipoDocumento(paciente.getTipoDocumento());
-        dto.setNombreCompleto(paciente.getNombreCompleto());
+        dto.setNombreCompleto(Encriptacion.desencriptarTexto(paciente.getNombreCompleto()));
         dto.setFechaNacimiento(paciente.getFechaNacimiento());
         dto.setEdad(paciente.getEdad());
         dto.setGenero(paciente.getGenero());
-        dto.setNacionalidad(paciente.getNacionalidad());
-        dto.setTelefono(paciente.getTelefono());
-        dto.setCorreo(paciente.getCorreo());
-        dto.setDireccion(paciente.getDireccion());
+        dto.setNacionalidad(Encriptacion.desencriptarTexto(paciente.getNacionalidad()));
+        dto.setTelefono(Encriptacion.desencriptarTexto(paciente.getTelefono()));
+        dto.setCorreo(Encriptacion.desencriptarTexto(paciente.getCorreo()));
+        dto.setDireccion(Encriptacion.desencriptarTexto(paciente.getDireccion()));
         return  dto;
     }
     public Paciente obtenerPacienteEntidad(Integer idPaciente){

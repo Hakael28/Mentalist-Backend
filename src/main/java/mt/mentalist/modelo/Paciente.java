@@ -32,9 +32,9 @@ public class Paciente {
     @Column(name = "tipo_documento")
     private TipoDocumento tipoDocumento;
 
-    @Column(name = "nombre_completo", nullable = false, length = 100)
+    @Column(name = "nombre_completo", nullable = false, length = 255)
     @NotNull
-    @Size(max = 100)
+    @Size(max = 255)
     private String nombreCompleto;
 
     @Column(name = "fecha_nacimiento")
@@ -46,19 +46,19 @@ public class Paciente {
     @Enumerated(EnumType.STRING)
     private Genero genero;
 
-    @Column(name = "nacionalidad", length = 100)
+    @Column(name = "nacionalidad", length = 255)
     @Size(max = 100)
     private String nacionalidad;
 
-    @Column(name = "telefono", length = 11)
-    @Size(max = 11)
+    @Column(name = "telefono", length = 255)
+    @Size(max = 255)
     private String telefono;
 
-    @Column(length = 100)
-    @Email
+    @Column(length = 255)
+    @Size(max = 255)
     private String correo;
 
-    @Size(max = 150)
+    @Size(max = 255)
     private String direccion;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
