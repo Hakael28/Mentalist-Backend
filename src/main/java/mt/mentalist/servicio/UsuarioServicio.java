@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 //import mt.mentalist.Funciones.Validacion;
 import mt.mentalist.DTO.UsuarioDTO;
+import mt.mentalist.Funciones.Encriptacion.Encriptacion;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Usuario;
 import mt.mentalist.repositorio.UsuarioRepositorio;
@@ -49,12 +50,12 @@ public class UsuarioServicio implements IUsuarioServicio {
 
         Usuario usuario = new Usuario();
 
-        usuario.setNombre(dto.getNombre());
+        usuario.setNombre(Encriptacion.encriptarTexto(dto.getNombre()));
         usuario.setUsuario(dto.getUsuario());
         usuario.setRol(dto.getRol());
         usuario.setContraseña(dto.getContraseña());
-        usuario.setCorreo(dto.getCorreo());
-        usuario.setTelefono(dto.getTelefono());
+        usuario.setCorreo(Encriptacion.encriptarTexto(dto.getCorreo()));
+        usuario.setTelefono(Encriptacion.desencriptarTexto(dto.getTelefono()));
         Usuario usuarioGuardado = usuarioRepositorio.save(usuario);
         return convertirEntidadDTO(usuarioGuardado);
     }
@@ -71,10 +72,10 @@ public class UsuarioServicio implements IUsuarioServicio {
         if(!dto.getUsuario().equals(usuario.getUsuario())){
             throw new IllegalArgumentException("No está permitido modificar el nombre de usuario.");
         }
-        usuario.setNombre(dto.getNombre());
+        usuario.setNombre(Encriptacion.encriptarTexto(dto.getNombre()));
         usuario.setContraseña(dto.getContraseña());
-        usuario.setCorreo(dto.getCorreo());
-        usuario.setTelefono(dto.getTelefono());
+        usuario.setCorreo(Encriptacion.encriptarTexto(dto.getCorreo()));
+        usuario.setTelefono(Encriptacion.encriptarTexto(dto.getTelefono()));
 
         Usuario actulizado = usuarioRepositorio.save(usuario);
         return convertirEntidadDTO(actulizado);
@@ -87,12 +88,12 @@ public class UsuarioServicio implements IUsuarioServicio {
             throw new RecursoNoEncontradoExcepcion("No se encontró el usuario con el ID: " + idUsuario);
         }
 
-        usuario.setNombre(dto.getNombre());
+        usuario.setNombre(Encriptacion.encriptarTexto(dto.getNombre()));
         usuario.setUsuario(dto.getUsuario());
         usuario.setRol(dto.getRol());
         usuario.setContraseña(dto.getContraseña());
-        usuario.setCorreo(dto.getCorreo());
-        usuario.setTelefono(dto.getTelefono());
+        usuario.setCorreo(Encriptacion.encriptarTexto(dto.getCorreo()));
+        usuario.setTelefono(Encriptacion.encriptarTexto(dto.getTelefono()));
 
         Usuario actulizado = usuarioRepositorio.save(usuario);
         return convertirEntidadDTO(actulizado);
@@ -116,12 +117,12 @@ public class UsuarioServicio implements IUsuarioServicio {
     private UsuarioDTO convertirEntidadDTO(Usuario usuario){
         UsuarioDTO dto = new UsuarioDTO();
         dto.setIdUsuario(usuario.getIdUsuario());
-        dto.setNombre(usuario.getNombre());
+        dto.setNombre(Encriptacion.desencriptarTexto(usuario.getNombre()));
         dto.setUsuario(usuario.getUsuario());
         dto.setRol(usuario.getRol());
         dto.setContraseña(usuario.getContraseña());
-        dto.setCorreo(usuario.getCorreo());
-        dto.setTelefono(usuario.getTelefono());
+        dto.setCorreo(Encriptacion.desencriptarTexto(usuario.getCorreo()));
+        dto.setTelefono(Encriptacion.desencriptarTexto(usuario.getTelefono()));
         return dto;
     }
     public Usuario ObtenerUsuarioEntidad(Integer idUsuario){
