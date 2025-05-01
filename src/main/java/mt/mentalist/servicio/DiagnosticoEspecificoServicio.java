@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.DiagnosticoEspecificoDTO;
+import mt.mentalist.Funciones.Encriptacion.Encriptacion;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.DiagnosticoEspecifico;
 import mt.mentalist.modelo.Usuario;
@@ -42,8 +43,8 @@ public class DiagnosticoEspecificoServicio implements IDiagnosticoEspecificoServ
     public DiagnosticoEspecificoDTO guardarDiagnosticoEspecifico(DiagnosticoEspecificoDTO dto) {
         DiagnosticoEspecifico diagnosticoEspecifico = new DiagnosticoEspecifico();
         diagnosticoEspecifico.setTipodiagnostico(dto.getTipodiagnostico());
-        diagnosticoEspecifico.setCodigoCie(dto.getCodigoCie());
-        diagnosticoEspecifico.setObservacionesMedicas(dto.getObservacionesMedicas());
+        diagnosticoEspecifico.setCodigoCie(Encriptacion.encriptarTexto(dto.getCodigoCie()));
+        diagnosticoEspecifico.setObservacionesMedicas(Encriptacion.encriptarTexto(dto.getObservacionesMedicas()));
         diagnosticoEspecifico.setFechadiagnostico(dto.getFechadiagnostico());
         DiagnosticoEspecifico diagnosticoEspecificoGuardado =diagnosticoEspecificoRepositorio.save(diagnosticoEspecifico);
         return convertirEntidadDTO(diagnosticoEspecificoGuardado);
@@ -63,8 +64,8 @@ public class DiagnosticoEspecificoServicio implements IDiagnosticoEspecificoServ
         DiagnosticoEspecificoDTO dto = new DiagnosticoEspecificoDTO();
         dto.setIdDiagnosticoEspecifico(diagnosticoEspecifico.getIdDiagnosticoEspecifico());
         dto.setTipodiagnostico(diagnosticoEspecifico.getTipodiagnostico());
-        dto.setCodigoCie(diagnosticoEspecifico.getCodigoCie());
-        dto.setObservacionesMedicas(diagnosticoEspecifico.getObservacionesMedicas());
+        dto.setCodigoCie(Encriptacion.desencriptarTexto(diagnosticoEspecifico.getCodigoCie()));
+        dto.setObservacionesMedicas(Encriptacion.desencriptarTexto(diagnosticoEspecifico.getObservacionesMedicas()));
         dto.setFechadiagnostico(diagnosticoEspecifico.getFechadiagnostico());
         return dto;
     }

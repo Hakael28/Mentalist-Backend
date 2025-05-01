@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.AreaOcurrenciaDTO;
+import mt.mentalist.Funciones.Encriptacion.Encriptacion;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.AreaOcurrencia;
 import mt.mentalist.modelo.Eapb;
@@ -41,7 +42,7 @@ public class AreaOcurrenciaServicio implements IAreaOcurrenciaServicio {
     @Override
     public AreaOcurrenciaDTO guardarAreaOcurrencia(AreaOcurrenciaDTO dto) {
         AreaOcurrencia areaOcurrencia = new AreaOcurrencia();
-        areaOcurrencia.setNombre(dto.getNombre());
+        areaOcurrencia.setNombre(Encriptacion.encriptarTexto(dto.getNombre()));
         AreaOcurrencia areaOcurrenciaGuardada = areaOcurrenciaRepositorio.save(areaOcurrencia);
         return convertirEntidadDTO(areaOcurrenciaGuardada);
 
@@ -60,7 +61,7 @@ public class AreaOcurrenciaServicio implements IAreaOcurrenciaServicio {
     private AreaOcurrenciaDTO convertirEntidadDTO(AreaOcurrencia areaOcurrencia) {
         AreaOcurrenciaDTO dto = new AreaOcurrenciaDTO();
         dto.setIdAreaOcurrencia(areaOcurrencia.getIdAreaOcurrencia());
-        dto.setNombre(areaOcurrencia.getNombre());
+        dto.setNombre(Encriptacion.desencriptarTexto(areaOcurrencia.getNombre()));
         return dto;
 
     }

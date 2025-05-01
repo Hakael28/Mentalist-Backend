@@ -5,6 +5,7 @@ import java.util.Optional;
 
 
 import mt.mentalist.DTO.EapbDTO;
+import mt.mentalist.Funciones.Encriptacion.Encriptacion;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Eapb;
 import mt.mentalist.modelo.Reporte;
@@ -43,7 +44,7 @@ public class EapbServicio implements IEapbServicio {
     @Override
     public EapbDTO guardarEapb(EapbDTO dto) {
         Eapb eapb = new Eapb();
-        eapb.setNombre(dto.getNombre());
+        eapb.setNombre(Encriptacion.encriptarTexto(dto.getNombre()));
         Eapb eapbGuardada = eapbRepositorio.save(eapb);
         return  convertirEntidadDTO(eapbGuardada);
     }
@@ -62,7 +63,7 @@ public class EapbServicio implements IEapbServicio {
     private EapbDTO convertirEntidadDTO (Eapb eapb){
         EapbDTO dto = new EapbDTO();
         dto.setIdEapb(eapb.getIdEapb());
-        dto.setNombre(eapb.getNombre());
+        dto.setNombre(Encriptacion.desencriptarTexto(eapb.getNombre()));
         return dto;
     }
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.CasoDTO;
+import mt.mentalist.Funciones.Encriptacion.Encriptacion;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.*;
 import mt.mentalist.repositorio.*;
@@ -91,7 +92,7 @@ public class CasoServicio implements ICasoServicio {
         caso.setSemanaEpidemiologica(dto.getSemanaEpidemiologica());
         caso.setFechaIngreso(dto.getFechaIngreso());
         caso.setFechaRevisionHistoria(dto.getFechaRevisionHistoria());
-        caso.setRemisionRutaSalud(dto.getRemisionRutaSalud());
+        caso.setRemisionRutaSalud(Encriptacion.encriptarTexto(dto.getRemisionRutaSalud()));
 
 //        Guardar el caso en la base de datos
         Caso casoGuardado = casoRepositorio.save(caso);
@@ -123,7 +124,7 @@ public class CasoServicio implements ICasoServicio {
         dto.setSemanaEpidemiologica(caso.getSemanaEpidemiologica());
         dto.setFechaIngreso(caso.getFechaIngreso());
         dto.setFechaRevisionHistoria(caso.getFechaRevisionHistoria());
-        dto.setRemisionRutaSalud(caso.getRemisionRutaSalud());
+        dto.setRemisionRutaSalud(Encriptacion.desencriptarTexto(caso.getRemisionRutaSalud()));
         return dto;
     }
 
