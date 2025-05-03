@@ -29,15 +29,15 @@ public class DiagnosticoEspecifico implements Serializable {
     @NotNull
     private Integer idDiagnosticoEspecifico;
 
-    @Column(name = "tipo_diagnostico", length = 100)
+    @Column(name = "tipo_diagnostico")
     @Enumerated(EnumType.STRING)
     private TipoDiagnostico tipodiagnostico;
 
-    @Column(name = "codigo_cie", length = 100)
-    @Size(max = 100)
+    @Column(name = "codigo_cie", length = 255)
+    @Size(max = 255)
     private String codigoCie;
 
-    @Column(name = "observaciones_medicas", length = 100)
+    @Column(name = "observaciones_medicas")
     private String observacionesMedicas;
 
     @Column(name = "fecha_diagnostico")

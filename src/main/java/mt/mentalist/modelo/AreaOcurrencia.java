@@ -21,9 +21,9 @@ public class AreaOcurrencia {
     @Column(name = "id_area_ocurrencia", nullable = false )
     private Integer idAreaOcurrencia;
 
-    @Column(length = 100, nullable = false )
+    @Column(length = 255, nullable = false )
    @NotNull
-    @Size(max = 100)
+    @Size(max = 255)
     private String nombre;
 
     @OneToMany(mappedBy = "areaOcurrencia", cascade = CascadeType.ALL)

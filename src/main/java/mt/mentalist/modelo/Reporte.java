@@ -32,8 +32,8 @@ public class Reporte implements Serializable{
     @Enumerated(EnumType.STRING)
     private TipoReporte tipoReporte;
 
-    @Column(length = 100)
-    @Size(max = 100)
+    @Column(length = 255)
+    @Size(max = 255)
     private String descripcion;
 
     @Temporal(TemporalType.DATE)

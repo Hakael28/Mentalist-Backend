@@ -20,7 +20,8 @@ public class RutaAtencion {
    @NotNull
    private Integer idRutaAtencion;
    
-   @Column(length = 200 ) @Size(max = 200)
+   @Column(length = 255 )
+   @Size(max = 255)
    private String descripcion;
    
    @OneToMany(mappedBy = "rutaAtencion", cascade = CascadeType.ALL)

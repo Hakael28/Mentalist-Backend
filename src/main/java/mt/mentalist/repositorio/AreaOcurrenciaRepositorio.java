@@ -11,5 +11,4 @@ import java.util.Optional;
 @Repository
 public interface AreaOcurrenciaRepositorio  extends JpaRepository<AreaOcurrencia, Integer>{
     Optional<AreaOcurrencia> findTopByOrderByIdAreaOcurrenciaDesc();
-
 }

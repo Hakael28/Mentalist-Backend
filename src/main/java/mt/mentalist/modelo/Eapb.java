@@ -21,8 +21,8 @@ public class Eapb {
    @NotNull
    private Integer idEapb;
    
-  @Column(length = 100)
-  @Size(max = 100)
+  @Column(length = 255)
+  @Size(max = 255)
    private String nombre;
    
    @OneToMany(mappedBy = "eapb", cascade = CascadeType.ALL)

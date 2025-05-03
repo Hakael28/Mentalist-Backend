@@ -22,33 +22,33 @@ public class Usuario {
     @Column(name = "id_usuario", nullable = false)
     private Integer idUsuario;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 255, nullable = false)
     @NotNull
-    @Size(max = 100)
+    @Size(max = 255)
     private String nombre;
 
-    @Column(length = 100, nullable = false, unique = true)
+    @Column(length = 255, nullable = false, unique = true)
     @NotNull
-    @Size(max = 100)
+    @Size(max = 255)
     private String usuario;
 
     @NotNull
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 255, nullable = false)
     @NotNull
-    @Size(min = 8, max = 100)
+    @Size(min = 8, max = 255)
     @ToString.Exclude
     private String contraseña;
 
-    @Column(length = 100)
-    @Size(max = 100)
+    @Column(length = 255)
+    @Size(max = 255)
     @Email
     private String correo;
     
-    @Column(length = 15)
-    @Size(max = 15)  
+    @Column(length = 255)
+    @Size(max = 255)
     private String telefono;
 
     @OneToMany(mappedBy = "usuario", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)

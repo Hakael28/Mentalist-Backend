@@ -47,7 +47,7 @@ public class Paciente {
     private Genero genero;
 
     @Column(name = "nacionalidad", length = 255)
-    @Size(max = 100)
+    @Size(max = 255)
     private String nacionalidad;
 
     @Column(name = "telefono", length = 255)
