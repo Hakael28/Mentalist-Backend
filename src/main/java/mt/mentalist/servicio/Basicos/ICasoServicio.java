@@ -11,9 +11,6 @@ public interface ICasoServicio {
     // Metodo para listar los casos
     List<CasoDTO> listarCaso();
 
-    // Metodo para sellecionar el ultimo caso registrado
-    Optional<Caso> findTopByOrderByIdCasoDesc();
-
     //Metodo para buscar el caso
     CasoDTO buscarCasoId(Integer idCaso);
 

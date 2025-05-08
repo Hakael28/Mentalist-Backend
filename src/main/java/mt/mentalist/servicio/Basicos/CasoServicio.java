@@ -40,11 +40,6 @@ public class CasoServicio implements ICasoServicio {
     }
 
     @Override
-    public Optional<Caso> findTopByOrderByIdCasoDesc() {
-        return casoRepositorio.findTopByOrderByIdCasoDesc();
-    }
-
-    @Override
     public CasoDTO buscarCasoId(Integer idCaso) {
         Caso caso = casoRepositorio.findById(idCaso).orElseThrow(() -> new RecursoNoEncontradoExcepcion("No se encontro el caso con el ID: " + idCaso));
         return convertirEntidadDTO(caso);
