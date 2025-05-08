@@ -1,9 +1,9 @@
 package mt.mentalist.controlador;
 
 import jakarta.validation.Valid;
-import mt.mentalist.DTO.RutaAtencionDTO;
+import mt.mentalist.DTO.DTOBasics.RutaAtencionDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
-import mt.mentalist.servicio.RutaAtencionServicio;
+import mt.mentalist.servicio.Basicos.RutaAtencionServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,9 @@
 package mt.mentalist.controlador;
 
 import jakarta.validation.Valid;
-import mt.mentalist.DTO.DiagnosticoEspecificoDTO;
+import mt.mentalist.DTO.DTOBasics.DiagnosticoEspecificoDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
-import mt.mentalist.modelo.DiagnosticoEspecifico;
-import mt.mentalist.servicio.DiagnosticoEspecificoServicio;
+import mt.mentalist.servicio.Basicos.DiagnosticoEspecificoServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

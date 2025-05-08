@@ -14,7 +14,9 @@ import org.springframework.stereotype.Repository;
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
 
 //    // Verificar si el usuario existe
+
 //    boolean existsByUsuario(String usuario);
+
     Optional<Usuario>findTopByOrderByIdUsuarioDesc();
 //
 //    // Buscar usuario sin distinguir mayúsculas y minúsculas

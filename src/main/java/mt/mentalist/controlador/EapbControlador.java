@@ -1,10 +1,10 @@
 package mt.mentalist.controlador;
 
 import jakarta.validation.Valid;
-import mt.mentalist.DTO.EapbDTO;
+import mt.mentalist.DTO.DTOBasics.EapbDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Eapb;
-import mt.mentalist.servicio.EapbServicio;
+import mt.mentalist.servicio.Basicos.EapbServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

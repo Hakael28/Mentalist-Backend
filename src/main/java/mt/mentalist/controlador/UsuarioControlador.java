@@ -1,10 +1,9 @@
 package mt.mentalist.controlador;
 
 import jakarta.validation.Valid;
-import mt.mentalist.DTO.UsuarioDTO;
+import mt.mentalist.DTO.DTOBasics.UsuarioDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
-import mt.mentalist.modelo.Usuario;
-import mt.mentalist.servicio.UsuarioServicio;
+import mt.mentalist.servicio.Basicos.UsuarioServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

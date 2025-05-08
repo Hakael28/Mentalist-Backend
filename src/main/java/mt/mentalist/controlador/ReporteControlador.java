@@ -1,8 +1,8 @@
 package mt.mentalist.controlador;
 
 import jakarta.validation.Valid;
-import mt.mentalist.DTO.ReporteDTO;
-import mt.mentalist.servicio.ReporteServicio;
+import mt.mentalist.DTO.DTOBasics.ReporteDTO;
+import mt.mentalist.servicio.Basicos.ReporteServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

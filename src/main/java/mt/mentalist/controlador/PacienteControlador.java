@@ -1,13 +1,9 @@
 package mt.mentalist.controlador;
 
 import jakarta.validation.Valid;
-import mt.mentalist.DTO.PacienteDTO;
-import mt.mentalist.DTO.ReporteDTO;
+import mt.mentalist.DTO.DTOBasics.PacienteDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
-import mt.mentalist.modelo.Paciente;
-import mt.mentalist.modelo.Reporte;
-import mt.mentalist.modelo.Usuario;
-import mt.mentalist.servicio.PacienteServicio;
+import mt.mentalist.servicio.Basicos.PacienteServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +39,7 @@ public class PacienteControlador {
     // Controlador para utilizar el metodo de guardar pacientes
     @PostMapping("/pacientes")
     public ResponseEntity<PacienteDTO> agregarPaciente(@Valid @RequestBody PacienteDTO dto) {
-        logger.info("Reporte a agregar" + dto);
+        logger.info("Paciente a agregar" + dto);
 
         PacienteDTO pacienteGuardado = this.pacienteServicio.guardarPaciente(dto);
         URI ubicacion = ServletUriComponentsBuilder
