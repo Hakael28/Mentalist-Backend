@@ -3,11 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
  */
 package mt.mentalist.modelo.Enum;
-
-/**
- *
- * @author jisaw
- */
 public enum TipoDiagnostico {
     Violencia_de_Genero,
     Trastorno_Mental,
