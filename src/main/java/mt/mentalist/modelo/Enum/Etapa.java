@@ -4,9 +4,6 @@
  */
 package mt.mentalist.modelo.Enum;
 
-import lombok.Getter;
-
-@Getter
 public enum Etapa {
     Primera_Infancia,
     Infancia,
@@ -14,5 +11,4 @@ public enum Etapa {
     Juventud,
     Adultez,
     Vejez;
-
 }
