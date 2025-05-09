@@ -27,7 +27,6 @@ public class UsuarioDTO {
     private String contraseña;
 
     @NotBlank(message = "El correo del usuario es obligatorio")
-    @Email(message = "El correo electrónico no tiene un formato válido")
     private String correo;
 
     @NotNull(message = "El telefono del usuario es obligatorio")

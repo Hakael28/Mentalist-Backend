@@ -17,7 +17,6 @@ public class RutaAtencion {
    
    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)     
    @Column(name="id_ruta_atencion", nullable = false) 
-   @NotNull
    private Integer idRutaAtencion;
    
    @Column(length = 255 )

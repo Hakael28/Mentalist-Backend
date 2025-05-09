@@ -25,7 +25,6 @@ public class Paciente {
 
     @Id
     @Column(name = "id_paciente", nullable = false)
-    @NotNull
     private Integer idPaciente;
 
     @Enumerated(EnumType.STRING)

@@ -8,20 +8,11 @@ import lombok.Getter;
 
 @Getter
 public enum Etapa {
-    PRIMERA_INFANCIA("Primer Infancia"),
-    INFANCIA("Infancia"),
-    ADOLESCENCIA("Adolescencia"),
-    JUVENTUD("Juventud"),
-    ADULTEZ("Adultez"),
-    VEJEZ("Vejez");
-    
-    private final String etapaLegible;
-    Etapa(String etapaLegible){
-        this.etapaLegible=etapaLegible;
-    }
-    
-    @Override
-    public String toString(){
-        return etapaLegible;
-    }
+    Primera_Infancia,
+    Infancia,
+    Adolescencia,
+    Juventud,
+    Adultez,
+    Vejez;
+
 }

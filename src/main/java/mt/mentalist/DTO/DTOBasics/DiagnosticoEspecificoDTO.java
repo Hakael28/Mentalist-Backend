@@ -17,7 +17,7 @@ public class DiagnosticoEspecificoDTO {
     private  Integer idDiagnosticoEspecifico;
 
     @NotNull(message = "El tipo de diagnóstico es obligatorio")
-    private TipoDiagnostico tipodiagnostico;
+    private TipoDiagnostico tipoDiagnostico;
 
     @NotBlank(message = "El código CIE es obligatorio")
     @Size(max = 10, message = "El código CIE no debe superar los 10 caracteres")
@@ -28,5 +28,5 @@ public class DiagnosticoEspecificoDTO {
 
     @NotNull(message = "La fecha del diagnóstico es obligatoria")
     @PastOrPresent(message = "La fecha del diagnóstico no puede ser futura")
-    private LocalDate Fechadiagnostico;
+    private LocalDate fechaDiagnostico;
 }

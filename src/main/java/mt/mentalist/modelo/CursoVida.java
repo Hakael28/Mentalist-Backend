@@ -21,7 +21,6 @@ public class CursoVida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_curso_vida", nullable = false )
-   @NotNull
     private Integer idCursoVida;
     
     @Enumerated(EnumType.STRING)

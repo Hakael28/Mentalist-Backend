@@ -9,19 +9,8 @@ package mt.mentalist.modelo.Enum;
  * @author jisaw
  */
 public enum TipoDiagnostico {
-    VIOLENCIA_DE_GENERO("Violencia de género"), 
-    TRASTORNO_MENTAL("Trastorno mental"),
-    INTENTO_DE_SUICIDIO("Intento de suicidio"),
-    CONSUMO_DE_SUSTANCIAS("Consumo de sustancias");
-    
-    private final String tipoDiagnosticoLegible;
-    TipoDiagnostico(String tipoDiagnosticoLegible){
-        this.tipoDiagnosticoLegible=tipoDiagnosticoLegible;
+    Violencia_de_Genero,
+    Trastorno_Mental,
+    Intento_de_Suicidio,
+    Consumo_de_Sustancias
     }
-    
-    @Override
-    public String toString(){
-        return tipoDiagnosticoLegible;
-    }
-
-}

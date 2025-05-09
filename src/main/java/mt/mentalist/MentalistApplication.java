@@ -12,4 +12,3 @@ public class MentalistApplication {
         SpringApplication.run(MentalistApplication.class, args);
     }
 }
-

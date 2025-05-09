@@ -26,12 +26,11 @@ public class DiagnosticoEspecifico implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_diagnostico_especifico", nullable = false)
-    @NotNull
     private Integer idDiagnosticoEspecifico;
 
     @Column(name = "tipo_diagnostico")
     @Enumerated(EnumType.STRING)
-    private TipoDiagnostico tipodiagnostico;
+    private TipoDiagnostico tipoDiagnostico;
 
     @Column(name = "codigo_cie", length = 255)
     @Size(max = 255)
@@ -41,8 +40,7 @@ public class DiagnosticoEspecifico implements Serializable {
     private String observacionesMedicas;
 
     @Column(name = "fecha_diagnostico")
-    @Temporal(TemporalType.DATE)
-    private LocalDate Fechadiagnostico;
+    private LocalDate fechaDiagnostico;
 
     @OneToMany(mappedBy = "diagnostico", cascade = CascadeType.ALL)
     @ToString.Exclude

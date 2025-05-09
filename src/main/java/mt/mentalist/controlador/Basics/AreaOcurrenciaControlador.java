@@ -27,7 +27,7 @@ public class AreaOcurrenciaControlador {
             LoggerFactory.getLogger(AreaOcurrenciaControlador.class);
 
     // Controlador para utilizar el metodo de listar areas de ocurrencia
-    //http://localhost:8084/mentalist-web/cursoVida
+    //http://localhost:8084/mentalist-web/areas
     @GetMapping("/areas")
     public List<AreaOcurrenciaDTO> obtenerAreasOcurrencia() {
         List<AreaOcurrenciaDTO> areas = this.areaOcurrenciaServicio.listarAreaOcureencia();

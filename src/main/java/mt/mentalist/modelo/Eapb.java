@@ -18,7 +18,6 @@ public class Eapb {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY) 
    @Column(name="id_eapb", nullable = false)
-   @NotNull
    private Integer idEapb;
    
    @Column(length = 255)

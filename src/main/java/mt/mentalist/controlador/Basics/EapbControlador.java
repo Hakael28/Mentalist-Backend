@@ -19,7 +19,7 @@ import java.util.Map;
 
 @RestController
 //http://localhost:8084/mentalist-web
-@RequestMapping("mantalist-web")
+@RequestMapping("mentalist-web")
 @CrossOrigin(value = "http://localhost:4200")
 public class EapbControlador {
     @Autowired
@@ -57,7 +57,7 @@ public class EapbControlador {
     public ResponseEntity<EapbDTO> obtenerEapbid(
             @PathVariable int idEapb) {
         EapbDTO eapb = this.eapbServicio.buscarEapbId(idEapb);
-        if (Eapb != null) {
+        if (eapb != null) {
             return ResponseEntity.ok(eapb);
         } else {
             throw new RecursoNoEncontradoExcepcion("no se encontro Eapb con el id:" + idEapb);

@@ -16,7 +16,6 @@ public class HistoriaClinica implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_historia_clinica", nullable = false)
-    @NotNull
     private Integer idHistorialClinica;
 
     @ManyToOne

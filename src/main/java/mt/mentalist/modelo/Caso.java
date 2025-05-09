@@ -25,7 +25,6 @@ public class Caso implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_caso", nullable = false)
-    @NotNull
     private Integer idCaso;
 
     @ManyToOne

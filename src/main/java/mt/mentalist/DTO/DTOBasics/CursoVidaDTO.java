@@ -1,6 +1,6 @@
 package mt.mentalist.DTO.DTOBasics;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import mt.mentalist.modelo.Enum.Etapa;
@@ -10,6 +10,6 @@ public class CursoVidaDTO {
 
     private Integer idCursoVida;
 
-    @NotBlank(message = "La etapa del curso de vida es obligatorio")
+    @NotNull
     private Etapa etapa;
 }

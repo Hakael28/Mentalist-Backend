@@ -55,7 +55,7 @@ public class UsuarioServicio implements IUsuarioServicio {
         usuario.setRol(dto.getRol());
         usuario.setContraseña(dto.getContraseña());
         usuario.setCorreo(Encriptacion.encriptarTexto(dto.getCorreo()));
-        usuario.setTelefono(Encriptacion.desencriptarTexto(dto.getTelefono()));
+        usuario.setTelefono(Encriptacion.encriptarTexto(dto.getTelefono()));
         Usuario usuarioGuardado = usuarioRepositorio.save(usuario);
         return convertirEntidadDTO(usuarioGuardado);
     }

@@ -41,10 +41,10 @@ public class DiagnosticoEspecificoServicio implements IDiagnosticoEspecificoServ
     @Override
     public DiagnosticoEspecificoDTO guardarDiagnosticoEspecifico(DiagnosticoEspecificoDTO dto) {
         DiagnosticoEspecifico diagnosticoEspecifico = new DiagnosticoEspecifico();
-        diagnosticoEspecifico.setTipodiagnostico(dto.getTipodiagnostico());
+        diagnosticoEspecifico.setTipoDiagnostico(dto.getTipoDiagnostico());
         diagnosticoEspecifico.setCodigoCie(Encriptacion.encriptarTexto(dto.getCodigoCie()));
         diagnosticoEspecifico.setObservacionesMedicas(Encriptacion.encriptarTexto(dto.getObservacionesMedicas()));
-        diagnosticoEspecifico.setFechadiagnostico(dto.getFechadiagnostico());
+        diagnosticoEspecifico.setFechaDiagnostico(dto.getFechaDiagnostico());
         DiagnosticoEspecifico diagnosticoEspecificoGuardado =diagnosticoEspecificoRepositorio.save(diagnosticoEspecifico);
         return convertirEntidadDTO(diagnosticoEspecificoGuardado);
     }
@@ -62,10 +62,10 @@ public class DiagnosticoEspecificoServicio implements IDiagnosticoEspecificoServ
     private DiagnosticoEspecificoDTO convertirEntidadDTO(DiagnosticoEspecifico diagnosticoEspecifico){
         DiagnosticoEspecificoDTO dto = new DiagnosticoEspecificoDTO();
         dto.setIdDiagnosticoEspecifico(diagnosticoEspecifico.getIdDiagnosticoEspecifico());
-        dto.setTipodiagnostico(diagnosticoEspecifico.getTipodiagnostico());
+        dto.setTipoDiagnostico(diagnosticoEspecifico.getTipoDiagnostico());
         dto.setCodigoCie(Encriptacion.desencriptarTexto(diagnosticoEspecifico.getCodigoCie()));
         dto.setObservacionesMedicas(Encriptacion.desencriptarTexto(diagnosticoEspecifico.getObservacionesMedicas()));
-        dto.setFechadiagnostico(diagnosticoEspecifico.getFechadiagnostico());
+        dto.setFechaDiagnostico(diagnosticoEspecifico.getFechaDiagnostico());
         return dto;
     }
 }

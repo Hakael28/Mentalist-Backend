@@ -44,7 +44,6 @@ public class Usuario {
 
     @Column(length = 255)
     @Size(max = 255)
-    @Email
     private String correo;
     
     @Column(length = 255)
