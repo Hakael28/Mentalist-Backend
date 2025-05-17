@@ -79,7 +79,7 @@ public class InformesServicio {
             String genero = rs.getString("genero");
             dto.setGenero(genero != null ? Genero.valueOf(genero) : null);
 
-            dto.setNacionalidad(rs.getString("nacionalidad"));
+            dto.setNacionalidad(Encriptacion.desencriptarTexto(rs.getString("nacionalidad")));
             dto.setCorreo(Encriptacion.desencriptarTexto(rs.getString("correo")));
 
             int idCaso = rs.getInt("id_caso");
@@ -97,12 +97,12 @@ public class InformesServicio {
             Date fechaRev = rs.getDate("fecha_revision_historia");
             dto.setFechaRevisionHistoria(fechaRev != null ? ((java.sql.Date) fechaRev).toLocalDate() : null);
 
-            dto.setRemisionRutaSalud(rs.getString("remision_ruta_salud"));
+            dto.setRemisionRutaSalud(Encriptacion.desencriptarTexto(rs.getString("remision_ruta_salud")));
 
             String tipoDiag = rs.getString("tipo_diagnostico");
             dto.setTipodiagnostico(tipoDiag != null ? TipoDiagnostico.valueOf(tipoDiag) : null);
 
-            dto.setCodigoCie(rs.getString("codigo_cie"));
+            dto.setCodigoCie(Encriptacion.desencriptarTexto(rs.getString("codigo_cie")));
 
             Date fechaDiag = rs.getDate("fecha_diagnostico");
             dto.setFechadiagnostico(fechaDiag != null ? ((java.sql.Date) fechaDiag).toLocalDate() : null);
