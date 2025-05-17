@@ -1,6 +1,7 @@
 package mt.mentalist.servicio.Funciones;
 
 import mt.mentalist.DTO.Fuctions.InformeCasoDTO;
+import mt.mentalist.DTO.Fuctions.InformeHistoriaClinicaDTO;
 import mt.mentalist.Funciones.Encriptacion.Encriptacion;
 import mt.mentalist.modelo.Enum.Etapa;
 import mt.mentalist.modelo.Enum.Genero;
@@ -14,12 +15,12 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class InformeCasoServicio {
+public class InformesServicio {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List<InformeCasoDTO>obtenerDatosInforme(){
+    public List<InformeCasoDTO>obtenerDatosInformeCaso(){
         String sql = """
             SELECT
                 p.id_paciente,
@@ -116,5 +117,45 @@ public class InformeCasoServicio {
 
             return dto;
         });
+    }
+
+    public List <InformeHistoriaClinicaDTO> obtenerDatosInformeHistoriaClinica() {
+        String sql = """
+                SELECT
+                  hc.id_historia_clinica,
+                  hc.descripcion_historia,
+                  hc.id_caso_H, 
+                  p.id_paciente,
+                  p.tipo_documento,
+                  p.nombre_completo,
+                  p.edad
+                FROM historia_clinica hc
+                JOIN paciente p ON hc.id_paciente_H = p.id_paciente
+              """;
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            InformeHistoriaClinicaDTO dto = new InformeHistoriaClinicaDTO();
+
+            int idHistoria = rs.getInt("id_historia_clinica");
+            dto.setIdHistoriaClinica(rs.wasNull() ? null : idHistoria);
+
+            dto.setDescripcionHistoria(Encriptacion.desencriptarTexto(rs.getString("descripcion_historia")));
+
+            int idPaciente = rs.getInt("id_paciente");
+            dto.setIdPaciente(rs.wasNull() ? null : idPaciente);
+
+            String tipoDoc = rs.getString("tipo_documento");
+            dto.setTipoDocumento(tipoDoc != null ? TipoDocumento.valueOf(tipoDoc) : null);
+
+            dto.setNombreCompleto(Encriptacion.desencriptarTexto(rs.getString("nombre_completo")));
+
+            int edad = rs.getInt("edad");
+            dto.setEdad(rs.wasNull() ? null : edad);
+
+            int idCaso = rs.getInt("id_caso_H");
+            dto.setIdCaso(rs.wasNull()?null:idCaso);
+
+            return dto;
+        });
+
     }
 }

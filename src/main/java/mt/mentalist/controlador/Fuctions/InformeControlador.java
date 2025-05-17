@@ -1,7 +1,8 @@
 package mt.mentalist.controlador.Fuctions;
 
 import mt.mentalist.DTO.Fuctions.InformeCasoDTO;
-import mt.mentalist.servicio.Funciones.InformeCasoServicio;
+import mt.mentalist.DTO.Fuctions.InformeHistoriaClinicaDTO;
+import mt.mentalist.servicio.Funciones.InformesServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +14,18 @@ import java.util.List;
 @RestController
 @RequestMapping("mentalist-web")
 @CrossOrigin(value = "http://localhost:4200")
-public class InformeCasoControlador {
+public class InformeControlador {
 
     @Autowired
-    private InformeCasoServicio informeCasoServicio;
+    private InformesServicio informeCasoServicio;
 
      @GetMapping("/InformeCaso")
     public List<InformeCasoDTO>obtenerInformeCasos(){
-         return informeCasoServicio.obtenerDatosInforme();
+         return informeCasoServicio.obtenerDatosInformeCaso();
+     }
+
+     @GetMapping("/InformeHistoriaClinica")
+    public List<InformeHistoriaClinicaDTO>obtenerhistoriaclinica(){
+         return informeCasoServicio.obtenerDatosInformeHistoriaClinica();
      }
 }
