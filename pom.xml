@@ -23,16 +23,19 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Boot Core Dependencies -->
+        <!-- Spring Boot para JPA (acceso a base de datos relacional con Hibernate) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
+        <!-- Validaciones automáticas con anotaciones como @NotNull, @Size, etc. -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+
+        <!-- Dependencias para pruebas unitarias e integración -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -45,27 +48,32 @@
             </exclusions>
         </dependency>
 
+        <!-- Soporte para aplicaciones web REST (controladores, JSON, etc.) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.security</groupId>-->
-        <!--            <artifactId>spring-security-test</artifactId>-->
-        <!--            <scope>test</scope>-->
-        <!--        </dependency>-->
+        <!-- Pruebas específicas para seguridad (mocks, roles en test, etc.) -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.security</groupId>-->
-        <!--            <artifactId>spring-security-crypto</artifactId>-->
-        <!--        </dependency>-->
+        <!-- Encriptación de contraseñas con BCrypt -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-security</artifactId>-->
-        <!--        </dependency>-->
+        <!-- Spring Security principal para proteger endpoints, manejar roles, etc. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
+        <!-- Recarga automática de cambios en desarrollo -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -73,66 +81,96 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Generación de reportes con JasperReports -->
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
             <version>7.0.0</version>
         </dependency>
+
+        <!-- Jasypt: Encriptación de propiedades sensibles (opcional si usas encriptado de propiedades) -->
         <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt</artifactId>
             <version>1.9.3</version>
         </dependency>
-        <!-- UI Dependencies -->
+
+        <!-- FlatLaf: Estilos modernos para interfaces Swing -->
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>3.5.4</version>
         </dependency>
+
+        <!-- Temas adicionales para FlatLaf (como temas de IntelliJ) -->
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf-intellij-themes</artifactId>
             <version>3.5.4</version>
         </dependency>
+
+        <!-- Layout absoluto (usado por NetBeans GUI Builder) -->
         <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE240</version>
         </dependency>
 
-        <!-- Database Dependencies -->
+        <!-- Conector de base de datos MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version> <!-- Versión estable -->
         </dependency>
 
-
-        <!-- JSON Processing -->
+        <!-- Manejo de objetos JSON básico -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20210307</version>
         </dependency>
 
-        <!-- Jackson for JSON Binding -->
+        <!-- Conversión entre objetos Java y JSON (Jackson) -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
-        <!-- Lombok for Boilerplate Code Reduction -->
+        <!-- Lombok: elimina código repetitivo como getters/setters/toString -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.36</version>
             <optional>true</optional>
         </dependency>
+
+        <!-- Presentadores de interfaz en proyectos con Dukescript (no es común para backend) -->
         <dependency>
             <groupId>com.dukescript.presenters</groupId>
             <artifactId>renderer</artifactId>
             <version>1.6.3</version>
             <type>jar</type>
+        </dependency>
+
+        <!-- JWT: Json Web Token para autenticación segura -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

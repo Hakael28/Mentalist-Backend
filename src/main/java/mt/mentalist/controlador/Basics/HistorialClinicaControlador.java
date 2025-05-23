@@ -19,8 +19,10 @@ import java.util.Map;
 @RestController
 //http://localhost:8084/mentalist-web
 @RequestMapping("mentalist-web")
-@CrossOrigin(value = "http://localhost:4200")
-public class HistorialClinicaControlador {
+@CrossOrigin(origins = {
+        "http://localhost:4200",
+        "https://localhost",
+})public class HistorialClinicaControlador {
     @Autowired
     private HistoriaClinicaServicio historiaClinicaServicio;
     private static final Logger logger =

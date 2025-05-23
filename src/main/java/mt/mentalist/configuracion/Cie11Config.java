@@ -10,8 +10,9 @@ import org.springframework.context.annotation.Configuration;
 public class Cie11Config {
 
     private String clientId;
-    private String clienteSecret;
+    private String clientSecret;
     private String tokenUrl;
     private String scope;
     private String apiBase;
+
 }

@@ -13,7 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("mentalist-web")
-@CrossOrigin(value = "http://localhost:4200")
+@CrossOrigin(origins = {
+        "http://localhost:4200",
+        "https://localhost",
+})
 public class InformeControlador {
 
     @Autowired

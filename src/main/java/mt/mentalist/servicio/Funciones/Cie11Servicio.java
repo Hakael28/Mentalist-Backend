@@ -10,6 +10,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +32,7 @@ public class Cie11Servicio {
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "client_credentials");
         body.add("client_id", cie11Config.getClientId());
-        body.add("client_secret", cie11Config.getClienteSecret());
+        body.add("client_secret", cie11Config.getClientSecret());
         body.add("scope", cie11Config.getScope());
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
@@ -47,7 +49,7 @@ public class Cie11Servicio {
     //Metodo para buscar los diagnosticos por texto
     public List<Map<String, String>> buscarDiagnosticos(String texto){
         String token = obtenerToken();
-        String url = cie11Config.getApiBase() + "/search?=" + texto;
+        String url = cie11Config.getApiBase() + "/search?q=" + URLEncoder.encode(texto, StandardCharsets.UTF_8);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
@@ -66,8 +68,12 @@ public class Cie11Servicio {
             JsonNode entidades = root.path("destinationEntities");
             entidades.forEach(nodo -> {
                 Map<String,String> map = new HashMap<>();
-                map.put("codigo", nodo.path("theCode").asText());
-                map.put("titulo", nodo.path("title").asText());
+                String codigo = nodo.path("theCode").asText();
+                String tituloBase = nodo.path("title").asText();
+                String tituloLimpio = tituloBase.replaceAll("<[^>]*>","");
+
+                map.put("codigo", codigo);
+                map.put("titulo", tituloLimpio);
                 resultados.add(map);
             });
 
