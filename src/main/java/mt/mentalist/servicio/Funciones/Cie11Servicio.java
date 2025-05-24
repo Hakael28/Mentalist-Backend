@@ -2,7 +2,7 @@ package mt.mentalist.servicio.Funciones;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import mt.mentalist.configuracion.Cie11Config;
+import mt.mentalist.configuracion.API.Cie11Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

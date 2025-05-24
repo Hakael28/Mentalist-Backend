@@ -116,6 +116,14 @@
             <version>RELEASE240</version>
         </dependency>
 
+        <!-- Presentadores de interfaz en proyectos con Dukescript (no es común para backend) -->
+        <dependency>
+            <groupId>com.dukescript.presenters</groupId>
+            <artifactId>renderer</artifactId>
+            <version>1.6.3</version>
+            <type>jar</type>
+        </dependency>
+
         <!-- Conector de base de datos MySQL -->
         <dependency>
             <groupId>mysql</groupId>
@@ -142,14 +150,6 @@
             <artifactId>lombok</artifactId>
             <version>1.18.36</version>
             <optional>true</optional>
-        </dependency>
-
-        <!-- Presentadores de interfaz en proyectos con Dukescript (no es común para backend) -->
-        <dependency>
-            <groupId>com.dukescript.presenters</groupId>
-            <artifactId>renderer</artifactId>
-            <version>1.6.3</version>
-            <type>jar</type>
         </dependency>
 
         <!-- JWT: Json Web Token para autenticación segura -->

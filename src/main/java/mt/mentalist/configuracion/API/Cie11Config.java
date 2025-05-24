@@ -1,4 +1,4 @@
-package mt.mentalist.configuracion;
+package mt.mentalist.configuracion.API;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
