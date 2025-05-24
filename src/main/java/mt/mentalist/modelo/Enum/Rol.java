@@ -5,7 +5,6 @@
 package mt.mentalist.modelo.Enum;
 
 public enum Rol {
-   Medico,
-   Administrador
-    
+   ADMIN,
+   MEDICO
 }
