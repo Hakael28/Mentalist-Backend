@@ -11,7 +11,7 @@ Thumbs.db
 # === Directorios de compilación de Maven ===
 target/
 .mvn/
-!/.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
