@@ -84,7 +84,7 @@ public class UsuarioControlador {
     }
 
     // Controlador para utilizar el metodo de actualizar la informacion de los usuarios
-    @PutMapping("/administrador/{idUsuario}/credenciales")
+    @PutMapping("/usuarios/{idUsuario}/credenciales")
     public ResponseEntity<UsuarioDTO> actualizarUsuarioAdmin(
             @PathVariable int idUsuario,
             @Valid @RequestBody UsuarioDTO  dto) {
