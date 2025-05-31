@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -31,6 +32,7 @@ public class UsuarioControlador {
 
     // Controlador pafra utilizar el metodo de listar usuarios
     //http://localhost:8084/mentalist-web/usuarios
+    @PreAuthorize("hasRole(´ADMIN')")
     @GetMapping("/usuarios")
     public List<UsuarioDTO> obtenerUsuarios() {
         List<UsuarioDTO> usuarios = this.usuarioServicio.listarUsuarios();
@@ -40,6 +42,7 @@ public class UsuarioControlador {
     }
 
     // Controlador para utilizar el metodo de guardar usuarios
+    @PreAuthorize("hasRole(´ADMIN')")
     @PostMapping("/usuarios")
     public ResponseEntity<UsuarioDTO> agregarUsuario(@Valid @RequestBody UsuarioDTO dto) {
         logger.info("Usuario a agregar" + dto);
@@ -53,6 +56,7 @@ public class UsuarioControlador {
     }
 
     // Controlador para utilizar el metodo de buscar usuario por id
+    @PreAuthorize("hasRole(´ADMIN')")
     @GetMapping("/usuarios/{idUsuario}")
     public ResponseEntity<UsuarioDTO> obtenerUsuarioPorId(
             @PathVariable int idUsuario) {
@@ -65,6 +69,7 @@ public class UsuarioControlador {
     }
 
     // Controlador para utilizar el metodo de elimninar usuarios
+    @PreAuthorize("hasRole(´ADMIN')")
     @DeleteMapping("/usuarios/{idUsuario}")
     public ResponseEntity<Map<String, Boolean>>
     eliminarUsuario(@PathVariable int idUsuario) {
@@ -75,6 +80,7 @@ public class UsuarioControlador {
     }
 
     // Controlador para utilizar el metodo de actualizar la informacion de los usuarios con restriccion referente a rol
+    @PreAuthorize("hasRole('MEDICO')")
     @PutMapping("/usuarios/{idUsuario}")
     public ResponseEntity<UsuarioDTO> actualizarUsuario(
            @PathVariable int idUsuario,
@@ -84,6 +90,7 @@ public class UsuarioControlador {
     }
 
     // Controlador para utilizar el metodo de actualizar la informacion de los usuarios
+    @PreAuthorize("hasRole(´ADMIN')")
     @PutMapping("/administrador/{idUsuario}/credenciales")
     public ResponseEntity<UsuarioDTO> actualizarUsuarioAdmin(
             @PathVariable int idUsuario,

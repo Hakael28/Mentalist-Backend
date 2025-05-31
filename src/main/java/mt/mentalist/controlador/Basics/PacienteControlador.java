@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,6 +29,7 @@ public class PacienteControlador {
 
     // Controlador para utilizar el metodo de listar los pacientes
     //http://localhost:8084/mentalist-web/pacientes
+    @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/pacientes")
     public List<PacienteDTO> obtenerPacientes() {
         List<PacienteDTO> pacientes = this.pacienteServicio.listarPacientes();
@@ -36,7 +38,7 @@ public class PacienteControlador {
         return pacientes;
     }
 
-    // Controlador para utilizar el metodo de guardar pacientes
+    @PreAuthorize("hasRole('MEDICO')")
     @PostMapping("/pacientes")
     public ResponseEntity<PacienteDTO> agregarPaciente(@Valid @RequestBody PacienteDTO dto) {
         logger.info("Paciente a agregar" + dto);
@@ -51,6 +53,7 @@ public class PacienteControlador {
     }
 
     // Controlador para utilizar el metodo de buscar pacientes por id
+    @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/pacientes/{idPaciente}")
     public ResponseEntity<PacienteDTO> obtenerPacienteId(
             @PathVariable int idPaciente) {
@@ -63,6 +66,7 @@ public class PacienteControlador {
     }
 
     // Controlador para utilizar el metodo de eliminar paciente
+    @PreAuthorize("hasRole('MEDICO')")
     @DeleteMapping("/pacientes/{idPaciente}")
     public ResponseEntity<Map<String, Boolean>>
     eliminarPaciente(@PathVariable int idPaciente) {
@@ -73,6 +77,7 @@ public class PacienteControlador {
     }
 
     // Controlador para utilizar el metodo de actualizar la informacion de los pacientes
+    @PreAuthorize("hasRole('MEDICO')")
     @PutMapping("/pacientes/{idPaciente}")
     public ResponseEntity<PacienteDTO> actualizarPaciente(
             @PathVariable int idPaciente,

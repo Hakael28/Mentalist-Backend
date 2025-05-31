@@ -12,11 +12,11 @@ import java.util.Date;
 public class JwtUtil {
     //Inyecta la clave secreta desde application.properties
     @Value("${jwt.secret}")
-    private String secretKey;
+    private static String secretKey;
     private static final long EXPIRATION_TIME=86400000;
 
     //Genera la clave secreta simetrica para firmar/verificar JWT usando HMAC-SHA
-    private Key getKey(){
+    private static Key getKey(){
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
@@ -33,7 +33,7 @@ public class JwtUtil {
     }
 
     //Extrae el subject (nombre de usuario) del token JWT
-    public String obtenerUsuario(String token){
+    public static String obtenerUsuario(String token){
         return Jwts.parserBuilder()
                 .setSigningKey(getKey())
                 .build()

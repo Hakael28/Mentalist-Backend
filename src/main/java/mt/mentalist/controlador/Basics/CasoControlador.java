@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -42,6 +43,7 @@ public class CasoControlador {
     private DiagnosticoEspecificoServicio diagnosticoEspecificoServicio;
 
     // Controlador para utilizar el metodo de listar los casos
+    @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/casos")
     public List<CasoDTO> Obtenercasos() {
         List<CasoDTO> casos = this.casoServicio.listarCaso();
@@ -52,6 +54,7 @@ public class CasoControlador {
 
     //http://localhost:8084/mentalist-web/casos
     // Controlador para utilizar el metodo de guardar casos
+    @PreAuthorize("hasRole('MEDICO')")
     @PostMapping("/casos")
     public ResponseEntity<CasoDTO> agregarCaso(@Valid @RequestBody CasoDTO dto) {
         logger.info("Intentando registrar un nuevo caso con datos: {}", dto);
@@ -69,6 +72,7 @@ public class CasoControlador {
     }
 
     // Controlador para utilizar el metodo de buscar caso por id
+    @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/casos/{idCaso}")
     public ResponseEntity<CasoDTO> obtenerCasoId(
             @PathVariable int idCaso) {
@@ -81,6 +85,7 @@ public class CasoControlador {
     }
 
     // Controlador para utilizar el metodo de eliminar caso
+    @PreAuthorize("hasRole('MEDICO')")
     @DeleteMapping("/casos/{idCaso}")
     public ResponseEntity<Map<String, Boolean>>
     eliminarCaso(@PathVariable int idCaso) {
