@@ -1,6 +1,5 @@
-package mt.mentalist.DTO.Fuctions;
+package mt.mentalist.DTO.Fuctions.Informes;
 
-import jakarta.validation.constraints.*;
 import lombok.Data;
 import mt.mentalist.modelo.Enum.Etapa;
 import mt.mentalist.modelo.Enum.Genero;

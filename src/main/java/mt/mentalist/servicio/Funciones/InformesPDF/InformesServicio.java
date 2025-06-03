@@ -1,8 +1,8 @@
-package mt.mentalist.servicio.Funciones;
+package mt.mentalist.servicio.Funciones.InformesPDF;
 
-import mt.mentalist.DTO.Fuctions.InformeCasoDTO;
-import mt.mentalist.DTO.Fuctions.InformeHistoriaClinicaDTO;
-import mt.mentalist.Funciones.Encriptacion.Encriptacion;
+import mt.mentalist.DTO.Fuctions.Informes.InformeCasoDTO;
+import mt.mentalist.DTO.Fuctions.Informes.InformeHistoriaClinicaDTO;
+import mt.mentalist.servicio.Funciones.Seguridad.EncriptacionServicio;
 import mt.mentalist.modelo.Enum.Etapa;
 import mt.mentalist.modelo.Enum.Genero;
 import mt.mentalist.modelo.Enum.TipoDiagnostico;
@@ -19,6 +19,8 @@ public class InformesServicio {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private EncriptacionServicio encriptacionServicio;
 
     public List<InformeCasoDTO>obtenerDatosInformeCaso(){
         String sql = """
@@ -62,13 +64,13 @@ public class InformesServicio {
             int idPaciente = rs.getInt("id_paciente");
             dto.setIdPaciente(rs.wasNull() ? null : idPaciente);
 
-            dto.setNombreCompleto(Encriptacion.desencriptarTexto(rs.getString("nombre_completo")));
+            dto.setNombreCompleto(encriptacionServicio.desencriptarTexto(rs.getString("nombre_completo")));
 
             String tipoDoc = rs.getString("tipo_documento");
             dto.setTipoDocumento(tipoDoc != null ? TipoDocumento.valueOf(tipoDoc) : null);
 
-            dto.setTelefono(Encriptacion.desencriptarTexto(rs.getString("telefono")));
-            dto.setDireccion(Encriptacion.desencriptarTexto(rs.getString("direccion")));
+            dto.setTelefono(encriptacionServicio.desencriptarTexto(rs.getString("telefono")));
+            dto.setDireccion(encriptacionServicio.desencriptarTexto(rs.getString("direccion")));
 
             Date fechaNac = rs.getDate("fecha_nacimiento");
             dto.setFechaNacimiento(fechaNac != null ? ((java.sql.Date) fechaNac).toLocalDate() : null);
@@ -79,8 +81,8 @@ public class InformesServicio {
             String genero = rs.getString("genero");
             dto.setGenero(genero != null ? Genero.valueOf(genero) : null);
 
-            dto.setNacionalidad(Encriptacion.desencriptarTexto(rs.getString("nacionalidad")));
-            dto.setCorreo(Encriptacion.desencriptarTexto(rs.getString("correo")));
+            dto.setNacionalidad(encriptacionServicio.desencriptarTexto(rs.getString("nacionalidad")));
+            dto.setCorreo(encriptacionServicio.desencriptarTexto(rs.getString("correo")));
 
             int idCaso = rs.getInt("id_caso");
             dto.setIdCaso(rs.wasNull() ? null : idCaso);
@@ -97,12 +99,12 @@ public class InformesServicio {
             Date fechaRev = rs.getDate("fecha_revision_historia");
             dto.setFechaRevisionHistoria(fechaRev != null ? ((java.sql.Date) fechaRev).toLocalDate() : null);
 
-            dto.setRemisionRutaSalud(Encriptacion.desencriptarTexto(rs.getString("remision_ruta_salud")));
+            dto.setRemisionRutaSalud(encriptacionServicio.desencriptarTexto(rs.getString("remision_ruta_salud")));
 
             String tipoDiag = rs.getString("tipo_diagnostico");
             dto.setTipodiagnostico(tipoDiag != null ? TipoDiagnostico.valueOf(tipoDiag) : null);
 
-            dto.setCodigoCie(Encriptacion.desencriptarTexto(rs.getString("codigo_cie")));
+            dto.setCodigoCie(encriptacionServicio.desencriptarTexto(rs.getString("codigo_cie")));
 
             Date fechaDiag = rs.getDate("fecha_diagnostico");
             dto.setFechadiagnostico(fechaDiag != null ? ((java.sql.Date) fechaDiag).toLocalDate() : null);
@@ -138,7 +140,7 @@ public class InformesServicio {
             int idHistoria = rs.getInt("id_historia_clinica");
             dto.setIdHistoriaClinica(rs.wasNull() ? null : idHistoria);
 
-            dto.setDescripcionHistoria(Encriptacion.desencriptarTexto(rs.getString("descripcion_historia")));
+            dto.setDescripcionHistoria(encriptacionServicio.desencriptarTexto(rs.getString("descripcion_historia")));
 
             int idPaciente = rs.getInt("id_paciente");
             dto.setIdPaciente(rs.wasNull() ? null : idPaciente);
@@ -146,7 +148,7 @@ public class InformesServicio {
             String tipoDoc = rs.getString("tipo_documento");
             dto.setTipoDocumento(tipoDoc != null ? TipoDocumento.valueOf(tipoDoc) : null);
 
-            dto.setNombreCompleto(Encriptacion.desencriptarTexto(rs.getString("nombre_completo")));
+            dto.setNombreCompleto(encriptacionServicio.desencriptarTexto(rs.getString("nombre_completo")));
 
             int edad = rs.getInt("edad");
             dto.setEdad(rs.wasNull() ? null : edad);

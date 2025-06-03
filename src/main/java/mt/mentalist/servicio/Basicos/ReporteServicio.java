@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.DTOBasics.ReporteDTO;
-import mt.mentalist.servicio.Funciones.EncriptacionServicio;
+import mt.mentalist.servicio.Funciones.Seguridad.EncriptacionServicio;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Reporte;
 import mt.mentalist.modelo.Usuario;

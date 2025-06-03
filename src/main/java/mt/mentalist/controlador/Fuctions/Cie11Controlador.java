@@ -1,6 +1,6 @@
 package mt.mentalist.controlador.Fuctions;
 
-import mt.mentalist.servicio.Funciones.Cie11Servicio;
+import mt.mentalist.servicio.Funciones.API.Cie11Servicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

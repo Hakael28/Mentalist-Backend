@@ -1,4 +1,4 @@
-package mt.mentalist.DTO.Fuctions;
+package mt.mentalist.DTO.Fuctions.Informes;
 
 import lombok.Data;
 import mt.mentalist.modelo.Enum.TipoDocumento;

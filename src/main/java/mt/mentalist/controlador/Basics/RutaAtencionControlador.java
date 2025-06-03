@@ -18,9 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-//http://localhost:8084/mentalist-web
-@RequestMapping("mentalist-web")
-@CrossOrigin(value = "http://localhost:4200")
+//http://localhost:8084/mentalist-web/basicos
+@RequestMapping("/mentalist-web/basicos")
 public class RutaAtencionControlador {
 
     private static final Logger logger = LoggerFactory.getLogger(RutaAtencionControlador.class);
@@ -29,7 +28,7 @@ public class RutaAtencionControlador {
     private RutaAtencionServicio rutaAtencionServicio;
 
     // Controlador pafra utilizar el metodo de listar Rutas de atención
-    //http://localhost:8084/mentalist-web/usuarios
+    //http://localhost:8084/mentalist-web/basicos/usuarios
     @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/rutas")
     public List<RutaAtencionDTO> obtenerRutas() {

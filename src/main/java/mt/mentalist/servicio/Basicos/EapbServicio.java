@@ -5,7 +5,7 @@ import java.util.Optional;
 
 
 import mt.mentalist.DTO.DTOBasics.EapbDTO;
-import mt.mentalist.servicio.Funciones.EncriptacionServicio;
+import mt.mentalist.servicio.Funciones.Seguridad.EncriptacionServicio;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Eapb;
 import mt.mentalist.repositorio.EapbRepositorio;

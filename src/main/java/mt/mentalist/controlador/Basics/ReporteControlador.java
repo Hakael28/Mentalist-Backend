@@ -16,9 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-//http://localhost:8084/mentalist-web
-@RequestMapping("mentalist-web")
-@CrossOrigin(value = "http://localhost:4200")
+//http://localhost:8084/mentalist-web/basicos
+@RequestMapping("/mentalist-web/basicos")
 public class ReporteControlador {
 
     private static final Logger logger = LoggerFactory.getLogger(ReporteControlador.class);
@@ -28,7 +27,7 @@ public class ReporteControlador {
 
 
     // Controlador para utilizar el metodo de listar los Reportes
-    //http://localhost:8084/mentalist-web/reportes
+    //http://localhost:8084/mentalist-web/basicos/reportes
     @GetMapping("/reportes")
     public List<ReporteDTO> obtenerReportes() {
         List<ReporteDTO> reportes = this.reporteServicio.listarReportes();

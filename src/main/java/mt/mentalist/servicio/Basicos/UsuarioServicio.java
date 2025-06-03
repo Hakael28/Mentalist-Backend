@@ -6,7 +6,7 @@ import mt.mentalist.DTO.DTOBasics.UsuarioDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Usuario;
 import mt.mentalist.repositorio.UsuarioRepositorio;
-import mt.mentalist.servicio.Funciones.EncriptacionServicio;
+import mt.mentalist.servicio.Funciones.Seguridad.EncriptacionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +41,7 @@ public class UsuarioServicio implements IUsuarioServicio {
         usuario.setNombre(encriptacionServicio.encriptarTexto(dto.getNombre()));
         usuario.setUsuario(dto.getUsuario());
         usuario.setRol(dto.getRol());
-        usuario.setContraseña(encriptacionServicio.encriptarContraseña(dto.getContraseña()));
+        usuario.setContrasena(encriptacionServicio.encriptarContraseña(dto.getContrasena()));
         usuario.setCorreo(encriptacionServicio.encriptarTexto(dto.getCorreo()));
         usuario.setTelefono(encriptacionServicio.encriptarTexto(dto.getTelefono()));
         Usuario usuarioGuardado = usuarioRepositorio.save(usuario);
@@ -58,7 +58,7 @@ public class UsuarioServicio implements IUsuarioServicio {
             throw new IllegalArgumentException("No está permitido modificar el nombre de usuario.");
         }
         usuario.setNombre(encriptacionServicio.encriptarTexto(dto.getNombre()));
-        usuario.setContraseña(encriptacionServicio.encriptarContraseña(dto.getContraseña()));
+        usuario.setContrasena(encriptacionServicio.encriptarContraseña(dto.getContrasena()));
         usuario.setCorreo(encriptacionServicio.encriptarTexto(dto.getCorreo()));
         usuario.setTelefono(encriptacionServicio.encriptarTexto(dto.getTelefono()));
 
@@ -67,13 +67,13 @@ public class UsuarioServicio implements IUsuarioServicio {
     }
 
     @Override
-    public UsuarioDTO actulizarUsuarioAdmin(Integer idUsuario, UsuarioDTO dto) {
+    public UsuarioDTO actualizarUsuarioAdmin(Integer idUsuario, UsuarioDTO dto) {
         Usuario usuario = ObtenerUsuarioEntidad(idUsuario);
 
         usuario.setNombre(encriptacionServicio.encriptarTexto(dto.getNombre()));
         usuario.setUsuario(dto.getUsuario());
         usuario.setRol(dto.getRol());
-        usuario.setContraseña(encriptacionServicio.encriptarContraseña(dto.getContraseña()));
+        usuario.setContrasena(encriptacionServicio.encriptarContraseña(dto.getContrasena()));
         usuario.setCorreo(encriptacionServicio.encriptarTexto(dto.getCorreo()));
         usuario.setTelefono(encriptacionServicio.encriptarTexto(dto.getTelefono()));
 
@@ -91,24 +91,19 @@ public class UsuarioServicio implements IUsuarioServicio {
        }
     }
 
-    @Override
-    public Optional<Usuario> findTopByOrderByIdUsuarioDesc() {
-        return usuarioRepositorio.findTopByOrderByIdUsuarioDesc();
-    }
-
     private UsuarioDTO convertirEntidadDTO(Usuario usuario){
         UsuarioDTO dto = new UsuarioDTO();
         dto.setIdUsuario(usuario.getIdUsuario());
         dto.setNombre(encriptacionServicio.desencriptarTexto(usuario.getNombre()));
         dto.setUsuario(usuario.getUsuario());
         dto.setRol(usuario.getRol());
-        dto.setContraseña(usuario.getContraseña());
+        dto.setContrasena(usuario.getContrasena());
         dto.setCorreo(encriptacionServicio.desencriptarTexto(usuario.getCorreo()));
         dto.setTelefono(encriptacionServicio.desencriptarTexto(usuario.getTelefono()));
         return dto;
     }
     public Usuario ObtenerUsuarioEntidad(Integer idUsuario){
         return usuarioRepositorio.findById(idUsuario)
-                .orElseThrow(()-> new RecursoNoEncontradoExcepcion("No se encontro el usuario con el ID: " + idUsuario));
+                .orElseThrow(() -> new RecursoNoEncontradoExcepcion("No se encontro el usuario con el ID: " + idUsuario));
     }
 }

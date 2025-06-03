@@ -18,12 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-//http://localhost:8084/mentalist-web
-@RequestMapping("mentalist-web")
-@CrossOrigin(origins = {
-        "http://localhost:4200",
-        "https://localhost",
-})
+//http://localhost:8084/mentalist-web/basicos
+@RequestMapping("/mentalist-web/basicos")
 public class HistorialClinicaControlador {
     @Autowired
     private HistoriaClinicaServicio historiaClinicaServicio;
@@ -31,7 +27,7 @@ public class HistorialClinicaControlador {
             LoggerFactory.getLogger(HistorialClinicaControlador.class);
 
     // Controlador para utilizar el metodo de listar Historia clinica
-    //http://localhost:8084/mentalist-web/historias
+    //http://localhost:8084/mentalist-web/basicos/historias
     @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/historias")
     public List<HistoriaClinicaDTO> obtenerhistorias() {

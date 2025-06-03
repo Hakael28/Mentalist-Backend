@@ -40,7 +40,7 @@ public class Usuario {
     @NotNull
     @Size(min = 8, max = 255)
     @ToString.Exclude
-    private String contraseña;
+    private String contrasena;
 
     @Column(length = 255)
     @Size(max = 255)

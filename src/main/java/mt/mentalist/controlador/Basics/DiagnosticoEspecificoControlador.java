@@ -18,9 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-//http://localhost:8084/mentalist-web
-@RequestMapping("mentalist-web")
-@CrossOrigin(value = "http://localhost:4200")
+//http://localhost:8084/mentalist-web/basicos
+@RequestMapping("/mentalist-web/basicos")
 public class DiagnosticoEspecificoControlador {
     private static final Logger logger = LoggerFactory.getLogger(DiagnosticoEspecificoControlador.class);
 
@@ -28,7 +27,7 @@ public class DiagnosticoEspecificoControlador {
     private DiagnosticoEspecificoServicio diagnosticoEspecificoServicio;
 
     // Controlador para utilizar el metodo de listar Diagnostico especifico
-    //http://localhost:8084/mentalist-web/usuarios
+    //http://localhost:8084/mentalist-web/basicos/diagnosticos
     @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/diagnosticos")
     public List<DiagnosticoEspecificoDTO> obtenediagnosticos() {

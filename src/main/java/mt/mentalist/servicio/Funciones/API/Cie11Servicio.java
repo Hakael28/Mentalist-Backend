@@ -1,4 +1,4 @@
-package mt.mentalist.servicio.Funciones;
+package mt.mentalist.servicio.Funciones.API;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

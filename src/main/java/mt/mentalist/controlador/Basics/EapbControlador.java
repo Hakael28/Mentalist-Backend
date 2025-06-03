@@ -19,9 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-//http://localhost:8084/mentalist-web
-@RequestMapping("mentalist-web")
-@CrossOrigin(value = "http://localhost:4200")
+//http://localhost:8084/mentalist-web/basicos
+@RequestMapping("/mentalist-web/basicos")
 public class EapbControlador {
     @Autowired
     private EapbServicio eapbServicio;
@@ -31,7 +30,7 @@ public class EapbControlador {
 
 
     // Controlador para utilizar el metodo de listar Eapb
-    //http://localhost:8084/mentalist-web/Eapb
+    //http://localhost:8084/mentalist-web/basicos/Eapb
     @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/eapbs")
     public List<EapbDTO> obtenerEapb() {

@@ -26,7 +26,7 @@ public class UsuarioDTO {
     @NotBlank(message = "La contraseña es obligatoria")
     @Size(min = 8, max = 100, message = "La contraseña debe tener entre 6 y 100 caracteres")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)//Solo se permite escribirla, no se serializa en respuestas
-    private String contraseña;
+    private String contrasena;
 
     @NotBlank(message = "El correo del usuario es obligatorio")
     private String correo;

@@ -18,9 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-//http://localhost:8084/mentalist-web
-@RequestMapping("mentalist-web")
-@CrossOrigin(value = "http://localhost:4200")
+//http://localhost:8084/mentalist-web/basicos
+@RequestMapping("/mentalist-web/basicos")
 public class AreaOcurrenciaControlador {
     @Autowired
     private AreaOcurrenciaServicio areaOcurrenciaServicio;
@@ -28,7 +27,7 @@ public class AreaOcurrenciaControlador {
             LoggerFactory.getLogger(AreaOcurrenciaControlador.class);
 
     // Controlador para utilizar el metodo de listar areas de ocurrencia
-    //http://localhost:8084/mentalist-web/areas
+    //http://localhost:8084/mentalist-web/basicos/areas
     @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/areas")
     public List<AreaOcurrenciaDTO> obtenerAreasOcurrencia() {
