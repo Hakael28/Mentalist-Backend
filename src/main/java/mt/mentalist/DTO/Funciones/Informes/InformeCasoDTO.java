@@ -1,4 +1,4 @@
-package mt.mentalist.DTO.Fuctions.Informes;
+package mt.mentalist.DTO.Funciones.Informes;
 
 import lombok.Data;
 import mt.mentalist.modelo.Enum.Etapa;

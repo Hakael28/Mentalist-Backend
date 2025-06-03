@@ -1,4 +1,4 @@
-package mt.mentalist.controlador.Fuctions;
+package mt.mentalist.controlador.Funciones;
 
 import mt.mentalist.servicio.Funciones.API.Cie11Servicio;
 import org.springframework.beans.factory.annotation.Autowired;

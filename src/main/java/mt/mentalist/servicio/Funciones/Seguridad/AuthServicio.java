@@ -1,8 +1,8 @@
 package mt.mentalist.servicio.Funciones.Seguridad;
 
 import lombok.RequiredArgsConstructor;
-import mt.mentalist.DTO.Fuctions.Seguridad.LoginRequestDTO;
-import mt.mentalist.DTO.Fuctions.Seguridad.LoginResponseDTO;
+import mt.mentalist.DTO.Funciones.Seguridad.LoginRequestDTO;
+import mt.mentalist.DTO.Funciones.Seguridad.LoginResponseDTO;
 import mt.mentalist.configuracion.Seguridad.JwtUtil;
 import mt.mentalist.modelo.Usuario;
 import mt.mentalist.repositorio.UsuarioRepositorio;

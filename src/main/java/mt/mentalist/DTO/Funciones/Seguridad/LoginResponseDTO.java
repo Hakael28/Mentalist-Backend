@@ -1,4 +1,4 @@
-package mt.mentalist.DTO.Fuctions.Seguridad;
+package mt.mentalist.DTO.Funciones.Seguridad;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

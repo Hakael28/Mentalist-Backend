@@ -1,4 +1,4 @@
-package mt.mentalist.Funciones.Login;
+package mt.mentalist.configuracion.Seguridad;
 
 import mt.mentalist.modelo.Usuario;
 

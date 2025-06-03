@@ -1,4 +1,4 @@
-package mt.mentalist.controlador.Basics;
+package mt.mentalist.controlador.Basicos;
 
 import jakarta.validation.Valid;
 import mt.mentalist.DTO.DTOBasics.EapbDTO;

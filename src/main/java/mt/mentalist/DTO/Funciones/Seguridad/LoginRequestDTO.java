@@ -1,4 +1,4 @@
-package mt.mentalist.DTO.Fuctions.Seguridad;
+package mt.mentalist.DTO.Funciones.Seguridad;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

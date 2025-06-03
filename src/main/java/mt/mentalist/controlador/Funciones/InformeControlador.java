@@ -1,11 +1,10 @@
-package mt.mentalist.controlador.Fuctions;
+package mt.mentalist.controlador.Funciones;
 
-import mt.mentalist.DTO.Fuctions.Informes.InformeCasoDTO;
-import mt.mentalist.DTO.Fuctions.Informes.InformeHistoriaClinicaDTO;
+import mt.mentalist.DTO.Funciones.Informes.InformeCasoDTO;
+import mt.mentalist.DTO.Funciones.Informes.InformeHistoriaClinicaDTO;
 import mt.mentalist.servicio.Funciones.InformesPDF.InformesServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
