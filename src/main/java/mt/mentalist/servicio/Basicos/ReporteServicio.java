@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.DTOBasics.ReporteDTO;
-import mt.mentalist.Funciones.Encriptacion.Encriptacion;
+import mt.mentalist.servicio.Funciones.EncriptacionServicio;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Reporte;
 import mt.mentalist.modelo.Usuario;
@@ -23,6 +23,8 @@ public class ReporteServicio implements IReporteServicio {
     private ReporteRepositorio reporteRepositorio;
     @Autowired
     private UsuarioServicio usuarioServicio;
+    @Autowired
+    private EncriptacionServicio encriptacionServicio;
 
     @Override
     public List<ReporteDTO> listarReportes() {
@@ -51,7 +53,7 @@ public class ReporteServicio implements IReporteServicio {
 
         reporte.setUsuario(usuario);
         reporte.setTipoReporte(dto.getTipoReporte());
-        reporte.setDescripcion(dto.getDescripcion());
+        reporte.setDescripcion(encriptacionServicio.encriptarTexto(dto.getDescripcion()));
         reporte.setFecha(dto.getFecha());
         Reporte reporteGuardado = reporteRepositorio.save(reporte);
         return convertirEntidadDTO(reporteGuardado);
@@ -69,7 +71,7 @@ public class ReporteServicio implements IReporteServicio {
         }
         existente.setUsuario(usuario);
         existente.setTipoReporte(dto.getTipoReporte());
-        existente.setDescripcion(Encriptacion.encriptarTexto(dto.getDescripcion()));
+        existente.setDescripcion(encriptacionServicio.encriptarTexto(dto.getDescripcion()));
         existente.setFecha(dto.getFecha());
         Reporte actualizado = reporteRepositorio.save(existente);
         return convertirEntidadDTO(actualizado);
@@ -91,7 +93,7 @@ public class ReporteServicio implements IReporteServicio {
         dto.setIdReporte(reporte.getIdReporte());
         dto.setIdUsuario(reporte.getUsuario().getIdUsuario());
         dto.setTipoReporte(reporte.getTipoReporte());
-        dto.setDescripcion(Encriptacion.desencriptarTexto(reporte.getDescripcion()));
+        dto.setDescripcion(encriptacionServicio.desencriptarTexto(reporte.getDescripcion()));
         dto.setFecha(reporte.getFecha());
         return dto;
     }

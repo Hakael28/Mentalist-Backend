@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.DTOBasics.AreaOcurrenciaDTO;
-import mt.mentalist.Funciones.Encriptacion.Encriptacion;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.AreaOcurrencia;
 import mt.mentalist.repositorio.AreaOcurrenciaRepositorio;
+import mt.mentalist.servicio.Funciones.EncriptacionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 public class AreaOcurrenciaServicio implements IAreaOcurrenciaServicio {
     @Autowired
     private AreaOcurrenciaRepositorio areaOcurrenciaRepositorio;
+    @Autowired
+    private EncriptacionServicio encriptacionServicio;
 
     @Override
     public List<AreaOcurrenciaDTO> listarAreaOcureencia() {
@@ -40,7 +42,7 @@ public class AreaOcurrenciaServicio implements IAreaOcurrenciaServicio {
     @Override
     public AreaOcurrenciaDTO guardarAreaOcurrencia(AreaOcurrenciaDTO dto) {
         AreaOcurrencia areaOcurrencia = new AreaOcurrencia();
-        areaOcurrencia.setNombre(Encriptacion.encriptarTexto(dto.getNombre()));
+        areaOcurrencia.setNombre(encriptacionServicio.encriptarTexto(dto.getNombre()));
         AreaOcurrencia areaOcurrenciaGuardada = areaOcurrenciaRepositorio.save(areaOcurrencia);
         return convertirEntidadDTO(areaOcurrenciaGuardada);
     }
@@ -58,7 +60,7 @@ public class AreaOcurrenciaServicio implements IAreaOcurrenciaServicio {
     private AreaOcurrenciaDTO convertirEntidadDTO(AreaOcurrencia areaOcurrencia) {
         AreaOcurrenciaDTO dto = new AreaOcurrenciaDTO();
         dto.setIdAreaOcurrencia(areaOcurrencia.getIdAreaOcurrencia());
-        dto.setNombre(Encriptacion.desencriptarTexto(areaOcurrencia.getNombre()));
+        dto.setNombre(encriptacionServicio.desencriptarTexto(areaOcurrencia.getNombre()));
         return dto;
     }
 }

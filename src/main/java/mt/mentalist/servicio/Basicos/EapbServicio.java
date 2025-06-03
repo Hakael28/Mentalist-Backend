@@ -5,7 +5,7 @@ import java.util.Optional;
 
 
 import mt.mentalist.DTO.DTOBasics.EapbDTO;
-import mt.mentalist.Funciones.Encriptacion.Encriptacion;
+import mt.mentalist.servicio.Funciones.EncriptacionServicio;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Eapb;
 import mt.mentalist.repositorio.EapbRepositorio;
@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 public class EapbServicio implements IEapbServicio {
     @Autowired
     private EapbRepositorio eapbRepositorio;
+    @Autowired
+    private EncriptacionServicio encriptacionServicio;
 
     @Override
     public List<EapbDTO> listarEapb() {
@@ -42,7 +44,7 @@ public class EapbServicio implements IEapbServicio {
     @Override
     public EapbDTO guardarEapb(EapbDTO dto) {
         Eapb eapb = new Eapb();
-        eapb.setNombre(Encriptacion.encriptarTexto(dto.getNombre()));
+        eapb.setNombre(encriptacionServicio.encriptarTexto(dto.getNombre()));
         Eapb eapbGuardada = eapbRepositorio.save(eapb);
         return  convertirEntidadDTO(eapbGuardada);
     }
@@ -61,7 +63,7 @@ public class EapbServicio implements IEapbServicio {
     private EapbDTO convertirEntidadDTO (Eapb eapb){
         EapbDTO dto = new EapbDTO();
         dto.setIdEapb(eapb.getIdEapb());
-        dto.setNombre(Encriptacion.desencriptarTexto(eapb.getNombre()));
+        dto.setNombre(encriptacionServicio.desencriptarTexto(eapb.getNombre()));
         return dto;
     }
 

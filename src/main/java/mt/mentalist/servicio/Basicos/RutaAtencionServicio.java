@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.DTOBasics.RutaAtencionDTO;
-import mt.mentalist.Funciones.Encriptacion.Encriptacion;
+import mt.mentalist.servicio.Funciones.EncriptacionServicio;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.RutaAtencion;
 import mt.mentalist.repositorio.RutaAtencionRepositorio;
@@ -20,6 +20,8 @@ public class RutaAtencionServicio implements IRutaAtencionServicio {
 
     @Autowired
     private RutaAtencionRepositorio rutaRepositorio;
+    @Autowired
+    private EncriptacionServicio encriptacionServicio;
 
 
     @Override
@@ -45,7 +47,7 @@ public class RutaAtencionServicio implements IRutaAtencionServicio {
     @Override
     public RutaAtencionDTO guardarRuta(RutaAtencionDTO dto) {
         RutaAtencion ruta = new RutaAtencion();
-        ruta.setDescripcion(Encriptacion.encriptarTexto(dto.getDescripcion()));
+        ruta.setDescripcion(encriptacionServicio.encriptarTexto(dto.getDescripcion()));
         RutaAtencion rutaAtencionGuardada = rutaRepositorio.save(ruta);
         return convertirEntidadDTO(rutaAtencionGuardada);
     }
@@ -62,7 +64,7 @@ public class RutaAtencionServicio implements IRutaAtencionServicio {
     private RutaAtencionDTO convertirEntidadDTO(RutaAtencion rutaAtencion){
         RutaAtencionDTO dto = new RutaAtencionDTO();
         dto.setIdRutaAtencion(rutaAtencion.getIdRutaAtencion());
-        dto.setDescripcion(Encriptacion.desencriptarTexto(rutaAtencion.getDescripcion()));
+        dto.setDescripcion(encriptacionServicio.desencriptarTexto(rutaAtencion.getDescripcion()));
         return dto;
     }
 

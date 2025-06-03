@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,7 +23,8 @@ import java.util.Map;
 @CrossOrigin(origins = {
         "http://localhost:4200",
         "https://localhost",
-})public class HistorialClinicaControlador {
+})
+public class HistorialClinicaControlador {
     @Autowired
     private HistoriaClinicaServicio historiaClinicaServicio;
     private static final Logger logger =
@@ -30,7 +32,8 @@ import java.util.Map;
 
     // Controlador para utilizar el metodo de listar Historia clinica
     //http://localhost:8084/mentalist-web/historias
-    @GetMapping ("/historias")
+    @PreAuthorize("hasRole('MEDICO')")
+    @GetMapping("/historias")
     public List<HistoriaClinicaDTO> obtenerhistorias() {
         List<HistoriaClinicaDTO> historias = this.historiaClinicaServicio.listarClinica();
         logger.info("Histarias obtrenidas");
@@ -39,6 +42,7 @@ import java.util.Map;
     }
 
     // Controlador para utilizar el metodo de guardarHistoriaClinica
+    @PreAuthorize("hasRole('MEDICO')")
     @PostMapping("/historias")
     public ResponseEntity<HistoriaClinicaDTO> agregarHistoriaClinica(@Valid @RequestBody HistoriaClinicaDTO dto) {
         logger.info("HistoriaClinica a agregar" + dto);
@@ -50,7 +54,9 @@ import java.util.Map;
                 .toUri();
         return ResponseEntity.created(ubicacion).body(historiaClinicaGuardada);
     }
+
     // Controlador para utilizar el metodo de buscar Historia  Clinica por id
+    @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/historias/{idHistorialClinica}")
     public ResponseEntity<HistoriaClinicaDTO> obtenerhHistoriaClinicaid(
             @PathVariable int idHistorialClinica) {
@@ -63,6 +69,7 @@ import java.util.Map;
     }
 
     // Controlador para utilizar el metodo de eliminar Historias Clinica
+    @PreAuthorize("hasRole('MEDICO')")
     @DeleteMapping("/historias/{idHistorialClinica}")
     public ResponseEntity<Map<String, Boolean>>
     eliminarhistorias(@PathVariable int idHistorialClinica) {
@@ -71,7 +78,6 @@ import java.util.Map;
         respuesta.put("Eliminado", Boolean.TRUE);
         return ResponseEntity.ok(respuesta);
     }
-
 
 
 }

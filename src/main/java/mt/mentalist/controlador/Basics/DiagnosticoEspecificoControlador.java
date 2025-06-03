@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,6 +29,7 @@ public class DiagnosticoEspecificoControlador {
 
     // Controlador para utilizar el metodo de listar Diagnostico especifico
     //http://localhost:8084/mentalist-web/usuarios
+    @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/diagnosticos")
     public List<DiagnosticoEspecificoDTO> obtenediagnosticos() {
         List<DiagnosticoEspecificoDTO> diagnosticos = this.diagnosticoEspecificoServicio.listarDiagnosticoEspecifico();
@@ -38,6 +40,7 @@ public class DiagnosticoEspecificoControlador {
     }
 
     // Controlador para utilizar el metodo de guardar diagnosticos
+    @PreAuthorize("hasRole('MEDICO')")
     @PostMapping("/diagnosticos")
     public ResponseEntity<DiagnosticoEspecificoDTO> agregarDianosticoEsoecifico(@Valid @RequestBody DiagnosticoEspecificoDTO dto) {
         logger.info("DiagnosticoEspecifico a agregar" + dto);
@@ -52,6 +55,7 @@ public class DiagnosticoEspecificoControlador {
     }
 
     // Controlador para utilizar el metodo de buscar Dianostico especifico por id
+    @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/diagnosticos/{idDiagnosticoEspecifico}")
     public ResponseEntity<DiagnosticoEspecificoDTO> obtenerDiagnosticoEspecificoid(
             @PathVariable int idDiagnosticoEspecifico) {
@@ -61,7 +65,9 @@ public class DiagnosticoEspecificoControlador {
         } else {
             throw new RecursoNoEncontradoExcepcion("no se encontro el diagnostico especifico con el id");
         }
-}
+    }
+    
+    @PreAuthorize("hasRole('MEDICO')")
     @DeleteMapping("/diagnosticos/{idDiagnosticoEspecifico}")
     public ResponseEntity<Map<String, Boolean>>
     eliminarDiagnosticoEspeficio(@PathVariable int idDiagnosticoEspecifico) {

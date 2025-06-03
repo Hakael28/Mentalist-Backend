@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.DTOBasics.DiagnosticoEspecificoDTO;
-import mt.mentalist.Funciones.Encriptacion.Encriptacion;
+import mt.mentalist.servicio.Funciones.EncriptacionServicio;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.DiagnosticoEspecifico;
 import mt.mentalist.repositorio.DiagnosticoEspecificoRepositorio;
@@ -17,6 +17,8 @@ public class DiagnosticoEspecificoServicio implements IDiagnosticoEspecificoServ
 
     @Autowired
     private DiagnosticoEspecificoRepositorio diagnosticoEspecificoRepositorio;
+    @Autowired
+    private EncriptacionServicio encriptacionServicio;
 
     @Override
     public List<DiagnosticoEspecificoDTO> listarDiagnosticoEspecifico() {
@@ -42,8 +44,8 @@ public class DiagnosticoEspecificoServicio implements IDiagnosticoEspecificoServ
     public DiagnosticoEspecificoDTO guardarDiagnosticoEspecifico(DiagnosticoEspecificoDTO dto) {
         DiagnosticoEspecifico diagnosticoEspecifico = new DiagnosticoEspecifico();
         diagnosticoEspecifico.setTipoDiagnostico(dto.getTipoDiagnostico());
-        diagnosticoEspecifico.setCodigoCie(Encriptacion.encriptarTexto(dto.getCodigoCie()));
-        diagnosticoEspecifico.setObservacionesMedicas(Encriptacion.encriptarTexto(dto.getObservacionesMedicas()));
+        diagnosticoEspecifico.setCodigoCie(encriptacionServicio.encriptarTexto(dto.getCodigoCie()));
+        diagnosticoEspecifico.setObservacionesMedicas(encriptacionServicio.encriptarTexto(dto.getObservacionesMedicas()));
         diagnosticoEspecifico.setFechaDiagnostico(dto.getFechaDiagnostico());
         DiagnosticoEspecifico diagnosticoEspecificoGuardado =diagnosticoEspecificoRepositorio.save(diagnosticoEspecifico);
         return convertirEntidadDTO(diagnosticoEspecificoGuardado);
@@ -63,8 +65,8 @@ public class DiagnosticoEspecificoServicio implements IDiagnosticoEspecificoServ
         DiagnosticoEspecificoDTO dto = new DiagnosticoEspecificoDTO();
         dto.setIdDiagnosticoEspecifico(diagnosticoEspecifico.getIdDiagnosticoEspecifico());
         dto.setTipoDiagnostico(diagnosticoEspecifico.getTipoDiagnostico());
-        dto.setCodigoCie(Encriptacion.desencriptarTexto(diagnosticoEspecifico.getCodigoCie()));
-        dto.setObservacionesMedicas(Encriptacion.desencriptarTexto(diagnosticoEspecifico.getObservacionesMedicas()));
+        dto.setCodigoCie(encriptacionServicio.desencriptarTexto(diagnosticoEspecifico.getCodigoCie()));
+        dto.setObservacionesMedicas(encriptacionServicio.desencriptarTexto(diagnosticoEspecifico.getObservacionesMedicas()));
         dto.setFechaDiagnostico(diagnosticoEspecifico.getFechaDiagnostico());
         return dto;
     }

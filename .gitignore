@@ -1,10 +1,25 @@
+# === Archivos generales innecesarios ===
 HELP.md
+*.log
+*.tmp
+*.bak
+*.swp
+*.~ 
+.DS_Store
+Thumbs.db
+
+# === Directorios de compilación de Maven ===
 target/
+.mvn/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+# === Archivos de respaldo de base de datos ===
+*.sql
+*.dump
+
+# === Spring Tool Suite (STS) ===
 .apt_generated
 .classpath
 .factorypath
@@ -13,13 +28,13 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
+# === IntelliJ IDEA ===
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+# === NetBeans ===
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -29,5 +44,5 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
+# === VS Code ===
 .vscode/

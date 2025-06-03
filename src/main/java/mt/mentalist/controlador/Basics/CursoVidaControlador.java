@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -30,6 +31,7 @@ public class CursoVidaControlador {
 
     // Controlador para utilizar el metodo de listar curso de vida
     //http://localhost:8084/mentalist-web/cursoVida
+    @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/cursoVida")
     public List<CursoVidaDTO> obtenerCursoVida() {
         List<CursoVidaDTO> cursos = this.cursoVidaServicio.listarCursoVida();
@@ -40,6 +42,7 @@ public class CursoVidaControlador {
     }
 
     // Controlador para utilizar el metodo de guardar curso de vida
+    @PreAuthorize("hasRole('MEDICO')")
     @PostMapping("/cursoVida")
     public ResponseEntity<CursoVidaDTO> agregarCursoVida(@Valid @RequestBody CursoVidaDTO dto) {
         logger.info("CursVida a agregar" + dto);
@@ -53,6 +56,7 @@ public class CursoVidaControlador {
     }
 
     // Controlador para utilizar el metodo de buscar curso vida por id
+    @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/cursoVida/{idCursoVida}")
     public ResponseEntity<CursoVidaDTO> obtenerCursoVidaId(
             @PathVariable int idCursoVida) {
@@ -65,6 +69,7 @@ public class CursoVidaControlador {
     }
 
     // Controlador para utilizar el metodo de eliminar curso vida
+    @PreAuthorize("hasRole('MEDICO')")
     @DeleteMapping("/cursoVida/{idCursoVida}")
     public ResponseEntity<Map<String, Boolean>>
     eliminarCursoVida(@PathVariable int idCursoVida) {

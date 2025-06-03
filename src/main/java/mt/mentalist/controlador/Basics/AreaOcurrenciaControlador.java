@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,6 +29,7 @@ public class AreaOcurrenciaControlador {
 
     // Controlador para utilizar el metodo de listar areas de ocurrencia
     //http://localhost:8084/mentalist-web/areas
+    @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/areas")
     public List<AreaOcurrenciaDTO> obtenerAreasOcurrencia() {
         List<AreaOcurrenciaDTO> areas = this.areaOcurrenciaServicio.listarAreaOcureencia();
@@ -38,6 +40,7 @@ public class AreaOcurrenciaControlador {
     }
 
     // Controlador para utilizar el metodo de guardar cursoVida
+    @PreAuthorize("hasRole('MEDICO')")
     @PostMapping("/areas")
     public ResponseEntity<AreaOcurrenciaDTO> agregarAreaOcurrencia(@Valid @RequestBody AreaOcurrenciaDTO dto) {
         logger.info("Area de ocurrencia a agregar" + dto);
@@ -51,6 +54,7 @@ public class AreaOcurrenciaControlador {
     }
 
     // Controlador para utilizar el metodo de buscar area de ocurrencia por id
+    @PreAuthorize("hasRole('MEDICO')")
     @GetMapping("/areas/{idAreaOcurrencia}")
     public ResponseEntity<AreaOcurrenciaDTO> obtenerAreaOcurrenciaId(
             @PathVariable int idAreaOcurrencia) {
@@ -63,6 +67,7 @@ public class AreaOcurrenciaControlador {
     }
 
     // Controlador para utilizar el metodo de eliminar curso vida
+    @PreAuthorize("hasRole('MEDICO')")
     @DeleteMapping("/areas/{idAreaOcurrencia}")
     public ResponseEntity<Map<String, Boolean>>
     eliminarAreaOcurrencia(@PathVariable int idAreaOcurrencia) {
