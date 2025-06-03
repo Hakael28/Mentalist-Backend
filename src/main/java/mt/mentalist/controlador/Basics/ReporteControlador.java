@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,6 +29,7 @@ public class ReporteControlador {
 
     // Controlador para utilizar el metodo de listar los Reportes
     //http://localhost:8084/mentalist-web/basicos/reportes
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/reportes")
     public List<ReporteDTO> obtenerReportes() {
         List<ReporteDTO> reportes = this.reporteServicio.listarReportes();
@@ -37,6 +39,7 @@ public class ReporteControlador {
     }
 
     // Controlador para utilizar el metodo de guardar Reportes
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MEDICO')")
     @PostMapping("/reportes")
     public ResponseEntity<ReporteDTO> agregarReporte(@Valid @RequestBody ReporteDTO dto) {
         logger.info("Reporte a agregar" + dto);
@@ -50,6 +53,7 @@ public class ReporteControlador {
     }
 
     // Controlador para utilizar el metodo de buscar un Reporte por id
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/reportes/{idReporte}")
     public ResponseEntity<ReporteDTO> obtenerReporteId(
             @PathVariable int idReporte) {
@@ -58,6 +62,7 @@ public class ReporteControlador {
     }
 
     // Controlador para utilizar el metodo de elimninar un Reporte
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/reportes/{idReporte}")
     public ResponseEntity<Map<String, Boolean>>
     eliminarReporte(@PathVariable int idReporte) {
@@ -68,6 +73,7 @@ public class ReporteControlador {
     }
 
     // Controlador para utilizar el metodo de actualizar la informacion de un Reporte
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/reportes/{idReporte}")
     public ResponseEntity<ReporteDTO> actualizarReporte(
             @PathVariable int idReporte,

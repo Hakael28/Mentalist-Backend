@@ -30,6 +30,7 @@ public class ConfiguracionSeguridad {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))//Habilita el CORS para permitir el acceso desde otros origines
                 .authorizeHttpRequests(auth -> auth //Define que rutas requieren autenticacion
                         .requestMatchers("/auth/**").permitAll()//Acceso publico
+                        .requestMatchers("/cie11/**").authenticated()
                         .requestMatchers("/mentalist-web/**").authenticated()//Requiere autenticacion
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))//No se guarda sesion en el servidor
