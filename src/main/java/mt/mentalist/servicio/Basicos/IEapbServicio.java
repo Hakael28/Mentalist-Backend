@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.DTOBasics.EapbDTO;
-import mt.mentalist.modelo.Eapb;
+import mt.mentalist.modelo.Entidades.Eapb;
 
 
 public interface IEapbServicio {

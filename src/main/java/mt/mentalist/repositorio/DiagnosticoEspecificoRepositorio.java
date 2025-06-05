@@ -2,7 +2,7 @@ package mt.mentalist.repositorio;
 
 
 import  org.springframework.data.jpa.repository.JpaRepository;
-import mt.mentalist.modelo.DiagnosticoEspecifico;
+import mt.mentalist.modelo.Entidades.DiagnosticoEspecifico;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package mt.mentalist.configuracion.Seguridad;
 
-import mt.mentalist.modelo.Usuario;
+import mt.mentalist.modelo.Entidades.Usuario;
 
 public class Sesion {
 

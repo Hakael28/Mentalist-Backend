@@ -1,9 +1,8 @@
 
-package mt.mentalist.modelo;
+package mt.mentalist.modelo.Entidades;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.util.ArrayList;

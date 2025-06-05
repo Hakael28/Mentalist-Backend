@@ -1,4 +1,4 @@
-package mt.mentalist.modelo;
+package mt.mentalist.modelo.Entidades;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;

@@ -1,4 +1,4 @@
-package mt.mentalist.servicio.Funciones.Seguridad;
+package mt.mentalist.servicio.Seguridad.Seguridad;
 
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Value;

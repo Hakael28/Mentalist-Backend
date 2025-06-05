@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import mt.mentalist.DTO.DTOBasics.CursoVidaDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
-import mt.mentalist.modelo.CursoVida;
+import mt.mentalist.modelo.Entidades.CursoVida;
 import mt.mentalist.repositorio.CursoVidaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

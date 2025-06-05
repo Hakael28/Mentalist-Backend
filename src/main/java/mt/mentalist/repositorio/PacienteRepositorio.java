@@ -5,7 +5,7 @@
 package mt.mentalist.repositorio;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import mt.mentalist.modelo.Paciente;
+import mt.mentalist.modelo.Entidades.Paciente;
 import org.springframework.stereotype.Repository;
 
 

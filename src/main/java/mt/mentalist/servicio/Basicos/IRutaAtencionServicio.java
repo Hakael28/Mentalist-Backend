@@ -2,7 +2,7 @@
 package mt.mentalist.servicio.Basicos;
 
 import mt.mentalist.DTO.DTOBasics.RutaAtencionDTO;
-import mt.mentalist.modelo.RutaAtencion;
+import mt.mentalist.modelo.Entidades.RutaAtencion;
 
 import java.util.List;
 import java.util.Optional;

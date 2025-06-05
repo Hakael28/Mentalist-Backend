@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import mt.mentalist.DTO.DTOBasics.UsuarioDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
-import mt.mentalist.modelo.Usuario;
+import mt.mentalist.modelo.Entidades.Usuario;
 import mt.mentalist.repositorio.UsuarioRepositorio;
-import mt.mentalist.servicio.Funciones.Seguridad.EncriptacionServicio;
+import mt.mentalist.servicio.Seguridad.Seguridad.EncriptacionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

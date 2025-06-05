@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.DTOBasics.AreaOcurrenciaDTO;
-import mt.mentalist.modelo.AreaOcurrencia;
+import mt.mentalist.modelo.Entidades.AreaOcurrencia;
 
 
 public interface IAreaOcurrenciaServicio {

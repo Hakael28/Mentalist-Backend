@@ -3,7 +3,7 @@ package mt.mentalist.controlador.Basicos;
 import jakarta.validation.Valid;
 import mt.mentalist.DTO.DTOBasics.EapbDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
-import mt.mentalist.modelo.Eapb;
+import mt.mentalist.modelo.Entidades.Eapb;
 import mt.mentalist.servicio.Basicos.EapbServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

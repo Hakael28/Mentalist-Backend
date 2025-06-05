@@ -95,35 +95,6 @@
             <version>1.9.3</version>
         </dependency>
 
-        <!-- FlatLaf: Estilos modernos para interfaces Swing -->
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>3.5.4</version>
-        </dependency>
-
-        <!-- Temas adicionales para FlatLaf (como temas de IntelliJ) -->
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf-intellij-themes</artifactId>
-            <version>3.5.4</version>
-        </dependency>
-
-        <!-- Layout absoluto (usado por NetBeans GUI Builder) -->
-        <dependency>
-            <groupId>org.netbeans.external</groupId>
-            <artifactId>AbsoluteLayout</artifactId>
-            <version>RELEASE240</version>
-        </dependency>
-
-        <!-- Presentadores de interfaz en proyectos con Dukescript (no es común para backend) -->
-        <dependency>
-            <groupId>com.dukescript.presenters</groupId>
-            <artifactId>renderer</artifactId>
-            <version>1.6.3</version>
-            <type>jar</type>
-        </dependency>
-
         <!-- Conector de base de datos MySQL -->
         <dependency>
             <groupId>mysql</groupId>

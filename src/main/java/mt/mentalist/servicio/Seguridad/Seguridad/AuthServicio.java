@@ -1,10 +1,10 @@
-package mt.mentalist.servicio.Funciones.Seguridad;
+package mt.mentalist.servicio.Seguridad.Seguridad;
 
 import lombok.RequiredArgsConstructor;
 import mt.mentalist.DTO.Funciones.Seguridad.LoginRequestDTO;
 import mt.mentalist.DTO.Funciones.Seguridad.LoginResponseDTO;
 import mt.mentalist.configuracion.Seguridad.JwtUtil;
-import mt.mentalist.modelo.Usuario;
+import mt.mentalist.modelo.Entidades.Usuario;
 import mt.mentalist.repositorio.UsuarioRepositorio;
 import org.springframework.stereotype.Service;
 

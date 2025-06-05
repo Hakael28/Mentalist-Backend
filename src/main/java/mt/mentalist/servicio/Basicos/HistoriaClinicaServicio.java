@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.DTOBasics.HistoriaClinicaDTO;
-import mt.mentalist.servicio.Funciones.Seguridad.EncriptacionServicio;
+import mt.mentalist.servicio.Seguridad.Seguridad.EncriptacionServicio;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
-import mt.mentalist.modelo.Caso;
-import mt.mentalist.modelo.HistoriaClinica;
-import mt.mentalist.modelo.Paciente;
+import mt.mentalist.modelo.Entidades.Caso;
+import mt.mentalist.modelo.Entidades.HistoriaClinica;
+import mt.mentalist.modelo.Entidades.Paciente;
 import mt.mentalist.repositorio.HistoriaClinicaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

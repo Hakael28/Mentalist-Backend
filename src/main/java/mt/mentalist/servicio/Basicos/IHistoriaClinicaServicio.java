@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mt.mentalist.DTO.DTOBasics.HistoriaClinicaDTO;
-import mt.mentalist.modelo.HistoriaClinica;
+import mt.mentalist.modelo.Entidades.HistoriaClinica;
 
 public interface IHistoriaClinicaServicio {
 

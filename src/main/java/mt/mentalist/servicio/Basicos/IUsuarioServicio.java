@@ -1,10 +1,8 @@
 package mt.mentalist.servicio.Basicos;
 
 import mt.mentalist.DTO.DTOBasics.UsuarioDTO;
-import mt.mentalist.modelo.Usuario;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IUsuarioServicio {
 
