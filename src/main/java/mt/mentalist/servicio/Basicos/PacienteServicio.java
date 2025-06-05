@@ -9,7 +9,7 @@ import mt.mentalist.modelo.Entidades.Paciente;
 import mt.mentalist.repositorio.PacienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import mt.mentalist.servicio.Seguridad.Seguridad.EncriptacionServicio;
+import mt.mentalist.servicio.Seguridad.EncriptacionServicio;
 @Service
 public class PacienteServicio implements IPacienteServicio {
     @Autowired

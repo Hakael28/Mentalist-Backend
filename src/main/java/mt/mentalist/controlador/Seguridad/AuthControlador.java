@@ -1,9 +1,9 @@
 package mt.mentalist.controlador.Seguridad;
 
 
-import mt.mentalist.DTO.Funciones.Seguridad.LoginRequestDTO;
-import mt.mentalist.DTO.Funciones.Seguridad.LoginResponseDTO;
-import mt.mentalist.servicio.Seguridad.Seguridad.AuthServicio;
+import mt.mentalist.DTO.Seguridad.LoginRequestDTO;
+import mt.mentalist.DTO.Seguridad.LoginResponseDTO;
+import mt.mentalist.servicio.Seguridad.AuthServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

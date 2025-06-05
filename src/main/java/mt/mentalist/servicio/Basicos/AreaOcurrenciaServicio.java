@@ -8,7 +8,7 @@ import mt.mentalist.DTO.DTOBasics.AreaOcurrenciaDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Entidades.AreaOcurrencia;
 import mt.mentalist.repositorio.AreaOcurrenciaRepositorio;
-import mt.mentalist.servicio.Seguridad.Seguridad.EncriptacionServicio;
+import mt.mentalist.servicio.Seguridad.EncriptacionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

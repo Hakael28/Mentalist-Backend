@@ -2,7 +2,7 @@ package mt.mentalist.servicio.Funciones.InformesPDF;
 
 import mt.mentalist.DTO.Funciones.Informes.InformeCasoDTO;
 import mt.mentalist.DTO.Funciones.Informes.InformeHistoriaClinicaDTO;
-import mt.mentalist.servicio.Seguridad.Seguridad.EncriptacionServicio;
+import mt.mentalist.servicio.Seguridad.EncriptacionServicio;
 import mt.mentalist.modelo.Enum.Etapa;
 import mt.mentalist.modelo.Enum.Genero;
 import mt.mentalist.modelo.Enum.TipoDiagnostico;
