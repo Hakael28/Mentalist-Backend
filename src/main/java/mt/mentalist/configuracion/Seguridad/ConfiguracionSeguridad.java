@@ -32,6 +32,13 @@ public class ConfiguracionSeguridad {
                         .requestMatchers("/auth/**").permitAll()//Acceso publico
                         .requestMatchers("/cie11/**").authenticated()
                         .requestMatchers("/mentalist-web/**").authenticated()//Requiere autenticacion
+                        .requestMatchers(
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/v3/api-docs.yaml",
+                                "/v3/api-docs/swagger-config"
+                        ).permitAll()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))//No se guarda sesion en el servidor
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)//Agrega filtro JWT antes del filtro de autenticacion estandar
