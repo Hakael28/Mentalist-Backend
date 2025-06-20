@@ -4,7 +4,7 @@ package mt.mentalist.servicio.Basicos;
 import java.util.List;
 import java.util.Optional;
 
-import mt.mentalist.DTO.DTOBasics.CursoVidaDTO;
+import mt.mentalist.DTO.Basicas.CursoVidaDTO;
 import mt.mentalist.modelo.Entidades.CursoVida;
 
 public interface ICursoVidaServicio {

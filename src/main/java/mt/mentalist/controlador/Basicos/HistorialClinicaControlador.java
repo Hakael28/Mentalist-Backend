@@ -1,7 +1,7 @@
 package mt.mentalist.controlador.Basicos;
 
 import jakarta.validation.Valid;
-import mt.mentalist.DTO.DTOBasics.HistoriaClinicaDTO;
+import mt.mentalist.DTO.Basicas.HistoriaClinicaDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.servicio.Basicos.HistoriaClinicaServicio;
 import org.slf4j.Logger;

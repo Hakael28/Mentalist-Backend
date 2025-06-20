@@ -1,4 +1,4 @@
-package mt.mentalist.DTO.DTOBasics;
+package mt.mentalist.DTO.Basicas;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

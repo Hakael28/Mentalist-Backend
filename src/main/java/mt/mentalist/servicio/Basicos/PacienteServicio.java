@@ -3,7 +3,7 @@ package mt.mentalist.servicio.Basicos;
 import java.util.List;
 import java.util.Optional;
 
-import mt.mentalist.DTO.DTOBasics.PacienteDTO;
+import mt.mentalist.DTO.Basicas.PacienteDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Entidades.Paciente;
 import mt.mentalist.repositorio.PacienteRepositorio;

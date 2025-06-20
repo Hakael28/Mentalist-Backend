@@ -1,6 +1,6 @@
 package mt.mentalist.servicio.Basicos;
 
-import mt.mentalist.DTO.DTOBasics.UsuarioDTO;
+import mt.mentalist.DTO.Basicas.UsuarioDTO;
 
 import java.util.List;
 

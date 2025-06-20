@@ -1,13 +1,14 @@
 package mt.mentalist.servicio.Funciones.InformesPDF;
 
-import mt.mentalist.DTO.Funciones.Informes.InformeCasoDTO;
-import mt.mentalist.DTO.Funciones.Informes.InformeHistoriaClinicaDTO;
+import mt.mentalist.DTO.Funciones.PDF.InformeCasoDTO;
+import mt.mentalist.DTO.Funciones.PDF.InformeHistoriaClinicaDTO;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class ExportadorPDFServicio {
 
     @Autowired

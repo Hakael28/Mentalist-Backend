@@ -1,7 +1,7 @@
 package mt.mentalist.controlador.Basicos;
 
 import jakarta.validation.Valid;
-import mt.mentalist.DTO.DTOBasics.ReporteDTO;
+import mt.mentalist.DTO.Basicas.ReporteDTO;
 import mt.mentalist.servicio.Basicos.ReporteServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

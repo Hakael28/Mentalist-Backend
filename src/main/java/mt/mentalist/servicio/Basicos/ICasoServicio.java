@@ -3,7 +3,7 @@ package mt.mentalist.servicio.Basicos;
 
 import java.util.List;
 
-import mt.mentalist.DTO.DTOBasics.CasoDTO;
+import mt.mentalist.DTO.Basicas.CasoDTO;
 
 public interface ICasoServicio {
     // Metodo para listar los casos

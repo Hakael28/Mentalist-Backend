@@ -7,7 +7,7 @@ package mt.mentalist.servicio.Basicos;
 import java.util.List;
 import java.util.Optional;
 
-import mt.mentalist.DTO.DTOBasics.RutaAtencionDTO;
+import mt.mentalist.DTO.Basicas.RutaAtencionDTO;
 import mt.mentalist.servicio.Seguridad.EncriptacionServicio;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Entidades.RutaAtencion;

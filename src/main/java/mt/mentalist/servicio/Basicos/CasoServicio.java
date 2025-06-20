@@ -3,7 +3,7 @@ package mt.mentalist.servicio.Basicos;
 import java.util.List;
 import java.util.Optional;
 
-import mt.mentalist.DTO.DTOBasics.CasoDTO;
+import mt.mentalist.DTO.Basicas.CasoDTO;
 import mt.mentalist.modelo.Entidades.*;
 import mt.mentalist.servicio.Seguridad.EncriptacionServicio;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;

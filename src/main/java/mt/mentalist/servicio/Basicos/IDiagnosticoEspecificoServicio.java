@@ -4,7 +4,7 @@
  */
 package mt.mentalist.servicio.Basicos;
 
-import mt.mentalist.DTO.DTOBasics.DiagnosticoEspecificoDTO;
+import mt.mentalist.DTO.Basicas.DiagnosticoEspecificoDTO;
 import mt.mentalist.modelo.Entidades.DiagnosticoEspecifico;
 
 import java.util.List;

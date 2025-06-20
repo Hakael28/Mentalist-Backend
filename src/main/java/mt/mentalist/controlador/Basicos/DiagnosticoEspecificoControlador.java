@@ -1,7 +1,7 @@
 package mt.mentalist.controlador.Basicos;
 
 import jakarta.validation.Valid;
-import mt.mentalist.DTO.DTOBasics.DiagnosticoEspecificoDTO;
+import mt.mentalist.DTO.Basicas.DiagnosticoEspecificoDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.servicio.Basicos.DiagnosticoEspecificoServicio;
 import org.slf4j.Logger;

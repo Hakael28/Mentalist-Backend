@@ -1,7 +1,7 @@
 package mt.mentalist.controlador.Basicos;
 
 import jakarta.validation.Valid;
-import mt.mentalist.DTO.DTOBasics.EapbDTO;
+import mt.mentalist.DTO.Basicas.EapbDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Entidades.Eapb;
 import mt.mentalist.servicio.Basicos.EapbServicio;

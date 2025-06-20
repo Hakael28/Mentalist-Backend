@@ -4,7 +4,7 @@
  */
 package mt.mentalist.servicio.Basicos;
 
-import mt.mentalist.DTO.DTOBasics.PacienteDTO;
+import mt.mentalist.DTO.Basicas.PacienteDTO;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@
  */
 package mt.mentalist.servicio.Basicos;
 
-import mt.mentalist.DTO.DTOBasics.ReporteDTO;
+import mt.mentalist.DTO.Basicas.ReporteDTO;
 
 import java.util.List;
 

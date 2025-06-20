@@ -88,6 +88,12 @@
             <version>7.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.3</version>
+        </dependency>
+
         <!-- Jasypt: Encriptación de propiedades sensibles (opcional si usas encriptado de propiedades) -->
         <dependency>
             <groupId>org.jasypt</groupId>

@@ -1,4 +1,4 @@
-package mt.mentalist.controlador.Funciones;
+package mt.mentalist.controlador.Funciones.PDF;
 
 import mt.mentalist.servicio.Funciones.InformesPDF.ExportadorPDFServicio;
 import org.springframework.beans.factory.annotation.Autowired;

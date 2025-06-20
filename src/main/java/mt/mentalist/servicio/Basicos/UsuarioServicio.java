@@ -2,7 +2,7 @@ package mt.mentalist.servicio.Basicos;
 
 import java.util.List;
 import java.util.Optional;
-import mt.mentalist.DTO.DTOBasics.UsuarioDTO;
+import mt.mentalist.DTO.Basicas.UsuarioDTO;
 import mt.mentalist.exception.RecursoNoEncontradoExcepcion;
 import mt.mentalist.modelo.Entidades.Usuario;
 import mt.mentalist.repositorio.UsuarioRepositorio;

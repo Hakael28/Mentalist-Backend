@@ -3,7 +3,7 @@ package mt.mentalist.servicio.Basicos;
 import java.util.List;
 import java.util.Optional;
 
-import mt.mentalist.DTO.DTOBasics.HistoriaClinicaDTO;
+import mt.mentalist.DTO.Basicas.HistoriaClinicaDTO;
 import mt.mentalist.modelo.Entidades.HistoriaClinica;
 
 public interface IHistoriaClinicaServicio {

@@ -4,7 +4,7 @@ package mt.mentalist.servicio.Basicos;
 import java.util.List;
 import java.util.Optional;
 
-import mt.mentalist.DTO.DTOBasics.EapbDTO;
+import mt.mentalist.DTO.Basicas.EapbDTO;
 import mt.mentalist.modelo.Entidades.Eapb;
 
 

@@ -1,7 +1,7 @@
-package mt.mentalist.controlador.Funciones;
+package mt.mentalist.controlador.Funciones.PDF;
 
-import mt.mentalist.DTO.Funciones.Informes.InformeCasoDTO;
-import mt.mentalist.DTO.Funciones.Informes.InformeHistoriaClinicaDTO;
+import mt.mentalist.DTO.Funciones.PDF.InformeCasoDTO;
+import mt.mentalist.DTO.Funciones.PDF.InformeHistoriaClinicaDTO;
 import mt.mentalist.servicio.Funciones.InformesPDF.InformesServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
