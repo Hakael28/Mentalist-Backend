@@ -34,8 +34,16 @@ public class AuthServicio {
                 usuario.getUsuario(),
                 usuario.getRol().name(),
                 usuario.getIdUsuario()
+
         );
 
-        return new LoginResponseDTO(token, usuario.getRol().name(), usuario.getIdUsuario());
-    }
+        return new LoginResponseDTO(
+                token,
+                usuario.getRol().name(),
+                usuario.getIdUsuario(),
+                encriptacionServicio.desencriptarTexto(usuario.getNombre()),
+                encriptacionServicio.desencriptarTexto(usuario.getTelefono()),
+                encriptacionServicio.desencriptarTexto(usuario.getCorreo()),
+                usuario.getUsuario()
+        );    }
 }
