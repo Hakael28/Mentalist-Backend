@@ -13,7 +13,7 @@ import org.springframework.web.cors.*;
 import java.util.List;
 
 @Configuration
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class ConfiguracionSeguridad {
 

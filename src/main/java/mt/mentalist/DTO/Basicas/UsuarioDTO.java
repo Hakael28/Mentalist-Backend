@@ -1,35 +1,38 @@
 package mt.mentalist.DTO.Basicas;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import mt.mentalist.modelo.Enum.Rol;
+import mt.mentalist.Validacion.Crear;
+import mt.mentalist.Validacion.Actualizar;
 
 @Data
 public class UsuarioDTO {
 
     private Integer idUsuario;
 
-    @NotBlank(message = "El nombre del profesional es obligatorio")
-    @Size(max = 100, message = "El nombre no debe superar los 100 caracteres")
+    @NotBlank(message = "El nombre del profesional es obligatorio", groups = {Crear.class, Actualizar.class})
+    @Size(max = 100, message = "El nombre no debe superar los 100 caracteres", groups = {Crear.class, Actualizar.class})
     private String nombre;
 
-    @NotBlank(message = "El nombre de usuario es obligatorio")
-    @Size(max = 100, message = "El nombre de usuario no debe superar los 100 caracteres")
+    @NotBlank(message = "El nombre de usuario es obligatorio", groups = {Crear.class})
+    @Size(max = 100, message = "El nombre de usuario no debe superar los 100 caracteres", groups = {Crear.class})
     private String usuario;
 
-    @NotNull(message = "El rol del usuario es obligatorio")
+    @NotNull(message = "El rol del usuario es obligatorio", groups = {Crear.class, Actualizar.class})
     private Rol rol;
 
-    @NotBlank(message = "La contraseña es obligatoria")
-    @Size(min = 8, max = 100, message = "La contraseña debe tener entre 6 y 100 caracteres")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)//Solo se permite escribirla, no se serializa en respuestas
+    @NotBlank(message = "La contraseña es obligatoria", groups = {Crear.class})
+    @Size(min = 8, max = 100, message = "La contraseña debe tener entre 8 y 100 caracteres", groups = {Crear.class})
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // Solo escritura
     private String contrasena;
 
-    @NotBlank(message = "El correo del usuario es obligatorio")
+    @NotBlank(message = "El correo del usuario es obligatorio", groups = {Crear.class, Actualizar.class})
     private String correo;
 
-    @NotNull(message = "El telefono del usuario es obligatorio")
+    @NotNull(message = "El teléfono del usuario es obligatorio", groups = {Crear.class, Actualizar.class})
     private String telefono;
 }

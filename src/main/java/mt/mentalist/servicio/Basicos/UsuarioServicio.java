@@ -70,16 +70,27 @@ public class UsuarioServicio implements IUsuarioServicio {
     public UsuarioDTO actualizarUsuarioAdmin(Integer idUsuario, UsuarioDTO dto) {
         Usuario usuario = ObtenerUsuarioEntidad(idUsuario);
 
+        // Verificar si el nombre de usuario ya existe en otro usuario
+        Optional<Usuario> existente = usuarioRepositorio.findByUsuario(dto.getUsuario());
+        if (existente.isPresent() && !existente.get().getIdUsuario().equals(idUsuario)) {
+            throw new IllegalArgumentException("El nombre de usuario ya existe.");
+        }
+
         usuario.setNombre(encriptacionServicio.encriptarTexto(dto.getNombre()));
         usuario.setUsuario(dto.getUsuario());
         usuario.setRol(dto.getRol());
-        usuario.setContrasena(encriptacionServicio.encriptarContraseña(dto.getContrasena()));
+
+        if (dto.getContrasena() != null && !dto.getContrasena().isBlank()) {
+            usuario.setContrasena(encriptacionServicio.encriptarContraseña(dto.getContrasena()));
+        }
+
         usuario.setCorreo(encriptacionServicio.encriptarTexto(dto.getCorreo()));
         usuario.setTelefono(encriptacionServicio.encriptarTexto(dto.getTelefono()));
 
-        Usuario actulizado = usuarioRepositorio.save(usuario);
-        return convertirEntidadDTO(actulizado);
+        Usuario actualizado = usuarioRepositorio.save(usuario);
+        return convertirEntidadDTO(actualizado);
     }
+
 
     @Override
     public void eliminarUsuario(Integer idUsuario){
