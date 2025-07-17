@@ -1,7 +1,5 @@
-package mt.mentalist.Funciones.Graficas;
+package mt.mentalist.Funciones.PDF;
 
-import mt.mentalist.Funciones.PDF.InformeCasoDTO;
-import mt.mentalist.Funciones.PDF.InformeHistoriaClinicaDTO;
 import mt.mentalist.Funciones.Seguridad.EncriptacionServicio;
 import mt.mentalist.CursoVida.Etapa;
 import mt.mentalist.Paciente.Genero;

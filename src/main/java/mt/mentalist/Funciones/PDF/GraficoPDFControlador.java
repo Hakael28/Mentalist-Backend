@@ -50,9 +50,4 @@ public class GraficoPDFControlador {
     public ResponseEntity<byte[]> descargarSemana(@RequestBody GraficoFiltroDTO filtro) throws Exception {
         return exportar("Semana.pdf", exportadorPDFServicioGraficos.generarPDFGraficoPorSemana(filtro));
     }
-
-    @PostMapping("/combinado")
-    public ResponseEntity<byte[]> descargarCombinado(@RequestBody GraficoFiltroDTO filtro) throws Exception {
-        return exportar("Combinado.pdf", exportadorPDFServicioGraficos.generarPDFGraficoCombinado(filtro));
-    }
 }

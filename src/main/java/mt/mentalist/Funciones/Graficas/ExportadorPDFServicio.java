@@ -2,6 +2,7 @@ package mt.mentalist.Funciones.Graficas;
 
 import mt.mentalist.Funciones.PDF.InformeCasoDTO;
 import mt.mentalist.Funciones.PDF.InformeHistoriaClinicaDTO;
+import mt.mentalist.Funciones.PDF.InformesServicio;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;

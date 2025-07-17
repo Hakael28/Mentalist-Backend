@@ -1,6 +1,5 @@
 package mt.mentalist.Funciones.PDF;
 
-import mt.mentalist.Funciones.Graficas.InformesServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
